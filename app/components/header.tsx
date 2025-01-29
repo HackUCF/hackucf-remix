@@ -58,9 +58,7 @@ export function Header() {
           >
             {item.href.startsWith('http') ||
             ['contact-us', 'sponsorship'].includes(item.id) ? (
-              <a href={item.href} target="_blank" rel="noopener noreferrer">
-                {item.name}
-              </a>
+              <a href={item.href}>{item.name}</a>
             ) : (
               <Link to={item.href} prefetch="intent">
                 {item.name}
