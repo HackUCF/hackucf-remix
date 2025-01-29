@@ -61,9 +61,7 @@ export function Header() {
                 {item.name}
               </a>
             ) : (
-              <Link to={item.href} prefetch="render">
-                {item.name}
-              </Link>
+              <Link to={item.href}>{item.name}</Link>
             )}
           </Button>
         ))}
