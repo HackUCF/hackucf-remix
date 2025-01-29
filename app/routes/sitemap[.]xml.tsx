@@ -1,9 +1,8 @@
 import type { LoaderFunction } from '@remix-run/cloudflare';
 
 export const loader: LoaderFunction = async () => {
-  const baseUrl = 'https://hackucf-remix.pages.dev';
+  const baseUrl = 'https://hackucf.org';
 
-  // Define your routes
   const routes = [
     '',
     'about-us',
