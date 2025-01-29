@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react';
+import { Link } from "@remix-run/react";
 
 export default function CollegiateCyberDefenseCompetition() {
   return (
@@ -41,7 +41,7 @@ export default function CollegiateCyberDefenseCompetition() {
         <section className="mb-16">
           <h2 className="mb-6 text-3xl font-semibold">How It Works</h2>
           <p className="mb-4">
-            We participate in the{' '}
+            We participate in the{" "}
             <a
               href="http://www.seccdc.org/"
               className="text-brandGold hover:underline"
@@ -52,7 +52,7 @@ export default function CollegiateCyberDefenseCompetition() {
             </a>
             , which takes place during the spring. Our region is one of ten in
             the United States. The team that places first in each region
-            progresses to the national competition:{' '}
+            progresses to the national competition:{" "}
             <a
               href="http://nationalccdc.org/"
               className="text-brandGold hover:underline"
@@ -72,8 +72,8 @@ export default function CollegiateCyberDefenseCompetition() {
           </p>
           <p className="mb-4">
             We must keep our business alive and respond to business-related
-            tasks called injections. All the while, we are being actively
-            attacked by Red Team—a relatively large group of offensive security
+            tasks called injects. All the while, we are being actively attacked
+            by Red Team—a relatively large group of offensive security
             professionals. We might be asked to set up a new network appliance
             or even conduct a forensic examination of the computer for Bobby
             Joe, one of the many disgruntled employees fired. Our customers are
@@ -108,7 +108,7 @@ export default function CollegiateCyberDefenseCompetition() {
             first, we hold special sessions regularly to train novices in the
             art of secure system administration. We prepare signature content
             specifically for recruits that might not know a port from a socket.
-            A self- starter attitude is definitely needed to keep up with the
+            A self-starter attitude is definitely needed to keep up with the
             massive influx of knowledge. We provide an educational experience
             that students will never come close to replicating in a classroom.
           </p>
