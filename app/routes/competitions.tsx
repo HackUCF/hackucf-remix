@@ -7,7 +7,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-// deemed to small for own file
 const FAQ_ITEMS = [
   {
     id: 'item-1',
@@ -113,7 +112,9 @@ export default function Competitions() {
           <p className="mb-4">
             The UCF College of Engineering and Computer Science sponsors the{' '}
             <span className="text-brandGold">
-              Collegiate Cybersecurity Competition (C3) Team
+              <Link to="/ccdc" className="hover:underline">
+                Collegiate Cybersecurity Competition (C3) Team
+              </Link>
             </span>
             , our application-only cybersecurity team. This team, managed and
             coached by UCF faculty, competes in (and wins) the largest

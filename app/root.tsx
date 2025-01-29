@@ -60,7 +60,7 @@ export function ErrorBoundary() {
     status = error.status;
     switch (error.status) {
       case 404:
-        message = 'Page Not Found';
+        message = 'This page does not exist yet.';
         break;
     }
   } else {
@@ -69,9 +69,9 @@ export function ErrorBoundary() {
 
   return (
     <App>
-      <div className="container prose py-8">
-        <h1>{status}</h1>
-        <p>{message}</p>
+      <div className="min-h-[50vh] flex flex-col space-y-8 mt-26 items-center justify-center text-center">
+        <h1 className="text-8xl font-bold text-primary">{status}</h1>
+        <p className="text-xl text-white">{message}</p>
       </div>
     </App>
   );

@@ -126,7 +126,7 @@ export default function AboutUs() {
             <p>
               The official name, Collegiate Cyber Defense Club, stems from the
               similarly named{' '}
-              <Link to="#" className="text-brandGold hover:underline">
+              <Link to="/ccdc" className="text-brandGold hover:underline">
                 Collegiate Cyber Defense Competition
               </Link>{' '}
               (CCDC). It should be no surprise that we participate in this
@@ -152,11 +152,11 @@ export default function AboutUs() {
             </ul>
             <p>
               For more information, choose a path:{' '}
-              <Link to="#" className="text-brandGold hover:underline">
+              <Link to="/ccdc" className="text-brandGold hover:underline">
                 Defensive Security
               </Link>{' '}
               or{' '}
-              <Link to="#" className="text-brandGold hover:underline">
+              <Link to="/ctf" className="text-brandGold hover:underline">
                 Offensive Security
               </Link>
               .

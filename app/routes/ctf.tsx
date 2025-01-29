@@ -21,7 +21,8 @@ export default function CaptureTheFlag() {
           <h2 className="mb-6 text-3xl font-semibold">KnightSec, the Team</h2>
           <p className="mb-6">
             At the University of Central Florida, we are all{' '}
-            <span className="text-brandGold">Knight</span>. And that sec in{' '}
+            <span className="text-brandGold">Knights</span>. And that{' '}
+            <span className="text-brandGold">Sec</span> in{' '}
             <span className="text-brandGold">KnightSec</span> doesn't
             necessarily stand for secrecy, but rather security. We do something
             really special. Our students participate in offensive-based Capture
@@ -110,12 +111,17 @@ export default function CaptureTheFlag() {
             on-campus where students can learn, have fun, and enjoy food and
             drinks from our sponsors—all while competing. Be on the lookout for
             upcoming competitions by checking out{' '}
-            <Link to="#" className="text-brandGold hover:underline">
+            <a
+              href="https://ctftime.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brandGold hover:underline"
+            >
               CTFtime
-            </Link>{' '}
+            </a>{' '}
             and our{' '}
-            <Link to="#" className="text-brandGold hover:underline">
-              calendar
+            <Link to="/calendar" className="text-brandGold hover:underline">
+              Calendar
             </Link>
             .
           </p>

@@ -17,7 +17,7 @@ const FAQ_ITEMS = [
   {
     question: 'When are meetings?',
     answer:
-      'Check the calendar, newsletter, or our social media pages for up-to-date announcements regarding club events. Our general body meetings are Fridays at 5:30pm-7:00pm EST in BA-119.',
+      'Check the calendar, newsletter, or our social media pages for up-to-date announcements regarding club events. Our general body meetings are Fridays at 5:30pm-7:00pm EST in ENG2-102.',
     key: 'meeting-times',
   },
   {
@@ -36,18 +36,13 @@ const FAQ_ITEMS = [
   {
     question: 'What are the benefits of membership?',
     answer:
-      'Members get a discount of our awesome t-shirt and voting rights for elections. More information about membership is available here.',
+      'Members get a discount of our awesome t-shirt and voting rights for elections. More information about membership is available in the Discord.',
     key: 'membership-benefits',
   },
   {
     question: 'How do I become a member?',
-    answer: 'You are looking for this page here.',
+    answer: 'Head over to our Discord and ask an Ops member.',
     key: 'become-member',
-  },
-  {
-    question: 'How do I join the mailing list?',
-    answer: 'You can join the mailing list here.',
-    key: 'join-mailing-list',
   },
   {
     question: 'How do I join Ops? What are the benefits to joining Ops?',

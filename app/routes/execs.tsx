@@ -20,8 +20,8 @@ const EXECUTIVE_DATA = [
   },
   {
     year: '2013-14',
-    president: 'Jonathan Singer / Carlos Beltran',
-    vicePresident: 'Carlos Beltran / Alex Davis',
+    president: 'Carlos Beltran (fmr: Jonathan Singer)',
+    vicePresident: 'Alex Davis (fmr: Carlos Beltran)',
     treasurer: 'Troy Micka',
     secretary: 'Austin Brogle',
   },
@@ -29,7 +29,7 @@ const EXECUTIVE_DATA = [
     year: '2014-15',
     president: 'Cody McMahon',
     vicePresident: 'Joe Pate',
-    treasurer: 'Dale Driggs / Troy Micka',
+    treasurer: 'Troy Micka (fmr: Dale Driggs)',
     secretary: 'Mark Ignacio',
   },
   {
@@ -72,7 +72,7 @@ const EXECUTIVE_DATA = [
     president: 'Michael Troisi',
     vicePresident: 'Ryan Carnovsky',
     treasurer: 'Addison Cobble',
-    secretary: 'Marisa Kosto Burns / Jeffrey DiVincent',
+    secretary: 'Jeffrey DiVincent (fmr: Marisa Kosto Burns)',
   },
   {
     year: '2021-22',
@@ -225,16 +225,26 @@ export default function Executives() {
                     key={year.year}
                     className={`
                       border-t border-brandGold/10
-                      ${index % 2 === 0 ? 'bg-background' : 'bg-brandGold bg-opacity-5'}
+                      ${
+                        index % 2 === 0
+                          ? 'bg-background'
+                          : 'bg-brandGold bg-opacity-5'
+                      }
                     `}
                   >
                     <td className="p-4 text-foreground">{year.year}</td>
-                    <td className="p-4 text-foreground">{year.president}</td>
-                    <td className="p-4 text-foreground">
+                    <td className="p-4 text-foreground whitespace-nowrap">
+                      {year.president}
+                    </td>
+                    <td className="p-4 text-foreground whitespace-nowrap">
                       {year.vicePresident}
                     </td>
-                    <td className="p-4 text-foreground">{year.treasurer}</td>
-                    <td className="p-4 text-foreground">{year.secretary}</td>
+                    <td className="p-4 text-foreground whitespace-nowrap">
+                      {year.treasurer}
+                    </td>
+                    <td className="p-4 text-foreground whitespace-nowrap">
+                      {year.secretary}
+                    </td>
                   </tr>
                 ))}
               </tbody>
