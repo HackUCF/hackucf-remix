@@ -1,32 +1,32 @@
-import { useState } from "react";
-import { Link } from "@remix-run/react";
-import { Menu } from "lucide-react";
+import { useState } from 'react';
+import { Link } from '@remix-run/react';
+import { Menu } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { ThemeToggle } from "@/components/theme-toggle";
+} from '@/components/ui/sheet';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 const NAV_ITEMS = [
-  { id: "about-us", name: "About Us", href: "/about-us" },
-  { id: "contact-us", name: "Contact Us", href: "/contact-us" },
-  { id: "sponsorship", name: "Sponsorship", href: "/sponsorship" },
-  { id: "calendar", name: "Calendar", href: "/calendar" },
-  { id: "wicys", name: "WiCyS", href: "/wicys" },
+  { id: 'about-us', name: 'About Us', href: '/about-us' },
+  { id: 'contact-us', name: 'Contact Us', href: '/contact-us' },
+  { id: 'sponsorship', name: 'Sponsorship', href: '/sponsorship' },
+  { id: 'calendar', name: 'Calendar', href: '/calendar' },
+  { id: 'wicys', name: 'WiCyS', href: '/wicys' },
   {
-    id: "horse-plinko",
-    name: "Horse Plinko Cyber Challenge",
-    href: "https://plinko.horse",
+    id: 'horse-plinko',
+    name: 'Horse Plinko Cyber Challenge',
+    href: 'https://plinko.horse',
   },
   {
-    id: "writeups",
-    name: "Writeups",
-    href: "https://hackucf-writeups.pages.dev/",
+    id: 'writeups',
+    name: 'Writeups',
+    href: 'https://hackucf-writeups.pages.dev/',
   },
 ];
 
@@ -49,19 +49,19 @@ export function Header() {
 
       {/* Desktop Navigation */}
       <nav className="hidden lg:flex space-x-1 2xl:space-x-8 mx-2">
-        {NAV_ITEMS.map((item) => (
+        {NAV_ITEMS.map(item => (
           <Button
             key={item.id}
             variant="ghost"
             asChild
             className="text-white hover:text-background hover:bg-white transition-colors text-sm px-2 py-2 sm:px-3 sm:py-2.5 md:px-4 lg:px-5 xl:px-6 rounded-md whitespace-nowrap"
           >
-            {item.href.startsWith("http") ? (
+            {item.href.startsWith('http') ? (
               <a href={item.href} target="_blank" rel="noopener noreferrer">
                 {item.name}
               </a>
             ) : (
-              <Link to={item.href} prefetch="intent">
+              <Link to={item.href} prefetch="render">
                 {item.name}
               </Link>
             )}
@@ -116,7 +116,7 @@ export function Header() {
               </SheetTitle>
             </SheetHeader>
             <div className="flex flex-col mt-8 space-y-4">
-              {NAV_ITEMS.map((item) => (
+              {NAV_ITEMS.map(item => (
                 <Button
                   key={item.id}
                   variant="ghost"
@@ -124,7 +124,7 @@ export function Header() {
                   onClick={() => setIsOpen(false)}
                   className="w-full text-left text-sm text-white hover:text-background hover:bg-white transition-colors px-3 py-2 rounded-md"
                 >
-                  {item.href.startsWith("http") ? (
+                  {item.href.startsWith('http') ? (
                     <Link
                       to={item.href}
                       target="_blank"
