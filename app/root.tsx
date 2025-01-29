@@ -18,6 +18,27 @@ import {
 
 import './globals.css';
 
+import type { MetaFunction } from '@remix-run/node';
+import { generateCanonicalUrl } from './lib/utils';
+
+export const meta: MetaFunction = ({ error, location }) => {
+  if (error) {
+    const status = isRouteErrorResponse(error) ? error.status : 500;
+    return [
+      { charset: 'utf-8' },
+      { title: `${status} Error - Hack@UCF` },
+      { viewport: 'width=device-width,initial-scale=1' },
+    ];
+  }
+
+  return [
+    { charset: 'utf-8' },
+    { title: 'Hack@UCF' },
+    { viewport: 'width=device-width,initial-scale=1' },
+    generateCanonicalUrl(location.pathname),
+  ];
+};
+
 function App({ children }: { children: React.ReactNode }) {
   return (
     <ThemeSwitcherSafeHTML lang="en">

@@ -6,6 +6,8 @@ import { DiscordLogoIcon as Discord } from '@radix-ui/react-icons';
 
 import { Button } from '@/components/ui/button';
 
+import { generateCanonicalUrl } from '../lib/utils';
+
 export const meta: MetaFunction = () => {
   return [
     { title: 'WiCyS @ UCF' },
@@ -14,6 +16,7 @@ export const meta: MetaFunction = () => {
       content:
         'Women in CyberSecurity (WiCyS) chapter at the University of Central Florida',
     },
+    generateCanonicalUrl(location.pathname),
   ];
 };
 
