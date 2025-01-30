@@ -1,3 +1,4 @@
+import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
 import { Line, LineChart, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 
@@ -105,6 +106,17 @@ const EXECUTIVE_DATA = [
 ];
 
 const positions = ['president', 'vicePresident', 'treasurer', 'secretary'];
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Executives | Hack@UCF' },
+    {
+      name: 'description',
+      content:
+        'Meet the Hack@UCF executive team throughout the years. Learn about our club leadership and the evolution of executive positions over time.',
+    },
+  ];
+};
 
 export default function Executives() {
   const chartData = EXECUTIVE_DATA.map(year => ({

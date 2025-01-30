@@ -1,4 +1,16 @@
+import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Capture the Flag | Hack@UCF' },
+    {
+      name: 'description',
+      content:
+        'UCF Hack@UCF Capture the Flag team, a group of offensive security enthusiasts who compete in jeopardy-style CTF competitions to solve real-world security challenges.',
+    },
+  ];
+};
 
 export default function CaptureTheFlag() {
   return (

@@ -1,3 +1,16 @@
+import type { MetaFunction } from '@remix-run/cloudflare';
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Calendar & Events | Hack@UCF' },
+    {
+      name: 'description',
+      content:
+        "Stay up-to-date with Hack@UCF's upcoming meetings, workshops, CTF competitions, and cybersecurity events. View our full calendar to never miss an opportunity to learn and engage with our community.",
+    },
+  ];
+};
+
 export default function Calendar() {
   return (
     <main className="bg-background text-white min-h-screen mt-20">

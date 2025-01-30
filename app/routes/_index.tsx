@@ -1,3 +1,4 @@
+import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
 import { ChevronDown } from 'lucide-react';
 import { useRef } from 'react';
@@ -74,18 +75,16 @@ const INDEX_CARD_DATA = [
   },
 ];
 
-function ScrollArrow({ onClick }: { onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      type="button"
-      className="hidden md:flex absolute bottom-24 left-3/6 transform -translate-x-1/2 animate-bounce transition-colors duration-600 ease-in-out hover:text-brandGoldHover"
-      aria-label="Scroll to next section"
-    >
-      <ChevronDown className="sm:w-8 sm:h-8 md:w-12 md:h-12 text-brandGold opacity-70" />
-    </button>
-  );
-}
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Home | Hack@UCF' },
+    {
+      name: 'description',
+      content:
+        "Hack@UCF is UCF's premier cybersecurity club, offering hands-on training in offensive and defensive security, CTF competitions, workshops, and a vibrant community of security enthusiasts. Join us to master cybersecurity skills and launch your security career.",
+    },
+  ];
+};
 
 export default function Index() {
   const clubActivitiesRef = useRef<HTMLElement>(null);
@@ -171,5 +170,18 @@ export default function Index() {
         </div>
       </section>
     </div>
+  );
+}
+
+function ScrollArrow({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      type="button"
+      className="hidden md:flex absolute bottom-24 left-3/6 transform -translate-x-1/2 animate-bounce transition-colors duration-600 ease-in-out hover:text-brandGoldHover"
+      aria-label="Scroll to next section"
+    >
+      <ChevronDown className="sm:w-8 sm:h-8 md:w-12 md:h-12 text-brandGold opacity-70" />
+    </button>
   );
 }

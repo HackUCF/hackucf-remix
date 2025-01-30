@@ -1,3 +1,4 @@
+import type { MetaFunction } from '@remix-run/cloudflare';
 import {
   Links,
   Meta,
@@ -8,6 +9,7 @@ import {
   useRouteError,
 } from '@remix-run/react';
 
+import { generateCanonicalUrl } from '@/lib/utils';
 import { GlobalPendingIndicator } from '@/components/global-pending-indicator';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
@@ -18,23 +20,70 @@ import {
 
 import './globals.css';
 
-import type { MetaFunction } from '@remix-run/node';
-import { generateCanonicalUrl } from './lib/utils';
-
 export const meta: MetaFunction = ({ error, location }) => {
+  const defaultDescription =
+    "UCF's Premier Collegiate Cyber Defense Club - Learn cybersecurity, compete in competitions, and join our thriving community of security enthusiasts.";
+
   if (error) {
     const status = isRouteErrorResponse(error) ? error.status : 500;
+    const errorTitle = `${status} Error | Hack@UCF`;
+    const errorDescription =
+      status === 404
+        ? "Sorry, the page you're looking for doesn't exist."
+        : 'Sorry, something went wrong on our end.';
+
     return [
-      { charset: 'utf-8' },
-      { title: `${status} Error - Hack@UCF` },
-      { viewport: 'width=device-width,initial-scale=1' },
+      { title: errorTitle },
+      { name: 'description', content: errorDescription },
+      { name: 'viewport', content: 'width=device-width,initial-scale=1' },
+      { name: 'robots', content: 'noindex,nofollow' },
+
+      // Open Graph
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'Hack@UCF' },
+      { property: 'og:title', content: errorTitle },
+      { property: 'og:description', content: errorDescription },
+      {
+        property: 'og:url',
+        content: `https://hackucf.org${location.pathname}`,
+      },
+
+      // Twitter
+      { name: 'twitter:card', content: 'summary' },
+      { name: 'twitter:site', content: '@HackUCF' },
+      { name: 'twitter:title', content: errorTitle },
+      { name: 'twitter:description', content: errorDescription },
     ];
   }
 
+  const title = 'Hack@UCF - UCF Collegiate Cyber Defense Club';
+
   return [
-    { charset: 'utf-8' },
-    { title: 'Hack@UCF' },
-    { viewport: 'width=device-width,initial-scale=1' },
+    { title },
+    { name: 'description', content: defaultDescription },
+    { name: 'viewport', content: 'width=device-width,initial-scale=1' },
+    { name: 'robots', content: 'index,follow' },
+
+    // Open Graph
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'Hack@UCF' },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: defaultDescription },
+    { property: 'og:url', content: `https://hackucf.org${location.pathname}` },
+
+    // Xitter
+    // Legacy Twitter tags (still supported)
+    { name: 'twitter:card', content: 'summary' },
+    { name: 'twitter:site', content: '@HackUCF' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: defaultDescription },
+    // New X tags (for future-proofing)
+    { name: 'x:card', content: 'summary' },
+    { name: 'x:site', content: '@HackUCF' },
+    { name: 'x:title', content: title },
+    { name: 'x:description', content: defaultDescription },
+
+    // Canonical URL
     generateCanonicalUrl(location.pathname),
   ];
 };

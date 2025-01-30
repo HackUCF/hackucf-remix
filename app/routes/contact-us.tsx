@@ -1,3 +1,4 @@
+import type { MetaFunction } from '@remix-run/cloudflare';
 import type { ActionFunctionArgs } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
@@ -11,6 +12,15 @@ interface ActionData {
   errors?: Record<string, string>;
   success?: boolean;
 }
+
+export const meta: MetaFunction = () => [
+  { title: 'Contact Us | Hack@UCF' },
+  {
+    name: 'description',
+    content:
+      'Need to reach us? Send us an email or fill out a form, and someone from our team will get back to you as soon as possible.',
+  },
+];
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const errors: Record<string, string> = {};
