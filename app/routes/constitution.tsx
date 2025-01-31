@@ -1,3 +1,4 @@
+import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
 
 import {
@@ -309,6 +310,17 @@ const CONSTITUTION_ARTICLES = [
       'Amendments to the constitution must be proposed in writing to the President. The amendment must then be presented to the organization during a membership meeting and should include a full explanation and/or rationale for the amendment. The amendment must be voted on at the following membership meeting and approved by a 2/3 affirmative vote of active student members. All amended constitutions must be submitted to the Office of Student Involvement within two school weeks. The amendment shall not take effect until approved by the Office of Student Involvement.',
   },
 ];
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Constitution | Hack@UCF' },
+    {
+      name: 'description',
+      content:
+        'Official constitution of the Collegiate Cyber Defense Club (CCDC) at UCF, outlining our mission, membership requirements, organizational structure, and governing principles. Established in 2012, we focus on computer security education, ethical training, and fostering a cybersecurity community within Central Florida.',
+    },
+  ];
+};
 
 export default function Constitution() {
   return (

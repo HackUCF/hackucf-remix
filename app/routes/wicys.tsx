@@ -8,11 +8,11 @@ import { Button } from '@/components/ui/button';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'WiCyS @ UCF' },
+    { title: 'WiCyS @ UCF | Hack@UCF' },
     {
       name: 'description',
       content:
-        'Women in CyberSecurity (WiCyS) chapter at the University of Central Florida',
+        'Women in CyberSecurity (WiCyS) at UCF is a student organization fostering a supportive community for underrepresented groups in cybersecurity through knowledge sharing, networking, and mentoring.',
     },
   ];
 };

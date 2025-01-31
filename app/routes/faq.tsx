@@ -1,3 +1,4 @@
+import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
 
 import {
@@ -119,6 +120,17 @@ const FAQ_ITEMS = [
     key: 'cyber-touch',
   },
 ];
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'FAQ | Hack@UCF' },
+    {
+      name: 'description',
+      content:
+        'Check out answers to the questions we get asked most. Welcome to the official Hack@UCF FAQ.',
+    },
+  ];
+};
 
 export default function FAQ() {
   return (

@@ -1,55 +1,55 @@
-import { Link } from "@remix-run/react";
-import { Instagram, Twitter, Github, Linkedin } from "lucide-react";
+import { Link } from '@remix-run/react';
+import { Instagram, X, Github, Linkedin } from 'lucide-react';
 
 export function Footer() {
   const SOCIAL_LINKS = [
     {
-      id: "instagram",
+      id: 'instagram',
       icon: <Instagram className="h-6 w-6" />,
-      url: "https://www.instagram.com/hack_ucf/",
-      label: "Instagram",
+      url: 'https://www.instagram.com/hack_ucf/',
+      label: 'Instagram',
     },
     {
-      id: "twitter",
-      icon: <Twitter className="h-6 w-6" />,
-      url: "https://x.com/HackUCF",
-      label: "Twitter",
+      id: 'x',
+      icon: <X className="h-6 w-6" />,
+      url: 'https://x.com/HackUCF',
+      label: 'Twitter',
     },
     {
-      id: "github",
+      id: 'github',
       icon: <Github className="h-6 w-6" />,
-      url: "https://github.com/HackUCF",
-      label: "GitHub",
+      url: 'https://github.com/HackUCF',
+      label: 'GitHub',
     },
     {
-      id: "linkedin",
+      id: 'linkedin',
       icon: <Linkedin className="h-6 w-6" />,
-      url: "https://www.linkedin.com/company/collegiate-cyber-defense-club-at-ucf",
-      label: "LinkedIn",
+      url: 'https://www.linkedin.com/company/collegiate-cyber-defense-club-at-ucf',
+      label: 'LinkedIn',
     },
   ];
 
   const ACTION_LINKS = [
     {
-      id: "join-the-fun",
-      text: "Join the Fun",
-      url: "https://join.hackucf.org",
+      id: 'join-the-fun',
+      text: 'Join the Fun',
+      url: 'https://join.hackucf.org',
     },
     {
-      id: "hop-on-discord",
-      text: "Hop on Discord",
-      url: "https://discord.com/invite/VwkkDcJ",
+      id: 'hop-on-discord',
+      text: 'Hop on Discord',
+      url: 'https://hackucf.org/discord',
     },
-    { id: "view-the-calendar", text: "View the Calendar", url: "/calendar" },
+    { id: 'view-the-calendar', text: 'View the Calendar', url: '/calendar' },
     {
-      id: "present-at-meeting",
-      text: "Present at a Meeting",
-      url: "/contact-us",
+      id: 'present-at-meeting',
+      text: 'Present at a Meeting',
+      url: 'https://hackucf.org/discord',
     },
     {
-      id: "donate",
-      text: "Donate",
-      url: "https://donate.stripe.com/7sI7un5vkfGV9xKaEE",
+      id: 'donate',
+      text: 'Donate',
+      url: 'https://donate.stripe.com/7sI7un5vkfGV9xKaEE',
     },
   ];
 
@@ -69,12 +69,12 @@ export function Footer() {
             Don't forget to join our Discord!
           </p>
           <div className="flex justify-center space-x-6">
-            {SOCIAL_LINKS.map((social) => (
+            {SOCIAL_LINKS.map(social => (
               <a
                 key={social.id}
                 href={social.url}
                 target="_blank"
-                rel="noopener "
+                rel="noopener noreferrer"
                 className="bg-brandGold hover:bg-brandGoldHover text-background h-12 w-12 flex items-center justify-center rounded-md transition-colors duration-300"
                 aria-label={`Follow us on ${social.label}`}
               >
@@ -84,7 +84,7 @@ export function Footer() {
           </div>
         </div>
         <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {ACTION_LINKS.map((action) => (
+          {ACTION_LINKS.map(action => (
             <Link
               key={action.id}
               to={action.url}
@@ -99,7 +99,7 @@ export function Footer() {
             &copy;HackUCF {new Date().getFullYear()}
           </p>
           <p className="text-white text-sm">
-            Made with ❤ by{" "}
+            Made with ❤ by{' '}
             <a
               href="https://github.com/parchinski"
               target="_blank"
