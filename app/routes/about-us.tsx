@@ -68,8 +68,10 @@ const PARTNER_LINKS = [
   },
 ];
 
-export const meta: MetaFunction = () => {
-  return [
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
     { title: 'About Us | Hack@UCF' },
     {
       name: 'description',
@@ -77,6 +79,8 @@ export const meta: MetaFunction = () => {
         'Learn about UCF Collegiate Cyber Defense Club, our mission, story, aliases, and allies. Join us to master cybersecurity skills and launch your security career.',
     },
   ];
+
+  return [...parentMeta, ...routeMeta];
 };
 
 export default function AboutUs() {

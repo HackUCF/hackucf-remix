@@ -1,8 +1,10 @@
 import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
 
-export const meta: MetaFunction = () => {
-  return [
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
     { title: 'CCDC Team | Hack@UCF' },
     {
       name: 'description',
@@ -10,6 +12,8 @@ export const meta: MetaFunction = () => {
         "UCF's champion Collegiate Cyber Defense Competition team, multiple-time national winners specializing in defensive security, system administration, and incident response. Join our elite cybersecurity competition team and develop real-world enterprise defense skills.",
     },
   ];
+
+  return [...parentMeta, ...routeMeta];
 };
 
 export default function CollegiateCyberDefenseCompetition() {

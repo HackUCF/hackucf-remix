@@ -1,8 +1,10 @@
 import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
 
-export const meta: MetaFunction = () => {
-  return [
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
     { title: 'Capture the Flag | Hack@UCF' },
     {
       name: 'description',
@@ -10,6 +12,8 @@ export const meta: MetaFunction = () => {
         'UCF Hack@UCF Capture the Flag team, a group of offensive security enthusiasts who compete in jeopardy-style CTF competitions to solve real-world security challenges.',
     },
   ];
+
+  return [...parentMeta, ...routeMeta];
 };
 
 export default function CaptureTheFlag() {

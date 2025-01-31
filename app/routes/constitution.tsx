@@ -311,8 +311,10 @@ const CONSTITUTION_ARTICLES = [
   },
 ];
 
-export const meta: MetaFunction = () => {
-  return [
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
     { title: 'Constitution | Hack@UCF' },
     {
       name: 'description',
@@ -320,6 +322,8 @@ export const meta: MetaFunction = () => {
         'Official constitution of the Collegiate Cyber Defense Club (CCDC) at UCF, outlining our mission, membership requirements, organizational structure, and governing principles. Established in 2012, we focus on computer security education, ethical training, and fostering a cybersecurity community within Central Florida.',
     },
   ];
+
+  return [...parentMeta, ...routeMeta];
 };
 
 export default function Constitution() {

@@ -41,8 +41,10 @@ const STATISTICS = [
   { id: 'stat-3', value: '102nd', label: 'Top International Team' },
 ];
 
-export const meta: MetaFunction = () => {
-  return [
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
     { title: 'Competitions | Hack@UCF' },
     {
       name: 'description',
@@ -50,6 +52,8 @@ export const meta: MetaFunction = () => {
         "Join Hack@UCF's competitive teams: KnightSec for CTF competitions and C3 Team for national cybersecurity events. Participate in offensive and defensive security challenges, from beginner-friendly CTFs to prestigious competitions like CCDC and CPTC.",
     },
   ];
+
+  return [...parentMeta, ...routeMeta];
 };
 
 export default function Competitions() {

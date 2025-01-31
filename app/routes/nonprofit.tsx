@@ -166,8 +166,10 @@ const BYLAWS: BylawArticle[] = [
   },
 ];
 
-export const meta: MetaFunction = () => {
-  return [
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
     { title: 'Nonprofit Bylaws | Hack@UCF' },
     {
       name: 'description',
@@ -175,6 +177,8 @@ export const meta: MetaFunction = () => {
         'Read the official bylaws of the Collegiate Cyber Defense Club Incorporated, a 501(c)(3) nonprofit organization at the University of Central Florida.',
     },
   ];
+
+  return [...parentMeta, ...routeMeta];
 };
 
 export default function Nonprofit() {

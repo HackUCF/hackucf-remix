@@ -13,14 +13,20 @@ interface ActionData {
   success?: boolean;
 }
 
-export const meta: MetaFunction = () => [
-  { title: 'Contact Us | Hack@UCF' },
-  {
-    name: 'description',
-    content:
-      'Need to reach us? Send us an email or fill out a form, and someone from our team will get back to you as soon as possible.',
-  },
-];
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
+    { title: 'Contact Us | Hack@UCF' },
+    {
+      name: 'description',
+      content:
+        'Need to reach us? Send us an email or fill out a form, and someone from our team will get back to you as soon as possible.',
+    },
+  ];
+
+  return [...parentMeta, ...routeMeta];
+};
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const errors: Record<string, string> = {};

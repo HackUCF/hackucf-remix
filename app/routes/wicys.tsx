@@ -6,8 +6,10 @@ import { DiscordLogoIcon as Discord } from '@radix-ui/react-icons';
 
 import { Button } from '@/components/ui/button';
 
-export const meta: MetaFunction = () => {
-  return [
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
     { title: 'WiCyS @ UCF | Hack@UCF' },
     {
       name: 'description',
@@ -15,6 +17,8 @@ export const meta: MetaFunction = () => {
         'Women in CyberSecurity (WiCyS) at UCF is a student organization fostering a supportive community for underrepresented groups in cybersecurity through knowledge sharing, networking, and mentoring.',
     },
   ];
+
+  return [...parentMeta, ...routeMeta];
 };
 
 export default function WiCyS() {

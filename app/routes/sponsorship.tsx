@@ -13,8 +13,10 @@ interface ActionData {
   success?: boolean;
 }
 
-export const meta: MetaFunction = () => {
-  return [
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
     { title: 'Sponsorship | Hack@UCF' },
     {
       name: 'description',
@@ -22,6 +24,8 @@ export const meta: MetaFunction = () => {
         'Support the UCF Collegiate Cyber Defense Competition Club by becoming a sponsor. Help fund our students and our mission to educate the community about computer security.',
     },
   ];
+
+  return [...parentMeta, ...routeMeta];
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {

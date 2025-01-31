@@ -107,8 +107,10 @@ const EXECUTIVE_DATA = [
 
 const positions = ['president', 'vicePresident', 'treasurer', 'secretary'];
 
-export const meta: MetaFunction = () => {
-  return [
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
     { title: 'Executives | Hack@UCF' },
     {
       name: 'description',
@@ -116,6 +118,8 @@ export const meta: MetaFunction = () => {
         'Meet the Hack@UCF executive team throughout the years. Learn about our club leadership and the evolution of executive positions over time.',
     },
   ];
+
+  return [...parentMeta, ...routeMeta];
 };
 
 export default function Executives() {

@@ -75,8 +75,10 @@ const INDEX_CARD_DATA = [
   },
 ];
 
-export const meta: MetaFunction = () => {
-  return [
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
     { title: 'Home | Hack@UCF' },
     {
       name: 'description',
@@ -84,6 +86,8 @@ export const meta: MetaFunction = () => {
         "Hack@UCF is UCF's premier cybersecurity club, offering hands-on training in offensive and defensive security, CTF competitions, workshops, and a vibrant community of security enthusiasts. Join us to master cybersecurity skills and launch your security career.",
     },
   ];
+
+  return [...parentMeta, ...routeMeta];
 };
 
 export default function Index() {

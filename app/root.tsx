@@ -38,8 +38,6 @@ export const meta: MetaFunction = ({ error, location }) => {
   const title = 'Hack@UCF - UCF Collegiate Cyber Defense Club';
 
   return [
-    { title },
-    { name: 'description', content: defaultDescription },
     { name: 'viewport', content: 'width=device-width,initial-scale=1' },
     { name: 'robots', content: 'index,follow' },
 

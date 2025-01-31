@@ -121,8 +121,10 @@ const FAQ_ITEMS = [
   },
 ];
 
-export const meta: MetaFunction = () => {
-  return [
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap(match => match.meta ?? []);
+
+  const routeMeta = [
     { title: 'FAQ | Hack@UCF' },
     {
       name: 'description',
@@ -130,6 +132,8 @@ export const meta: MetaFunction = () => {
         'Check out answers to the questions we get asked most. Welcome to the official Hack@UCF FAQ.',
     },
   ];
+
+  return [...parentMeta, ...routeMeta];
 };
 
 export default function FAQ() {
