@@ -1,29 +1,28 @@
 import { Link } from '@remix-run/react';
-import { Instagram, X, Github, Linkedin } from 'lucide-react';
 
 export function Footer() {
   const SOCIAL_LINKS = [
     {
       id: 'instagram',
-      icon: <Instagram className="h-6 w-6" />,
+      icon: <img src="/instagram.svg" alt="Instagram" className="h-6 w-6" />,
       url: 'https://www.instagram.com/hack_ucf/',
       label: 'Instagram',
     },
     {
       id: 'x',
-      icon: <X className="h-6 w-6" />,
+      icon: <img src="/x-social.svg" alt="X" className="h-6 w-6" />,
       url: 'https://x.com/HackUCF',
       label: 'Twitter',
     },
     {
       id: 'github',
-      icon: <Github className="h-6 w-6" />,
+      icon: <img src="/github.svg" alt="GitHub" className="h-6 w-6" />,
       url: 'https://github.com/HackUCF',
       label: 'GitHub',
     },
     {
       id: 'linkedin',
-      icon: <Linkedin className="h-6 w-6" />,
+      icon: <img src="/linkedin.svg" alt="LinkedIn" className="h-6 w-6" />,
       url: 'https://www.linkedin.com/company/collegiate-cyber-defense-club-at-ucf',
       label: 'LinkedIn',
     },
