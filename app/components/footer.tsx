@@ -37,13 +37,13 @@ export function Footer() {
     {
       id: 'hop-on-discord',
       text: 'Hop on Discord',
-      url: 'https://hackucf.org/discord',
+      url: 'https://discord.com/invite/VwkkDcJ',
     },
     { id: 'view-the-calendar', text: 'View the Calendar', url: '/calendar' },
     {
       id: 'present-at-meeting',
       text: 'Present at a Meeting',
-      url: 'https://hackucf.org/discord',
+      url: 'https://discord.com/invite/VwkkDcJ',
     },
     {
       id: 'donate',
