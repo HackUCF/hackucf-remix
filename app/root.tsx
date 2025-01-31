@@ -27,32 +27,11 @@ export const meta: MetaFunction = ({ error, location }) => {
   if (error) {
     const status = isRouteErrorResponse(error) ? error.status : 500;
     const errorTitle = `${status} Error | Hack@UCF`;
-    const errorDescription =
-      status === 404
-        ? "Sorry, the page you're looking for doesn't exist."
-        : 'Sorry, something went wrong on our end.';
 
     return [
       { title: errorTitle },
-      { name: 'description', content: errorDescription },
-      { name: 'viewport', content: 'width=device-width,initial-scale=1' },
-      { name: 'robots', content: 'noindex,nofollow' },
-
-      // Open Graph
-      { property: 'og:type', content: 'website' },
-      { property: 'og:site_name', content: 'Hack@UCF' },
-      { property: 'og:title', content: errorTitle },
-      { property: 'og:description', content: errorDescription },
-      {
-        property: 'og:url',
-        content: `https://hackucf.org${location.pathname}`,
-      },
-
-      // Twitter
-      { name: 'twitter:card', content: 'summary' },
-      { name: 'twitter:site', content: '@HackUCF' },
-      { name: 'twitter:title', content: errorTitle },
-      { name: 'twitter:description', content: errorDescription },
+      { name: 'robots', content: 'noindex,nofollow,noarchive' },
+      { name: 'googlebot', content: 'noindex,nofollow,noarchive' },
     ];
   }
 
@@ -70,13 +49,19 @@ export const meta: MetaFunction = ({ error, location }) => {
     { property: 'og:title', content: title },
     { property: 'og:description', content: defaultDescription },
     { property: 'og:url', content: `https://hackucf.org${location.pathname}` },
+    { property: 'og:image', content: 'https://hackucf.org/membership3.webp' },
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:image:alt', content: 'Hack@UCF Logo' },
 
-    // Xitter
     // Legacy Twitter tags (still supported)
-    { name: 'twitter:card', content: 'summary' },
+    { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:site', content: '@HackUCF' },
     { name: 'twitter:title', content: title },
     { name: 'twitter:description', content: defaultDescription },
+    { name: 'twitter:image', content: 'https://hackucf.org/membership3.webp' },
+    { name: 'twitter:image:alt', content: 'Hack@UCF Logo' },
+
     // New X tags (for future-proofing)
     { name: 'x:card', content: 'summary' },
     { name: 'x:site', content: '@HackUCF' },
