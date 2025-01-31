@@ -1,3 +1,4 @@
+import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
 
 import { Button } from '@/components/ui/button';
@@ -66,6 +67,17 @@ const PARTNER_LINKS = [
     href: 'https://www.eff.org/fight/',
   },
 ];
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'About Us | Hack@UCF' },
+    {
+      name: 'description',
+      content:
+        'Learn about UCF Collegiate Cyber Defense Club, our mission, story, aliases, and allies. Join us to master cybersecurity skills and launch your security career.',
+    },
+  ];
+};
 
 export default function AboutUs() {
   return (

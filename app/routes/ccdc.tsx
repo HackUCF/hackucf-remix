@@ -1,4 +1,16 @@
-import { Link } from "@remix-run/react";
+import type { MetaFunction } from '@remix-run/cloudflare';
+import { Link } from '@remix-run/react';
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'CCDC Team | Hack@UCF' },
+    {
+      name: 'description',
+      content:
+        "UCF's champion Collegiate Cyber Defense Competition team, multiple-time national winners specializing in defensive security, system administration, and incident response. Join our elite cybersecurity competition team and develop real-world enterprise defense skills.",
+    },
+  ];
+};
 
 export default function CollegiateCyberDefenseCompetition() {
   return (
@@ -41,7 +53,7 @@ export default function CollegiateCyberDefenseCompetition() {
         <section className="mb-16">
           <h2 className="mb-6 text-3xl font-semibold">How It Works</h2>
           <p className="mb-4">
-            We participate in the{" "}
+            We participate in the{' '}
             <a
               href="http://www.seccdc.org/"
               className="text-brandGold hover:underline"
@@ -52,7 +64,7 @@ export default function CollegiateCyberDefenseCompetition() {
             </a>
             , which takes place during the spring. Our region is one of ten in
             the United States. The team that places first in each region
-            progresses to the national competition:{" "}
+            progresses to the national competition:{' '}
             <a
               href="http://nationalccdc.org/"
               className="text-brandGold hover:underline"

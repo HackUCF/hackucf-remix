@@ -1,10 +1,12 @@
+import type { MetaFunction } from '@remix-run/cloudflare';
+import { Link } from '@remix-run/react';
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Link } from '@remix-run/react';
 
 interface DonationTier {
   tier: string;
@@ -163,6 +165,17 @@ const BYLAWS: BylawArticle[] = [
     ],
   },
 ];
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Nonprofit Bylaws | Hack@UCF' },
+    {
+      name: 'description',
+      content:
+        'Read the official bylaws of the Collegiate Cyber Defense Club Incorporated, a 501(c)(3) nonprofit organization at the University of Central Florida.',
+    },
+  ];
+};
 
 export default function Nonprofit() {
   return (

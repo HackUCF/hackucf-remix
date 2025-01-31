@@ -1,3 +1,4 @@
+import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
 
 import {
@@ -39,6 +40,17 @@ const STATISTICS = [
   { id: 'stat-2', value: '16th', label: 'Top American Team' },
   { id: 'stat-3', value: '102nd', label: 'Top International Team' },
 ];
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Competitions | Hack@UCF' },
+    {
+      name: 'description',
+      content:
+        "Join Hack@UCF's competitive teams: KnightSec for CTF competitions and C3 Team for national cybersecurity events. Participate in offensive and defensive security challenges, from beginner-friendly CTFs to prestigious competitions like CCDC and CPTC.",
+    },
+  ];
+};
 
 export default function Competitions() {
   return (
