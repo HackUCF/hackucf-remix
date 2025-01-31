@@ -35,30 +35,22 @@ export const meta: MetaFunction = ({ error, location }) => {
   }
 
   return [
-    // Core meta tags
-    { name: 'viewport', content: 'width=device-width,initial-scale=1' },
-    { name: 'robots', content: 'index,follow' },
-
-    // Open Graph
-    { property: 'og:type', content: 'website' },
-    { property: 'og:site_name', content: 'Hack@UCF' },
+    { charset: 'utf-8' },
+    {
+      name: 'viewport',
+      content: 'width=device-width,initial-scale=1,viewport-fit=cover',
+    },
+    { property: 'og:url', content: `https://hackucf.org${location.pathname}` },
     { property: 'og:title', content: title },
     { property: 'og:description', content: defaultDescription },
-    { property: 'og:url', content: `https://hackucf.org${location.pathname}` },
     { property: 'og:image', content: imageUrl },
-    { property: 'og:image:width', content: '1200' },
-    { property: 'og:image:height', content: '630' },
-    { property: 'og:image:alt', content: 'Hack@UCF Logo' },
 
-    // Twitter Card
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:site', content: '@HackUCF' },
+    { name: 'twitter:creator', content: '@HackUCF' },
     { name: 'twitter:title', content: title },
     { name: 'twitter:description', content: defaultDescription },
     { name: 'twitter:image', content: imageUrl },
-    { name: 'twitter:image:alt', content: 'Hack@UCF Logo' },
-
-    // Canonical URL
     generateCanonicalUrl(location.pathname),
   ];
 };
@@ -67,12 +59,6 @@ function App({ children }: { children: React.ReactNode }) {
   return (
     <ThemeSwitcherSafeHTML lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="description"
-          content="UCF's One and Only Collegiate Cyber Defense Club"
-        />
         <Meta />
         <Links />
         <ThemeSwitcherScript />
