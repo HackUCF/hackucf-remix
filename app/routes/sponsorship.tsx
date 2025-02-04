@@ -316,7 +316,7 @@ export default function Sponsorship() {
                 name="message"
                 placeholder="Your message"
                 className="bg-white text-background"
-                rows={2}
+                rows={8}
                 value={formData.message}
                 onChange={handleInputChange}
                 aria-invalid={errors.message ? true : undefined}
