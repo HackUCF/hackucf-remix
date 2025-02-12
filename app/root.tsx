@@ -23,7 +23,7 @@ import './globals.css';
 export const meta: MetaFunction = ({ error, location }) => {
   const title = 'Hack@UCF - UCF Collegiate Cyber Defense Club';
   const defaultDescription =
-    "UCF's Premier Collegiate Cyber Defense Club - Learn cybersecurity, compete in competitions, and join our thriving community of security enthusiasts.";
+    'The University of Central Florida Premier Collegiate Cyber Defense Club - Learn cybersecurity fundamentals, compete in national competitions, network with industry professionals, and join our thriving community of security enthusiasts and researchers.';
   const imageUrl = 'https://hackucf.org/hackucf-opengraph-card.jpg';
 
   if (error) {
