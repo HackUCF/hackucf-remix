@@ -57,7 +57,7 @@ export function Footer() {
       className="bg-background text-white px-4 sm:px-6 lg:px-8 mb-16 pt-16"
       id="connect"
     >
-      <div className="max-w-7xl mx-auto flex-col items-center justify-center h-full">
+      <div data-nosnippet className="max-w-7xl mx-auto flex-col items-center justify-center h-full">
         <div className="mb-12">
           <h2 className="text-4xl font-bold text-center mb-8 text-white">
             Stay Connected
