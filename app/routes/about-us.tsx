@@ -137,8 +137,14 @@ export default function AboutUs() {
               Engineering and Computer Science. In Spring 2013, the club
               founders applied to be an official club; the Student Government
               Association named Collegiate Cyber Defense Club a registered
-              student organization with Thomas Nedorost as our club advisor, who 
-              is still our advisor to this day.
+              student organization with{' '}
+              <Link
+                to="https://www.cs.ucf.edu/~nedorost/"
+                className="text-brandGold hover:underline"
+              >
+                Thomas Nedorost
+              </Link>{' '}
+              as our club advisor, who is still our advisor to this day.
             </p>
             <p>
               The official name, Collegiate Cyber Defense Club, stems from the
@@ -147,8 +153,8 @@ export default function AboutUs() {
                 Collegiate Cyber Defense Competition
               </Link>{' '}
               (CCDC). It should be no surprise that we participate in this
-              competition; however, that is not all we do. With over 500+ dues paying
-              members to date, we continue to bring that much-needed
+              competition; however, that is not all we do. With over 500+ dues
+              paying members to date, we continue to bring that much-needed
               cybersecurity presence to the campus of the University of Central
               Florida through a number of methods:
             </p>
