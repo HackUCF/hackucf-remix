@@ -2,8 +2,10 @@ import type { MetaFunction } from '@remix-run/cloudflare';
 import type { ActionFunctionArgs } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Turnstile } from '@marsidev/react-turnstile';
 
+import { ClientOnly } from "@/components/ClientOnly";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -12,6 +14,9 @@ interface ActionData {
   errors?: Record<string, string>;
   success?: boolean;
 }
+
+// Replace with your actual Cloudflare Turnstile site key
+const TURNSTILE_SITE_KEY = '0x4AAAAAAA_5HexOM2PrjMHA';
 
 export const meta: MetaFunction = ({ matches }) => {
   const parentMeta = matches.flatMap(match => match.meta ?? []);
@@ -35,6 +40,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const firstName = formData.get('firstName') as string;
   const lastName = formData.get('lastName') as string;
   const message = formData.get('message') as string;
+  const turnstileToken = formData.get('cf-turnstile-response') as string;
 
   if (typeof email !== 'string' || !email.includes('@')) {
     errors.email = 'Invalid email address';
@@ -48,23 +54,30 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   if (typeof lastName !== 'string' || lastName.trim().length < 1) {
     errors.lastName = 'Enter a valid last name';
   }
+  if (!turnstileToken) {
+    errors.turnstile = 'Please complete the CAPTCHA';
+  }
+
   if (Object.keys(errors).length > 0) {
     return json<ActionData>({ errors }, { status: 400 });
   }
 
   try {
-    const response = await fetch('https://bpmail.bryantpdev.workers.dev/', {
+    // Send a single request with both form data and Turnstile token
+    const response = await fetch('https://cf-email-worker.hack-cb6.workers.dev/', {
       method: 'POST',
       body: new URLSearchParams({
         email,
         firstName,
         lastName,
         message,
+        'cf-turnstile-response': turnstileToken, // Include the token in the same request
       }),
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
+
     // biome-ignore lint/suspicious/noExplicitAny: only type that really works in this case
     let data: any;
     if (response.headers.get('content-type')?.includes('application/json')) {
@@ -72,12 +85,22 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     } else {
       data = await response.text();
     }
+
     if (!response.ok) {
+      // Check if the error is related to Turnstile validation
+      if (data?.error?.includes('turnstile') || data?.error?.includes('captcha')) {
+        return json<ActionData>(
+          { errors: { turnstile: data?.error || 'CAPTCHA validation failed' } },
+          { status: response.status },
+        );
+      }
+
       return json<ActionData>(
         { errors: { form: data?.error || 'Failed to submit form' } },
         { status: response.status },
       );
     }
+
     return json<ActionData>({ success: true }, { status: 200 });
   } catch (error: unknown) {
     console.error('Error submitting form:', error);
@@ -100,10 +123,21 @@ export default function ContactUs() {
     message: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const turnstileRef = useRef<any>(null);
 
   useEffect(() => {
     if (actionData?.success) {
       setShowSuccessMessage(true);
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        message: '',
+      });
+      // Reset Turnstile if form submission was successful
+      if (turnstileRef.current?.reset) {
+        turnstileRef.current.reset();
+      }
       const timer = setTimeout(() => setShowSuccessMessage(false), 5000);
       return () => clearTimeout(timer);
     }
@@ -165,15 +199,15 @@ export default function ContactUs() {
               </h3>
               <address className="not-italic">
                 Collegiate Cyber Defense Club @ UCF
-                <br />
+
                 c/o Dr. Thomas Nedorost
-                <br />
+
                 Department of Computer Science
-                <br />
+
                 University of Central Florida
-                <br />
+
                 4328 Scorpius Street, HEC 346
-                <br />
+
                 Orlando, FL 32816-2362
               </address>
             </div>
@@ -276,6 +310,26 @@ export default function ContactUs() {
                 </div>
               )}
             </div>
+
+            {/* Cloudflare Turnstile */}
+            <div className="my-4">
+              <ClientOnly fallback={<div>Loading captcha...</div>}>
+                <Turnstile
+                  siteKey={TURNSTILE_SITE_KEY}
+                  ref={turnstileRef}
+                  options={{
+                    theme: 'dark',
+                    size: 'normal',
+                  }}
+                />
+                {actionData?.errors?.turnstile && (
+                  <div className="text-red-500 text-sm mt-1">
+                    {actionData.errors.turnstile}
+                  </div>
+                )}
+              </ClientOnly>
+            </div>
+
             <Button
               type="submit"
               className="bg-brandGold hover:bg-brandGold/90 text-background font-semibold py-2 px-4 w-full"
@@ -285,8 +339,8 @@ export default function ContactUs() {
             </Button>
           </Form>
         </div>
-      </div>
-    </main>
+      </div >
+    </main >
   );
 }
 
