@@ -54,15 +54,15 @@ export function Footer() {
 
   return (
     <footer
-      className="bg-background text-white px-4 sm:px-6 lg:px-8 mb-16 pt-16"
+      className="bg-background text-black px-4 sm:px-6 lg:px-8 mb-16 pt-16"
       id="connect"
     >
       <div data-nosnippet className="max-w-7xl mx-auto flex-col items-center justify-center h-full">
         <div className="mb-12">
-          <h2 className="text-4xl font-bold text-center mb-8 text-white">
+          <h2 className="text-4xl font-bold text-center mb-8 text-black">
             Stay Connected
           </h2>
-          <p className="text-center max-w-2xl mx-auto mb-8 text-white">
+          <p className="text-center max-w-2xl mx-auto mb-8 text-black">
             You can follow us on social media to stay tuned for job and
             internship opportunities, or get updated when we hold a meeting.
             Don't forget to join our Discord!
@@ -97,7 +97,7 @@ export function Footer() {
           <p className="text-brandGold font-semibold mb-1">
             &copy;HackUCF {new Date().getFullYear()}
           </p>
-          <p className="text-white text-sm">
+          <p className="text-black text-sm">
             Made with ❤ by{' '}
             <a
               href="https://github.com/parchinski"

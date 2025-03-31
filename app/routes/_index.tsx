@@ -106,13 +106,13 @@ export default function Index() {
       <section className="min-h-screen w-full flex items-center justify-center px-8 bg-black relative">
         <HackerBg className="absolute inset-0 w-full h-full" />
         <div className="max-w-4xl text-center z-10 mt-16">
-          <h1 className="text-5xl font-bold bg-white text-transparent bg-clip-text drop-shadow-md py-1 animate-fade-in-up">
+          <h1 className="text-5xl font-bold text-black drop-shadow-md py-1 animate-fade-in-up">
             HACK@UCF
           </h1>
-          <h1 className="text-5xl font-bold mb-4 bg-white text-transparent bg-clip-text drop-shadow-md py-1 animate-fade-in-up">
+          <h1 className="text-5xl font-bold mb-4 text-black drop-shadow-md py-1 animate-fade-in-up">
             Collegiate Cyber Defense Club
           </h1>
-          <p className="text-2xl mb-8 text-white font-semibold drop-shadow-md animate-fade-in-up animation-delay-300">
+          <p className="text-2xl mb-8 text-black font-semibold drop-shadow-md animate-fade-in-up animation-delay-300">
             We are the University of Central Florida's only defensive and
             offensive cybersecurity student organization.
           </p>
@@ -137,7 +137,7 @@ export default function Index() {
       >
         <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-background to-transparent" />
         <BackgroundGrid className="absolute inset-0 w-full h-full" />
-        <h2 className="text-3xl sm:text-4xl font-bold text-center text-white relative z-10 my-8">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-black relative z-10 my-8">
           Club Activities
         </h2>
 
@@ -156,7 +156,7 @@ export default function Index() {
                 <div className="overflow-hidden">
                   <ImageCarousel imagePaths={card.imageUrls} alt={card.title} />
                 </div>
-                <CardDescription className="text-white text-xs sm:text-sm">
+                <CardDescription className="text-black text-xs sm:text-sm">
                   {card.description}
                 </CardDescription>
               </CardContent>

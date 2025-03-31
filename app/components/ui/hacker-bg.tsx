@@ -48,7 +48,7 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
       if (currentTime - lastTime < interval) return;
       lastTime = currentTime;
 
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.95)'; // White with high opacity
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = color;

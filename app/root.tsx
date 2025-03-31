@@ -102,7 +102,7 @@ export function ErrorBoundary() {
     <App>
       <div className="min-h-[50vh] flex flex-col space-y-8 mt-26 items-center justify-center text-center">
         <h1 className="text-8xl font-bold text-primary">{status}</h1>
-        <p className="text-xl text-white">{message}</p>
+        <p className="text-xl text-black">{message}</p>
       </div>
     </App>
   );

@@ -172,7 +172,7 @@ export default function ContactUs() {
   };
 
   return (
-    <main className="bg-background text-white min-h-screen mt-20 px-8">
+    <main className="bg-background text-black min-h-screen mt-20 px-8">
       <div className="container mx-auto max-w-6xl py-16">
         <h1 className="text-5xl font-bold mb-16 text-center">Contact Us</h1>
 

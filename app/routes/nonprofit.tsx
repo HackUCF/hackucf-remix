@@ -183,7 +183,7 @@ export const meta: MetaFunction = ({ matches }) => {
 
 export default function Nonprofit() {
   return (
-    <main className="bg-background text-white min-h-screen mt-20 px-8">
+    <main className="bg-background text-black min-h-screen mt-20 px-8">
       <div className="container mx-auto max-w-6xl py-16">
         <div className="flex flex-col items-center justify-center mb-16">
           <h1 className="text-5xl font-bold">Nonprofit Bylaws</h1>

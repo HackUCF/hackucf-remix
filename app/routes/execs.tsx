@@ -146,7 +146,7 @@ export default function Executives() {
             <CardTitle className="text-3xl font-semibold text-center">
               Leadership Evolution at Hack@UCF
             </CardTitle>
-            <CardDescription className="text-lg text-center text-white">
+            <CardDescription className="text-lg text-center text-black">
               Tracking executive positions over the years
             </CardDescription>
           </CardHeader>
@@ -241,10 +241,9 @@ export default function Executives() {
                     key={year.year}
                     className={`
                       border-t border-brandGold/10
-                      ${
-                        index % 2 === 0
-                          ? 'bg-background'
-                          : 'bg-brandGold bg-opacity-5'
+                      ${index % 2 === 0
+                        ? 'bg-background'
+                        : 'bg-brandGold bg-opacity-5'
                       }
                     `}
                   >
