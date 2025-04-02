@@ -109,7 +109,7 @@ export default function Index() {
           <h1 className="text-5xl font-bold bg-white text-transparent bg-clip-text drop-shadow-md py-1 animate-fade-in-up">
             HACK@UCF
           </h1>
-          <h1 className="text-5xl font-bold mb-4 bg-white text-transparent bg-clip-text drop-shadow-md py-1 animate-fade-in-up">
+          <h1 className="text-5xl font-bold mb-4 text-white py-1 animate-fade-in-up">
             Collegiate Cyber Defense Club
           </h1>
           <p className="text-2xl mb-8 text-white font-semibold drop-shadow-md animate-fade-in-up animation-delay-300">
