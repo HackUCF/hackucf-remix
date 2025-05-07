@@ -103,6 +103,13 @@ const EXECUTIVE_DATA = [
     treasurer: 'Jonathan Styles',
     secretary: 'John Vezzola',
   },
+  {
+    year: '2025-26',
+    president: 'Kevin Kiderchah',
+    vicePresident: 'John Vezzola',
+    treasurer: 'Eric Mathews',
+    secretary: 'Jacob Freeman',
+  }
 ];
 
 const positions = ['president', 'vicePresident', 'treasurer', 'secretary'];
