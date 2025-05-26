@@ -36,15 +36,12 @@ export const meta: MetaFunction = ({ error, location }) => {
 
   return [
     { charset: 'utf-8' },
-    {
-      name: 'viewport',
-      content: 'width=device-width,initial-scale=1,viewport-fit=cover',
-    },
+    { name: 'viewport', content: 'width=device-width,initial-scale=1,viewport-fit=cover' },
     { property: 'og:url', content: `https://hackucf.org${location.pathname}` },
+    { property: 'og:type', content: 'video' },
     { property: 'og:title', content: title },
     { property: 'og:description', content: defaultDescription },
     { property: 'og:image', content: imageUrl },
-
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:site', content: '@HackUCF' },
     { name: 'twitter:creator', content: '@HackUCF' },
