@@ -338,6 +338,13 @@ export default function ContactUs() {
               {isSubmitting ? 'Sending...' : 'Send'}
             </Button>
           </Form>
+          <div className="flex justify-center mt-8">
+            <img
+              src="/cryaboutit.png"
+              alt="You right now"
+              className="max-w-xs"
+            />
+          </div>
         </div>
       </div >
     </main >
