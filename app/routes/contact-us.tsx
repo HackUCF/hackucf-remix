@@ -194,7 +194,7 @@ export default function ContactUs() {
             )}
             {showSuccessMessage && (
               <div className="text-green-500 bg-green-100 border border-green-400 rounded p-2">
-                Your message has been sent successfully!
+                Please check your email and click the link to confirm. (Link will expire in 15min)
               </div>
             )}
             <div className="space-y-2">
