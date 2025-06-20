@@ -99,7 +99,7 @@ export default function ContactUs() {
     }
 
     try {
-      const response = await fetch('https://workers.hackucf.org', {
+      const response = await fetch('https://workers.hackucf.org/send', {
         method: 'POST',
         body: new URLSearchParams({
           email,
