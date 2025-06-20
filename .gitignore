@@ -3,6 +3,7 @@
 .wrangler
 .DS_Store
 .env
+.dev.vars
 *.log
 build
 node_modules
