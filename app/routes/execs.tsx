@@ -107,7 +107,7 @@ const EXECUTIVE_DATA = [
     year: '2025-26',
     president: 'Kevin Kiderchah',
     vicePresident: 'John Vezzola',
-    treasurer: 'Eric Mathews',
+    treasurer: 'Eric Matthews',
     secretary: 'Jacob Freeman',
   }
 ];
