@@ -18,6 +18,7 @@ import {
   ThemeSwitcherSafeHTML,
   ThemeSwitcherScript,
 } from '@/components/theme-switcher';
+import { useAnalytics } from '@/hooks/use-analytics';
 
 import './globals.css';
 
@@ -62,6 +63,9 @@ export const meta: MetaFunction = ({ error, location }) => {
 function App({ children }: { children: React.ReactNode }) {
   const { analyticsToken } = useLoaderData<typeof loader>();
 
+  // Use analytics hook as fallback
+  useAnalytics({ token: analyticsToken, enabled: true });
+
   return (
     <ThemeSwitcherSafeHTML lang="en">
       <head>
@@ -70,10 +74,31 @@ function App({ children }: { children: React.ReactNode }) {
         <ThemeSwitcherScript />
         {/* Cloudflare Web Analytics */}
         {analyticsToken && (
+          <>
+            <script
+              defer
+              src="https://static.cloudflareinsights.com/beacon.min.js"
+              data-cf-beacon={`{"token": "${analyticsToken}"}`}
+              onError={() => console.error('Failed to load Cloudflare Analytics beacon')}
+              onLoad={() => console.log('Cloudflare Analytics beacon loaded successfully')}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  console.log('Analytics token available:', '${analyticsToken}');
+                  // Fallback for manual initialization if needed
+                  window._cfSettings = window._cfSettings || {};
+                  window._cfSettings.token = '${analyticsToken}';
+                `,
+              }}
+            />
+          </>
+        )}
+        {!analyticsToken && (
           <script
-            defer
-            src="https://static.cloudflareinsights.com/beacon.min.js"
-            data-cf-beacon={`{"token": "${analyticsToken}"}`}
+            dangerouslySetInnerHTML={{
+              __html: `console.warn('Cloudflare Analytics token not found. Set CLOUDFLARE_ANALYTICS_TOKEN environment variable.');`,
+            }}
           />
         )}
       </head>
