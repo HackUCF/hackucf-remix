@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/cloudflare';
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/cloudflare';
 import {
   Links,
   Meta,
@@ -6,6 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
+  useLoaderData,
   useRouteError,
 } from '@remix-run/react';
 
@@ -19,6 +20,12 @@ import {
 } from '@/components/theme-switcher';
 
 import './globals.css';
+
+export const loader = async ({ context }: LoaderFunctionArgs) => {
+  return {
+    analyticsToken: context.CLOUDFLARE_ANALYTICS_TOKEN || null,
+  };
+};
 
 export const meta: MetaFunction = ({ error, location }) => {
   const title = 'Hack@UCF - UCF Collegiate Cyber Defense Club';
@@ -53,12 +60,22 @@ export const meta: MetaFunction = ({ error, location }) => {
 };
 
 function App({ children }: { children: React.ReactNode }) {
+  const { analyticsToken } = useLoaderData<typeof loader>();
+
   return (
     <ThemeSwitcherSafeHTML lang="en">
       <head>
         <Meta />
         <Links />
         <ThemeSwitcherScript />
+        {/* Cloudflare Web Analytics */}
+        {analyticsToken && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token": "${analyticsToken}"}`}
+          />
+        )}
       </head>
       <body>
         <GlobalPendingIndicator />

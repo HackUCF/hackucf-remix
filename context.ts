@@ -1,8 +1,11 @@
 import type { AppLoadContext } from '@remix-run/cloudflare';
 
-// biome-ignore lint/suspicious/noEmptyInterface: Fill this in with your own types for your use-case
-export interface Env {}
+export interface Env {
+  CLOUDFLARE_ANALYTICS_TOKEN?: string;
+}
 
 export function getLoadContext(env: Env): AppLoadContext {
-  return {};
+  return {
+    CLOUDFLARE_ANALYTICS_TOKEN: env.CLOUDFLARE_ANALYTICS_TOKEN,
+  };
 }
