@@ -34,7 +34,7 @@ export function ThemeSwitcherSafeHTML({
 export function ThemeSwitcherScript() {
   return (
     <script
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: Script is necessary for theme persistence and is self-contained.
       dangerouslySetInnerHTML={{
         __html: `
           (function() {

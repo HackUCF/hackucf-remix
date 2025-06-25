@@ -1,6 +1,8 @@
 import { Link } from '@remix-run/react';
+import { useId } from 'react';
 
 export function Footer() {
+  const footerId = useId();
   const SOCIAL_LINKS = [
     {
       id: 'instagram',
@@ -55,9 +57,12 @@ export function Footer() {
   return (
     <footer
       className="bg-background text-white px-4 sm:px-6 lg:px-8 mb-16 pt-16"
-      id="connect"
+      id={footerId}
     >
-      <div data-nosnippet className="max-w-7xl mx-auto flex-col items-center justify-center h-full">
+      <div
+        data-nosnippet
+        className="max-w-7xl mx-auto flex-col items-center justify-center h-full"
+      >
         <div className="mb-12">
           <h2 className="text-4xl font-bold text-center mb-8 text-white">
             Stay Connected

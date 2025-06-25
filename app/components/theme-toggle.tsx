@@ -1,5 +1,5 @@
-import React from 'react';
 import { LaptopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import React from 'react';
 import { useHydrated } from 'remix-utils/use-hydrated';
 
 import {
@@ -10,8 +10,9 @@ import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
@@ -30,9 +31,9 @@ export function ThemeToggle() {
     }
   }, [hydrated]);
 
-  const setTheme = (theme: ThemeOption) => {
-    setSystemTheme(theme);
-    setThemeState(theme);
+  const setTheme = (newTheme: ThemeOption) => {
+    setSystemTheme(newTheme);
+    setThemeState(newTheme);
   };
 
   return (
@@ -53,18 +54,20 @@ export function ThemeToggle() {
         <DropdownMenuContent className="mt-2">
           <DropdownMenuLabel>Theme</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {THEME_OPTIONS.map(themeOption => (
-            <DropdownMenuItem asChild key={themeOption}>
-              <button
-                type="button"
-                className="w-full text-left"
-                onClick={() => setTheme(themeOption)}
-                aria-selected={theme === themeOption}
+          <DropdownMenuRadioGroup
+            value={theme}
+            onValueChange={value => setTheme(value as ThemeOption)}
+          >
+            {THEME_OPTIONS.map(themeOption => (
+              <DropdownMenuRadioItem
+                key={themeOption}
+                value={themeOption}
+                className="w-full text-left cursor-pointer"
               >
                 {themeOption.charAt(0).toUpperCase() + themeOption.slice(1)}
-              </button>
-            </DropdownMenuItem>
-          ))}
+              </DropdownMenuRadioItem>
+            ))}
+          </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

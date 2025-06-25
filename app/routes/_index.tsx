@@ -2,7 +2,7 @@ import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
 import { ChevronDown } from 'lucide-react';
 import { useRef } from 'react';
-
+import ImageCarousel from '@/components/image-carousel';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -12,9 +12,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import HackerBg from '@/components/ui/hacker-bg';
 import BackgroundGrid from '@/components/ui/grid-bg';
-import ImageCarousel from '@/components/image-carousel';
+import HackerBg from '@/components/ui/hacker-bg';
 
 const INDEX_CARD_DATA = [
   {

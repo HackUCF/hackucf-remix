@@ -1,22 +1,21 @@
 import type { MetaFunction } from '@remix-run/cloudflare';
 import {
+  isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  isRouteErrorResponse,
   useRouteError,
 } from '@remix-run/react';
-
-import { generateCanonicalUrl } from '@/lib/utils';
+import { Footer } from '@/components/footer';
 import { GlobalPendingIndicator } from '@/components/global-pending-indicator';
 import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
 import {
   ThemeSwitcherSafeHTML,
   ThemeSwitcherScript,
 } from '@/components/theme-switcher';
+import { generateCanonicalUrl } from '@/lib/utils';
 
 import './globals.css';
 
@@ -36,7 +35,10 @@ export const meta: MetaFunction = ({ error, location }) => {
 
   return [
     { charset: 'utf-8' },
-    { name: 'viewport', content: 'width=device-width,initial-scale=1,viewport-fit=cover' },
+    {
+      name: 'viewport',
+      content: 'width=device-width,initial-scale=1,viewport-fit=cover',
+    },
     { property: 'og:url', content: `https://hackucf.org${location.pathname}` },
     { property: 'og:type', content: 'website' },
     { property: 'og:title', content: title },

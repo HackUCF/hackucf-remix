@@ -1,8 +1,8 @@
+import { DiscordLogoIcon as Discord } from '@radix-ui/react-icons';
 import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
 import { Image } from '@unpic/react';
 import { Mail } from 'lucide-react';
-import { DiscordLogoIcon as Discord } from '@radix-ui/react-icons';
 
 import { Button } from '@/components/ui/button';
 

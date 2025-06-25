@@ -24,6 +24,7 @@
 		"@remix-run/react": "^2.16.8",
 		"@remix-run/serve": "^2.16.8",
 		"@unpic/react": "^0.1.15",
+		"caniuse-lite": "^1.0.30001726",
 		"class-variance-authority": "0.7.0",
 		"clsx": "2.1.0",
 		"isbot": "5.1.0",

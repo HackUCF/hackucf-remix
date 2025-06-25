@@ -1,8 +1,8 @@
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import type { MetaFunction } from '@remix-run/cloudflare';
-import { useState, useEffect, useRef } from 'react';
-import { Turnstile } from '@marsidev/react-turnstile';
+import { useId, useRef, useState } from 'react'; // Added useId
 
-import { ClientOnly } from "@/components/ClientOnly";
+import { ClientOnly } from '@/components/ClientOnly';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -26,6 +26,16 @@ export const meta: MetaFunction = ({ matches }) => {
 };
 
 export default function ContactUs() {
+  const firstNameId = useId();
+  const lastNameId = useId();
+  const emailId = useId();
+  const messageId = useId();
+
+  const firstNameErrorId = useId();
+  const lastNameErrorId = useId();
+  const emailErrorId = useId();
+  const messageErrorId = useId();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [formData, setFormData] = useState({
@@ -36,7 +46,7 @@ export default function ContactUs() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [turnstileToken, setTurnstileToken] = useState('');
-  const turnstileRef = useRef<any>(null);
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
 
   const validateField = (name: string, value: string) => {
     if (
@@ -113,18 +123,26 @@ export default function ContactUs() {
         },
       });
 
-      let data: any;
+      let data: string | { error?: string };
       if (response.headers.get('content-type')?.includes('application/json')) {
-        data = await response.json();
+        data = (await response.json()) as { error?: string };
       } else {
         data = await response.text();
       }
 
       if (!response.ok) {
-        if (data?.error?.includes('turnstile') || data?.error?.includes('captcha')) {
-          setErrors({ turnstile: data?.error || 'CAPTCHA validation failed' });
+        if (
+          typeof data === 'object' &&
+          (data.error?.includes('turnstile') || data.error?.includes('captcha'))
+        ) {
+          setErrors({ turnstile: data.error || 'CAPTCHA validation failed' });
         } else {
-          setErrors({ form: data?.error || 'Failed to submit form' });
+          setErrors({
+            form:
+              (typeof data === 'object' && data.error) ||
+              (typeof data === 'string' && data) ||
+              'Failed to submit form',
+          });
         }
       } else {
         setShowSuccessMessage(true);
@@ -176,11 +194,16 @@ export default function ContactUs() {
                 Mailing Address
               </h3>
               <address className="not-italic">
-                Collegiate Cyber Defense Club @ UCF<br />
-                c/o Dr. Thomas Nedorost<br />
-                Department of Computer Science<br />
-                University of Central Florida<br />
-                4328 Scorpius Street, HEC 346<br />
+                Collegiate Cyber Defense Club @ UCF
+                <br />
+                c/o Dr. Thomas Nedorost
+                <br />
+                Department of Computer Science
+                <br />
+                University of Central Florida
+                <br />
+                4328 Scorpius Street, HEC 346
+                <br />
                 Orlando, FL 32816-2362
               </address>
             </div>
@@ -194,15 +217,19 @@ export default function ContactUs() {
             )}
             {showSuccessMessage && (
               <div className="text-green-500 bg-green-100 border border-green-400 rounded p-2">
-                Please check your email and click the link to confirm. (Link will expire in 15min)
+                Please check your email and click the link to confirm. (Link
+                will expire in 15min)
               </div>
             )}
             <div className="space-y-2">
-              <label htmlFor="firstName" className="block text-sm font-medium">
+              <label
+                htmlFor={firstNameId}
+                className="block text-sm font-medium"
+              >
                 First Name (required)
               </label>
               <Input
-                id="firstName"
+                id={firstNameId}
                 name="firstName"
                 placeholder="First Name"
                 className="bg-white text-background"
@@ -210,21 +237,21 @@ export default function ContactUs() {
                 onChange={handleInputChange}
                 aria-invalid={errors.firstName ? true : undefined}
                 aria-errormessage={
-                  errors.firstName ? 'firstName-error' : undefined
+                  errors.firstName ? firstNameErrorId : undefined
                 }
               />
               {errors.firstName && (
-                <div id="firstName-error" className="text-red-500 text-sm">
+                <div id={firstNameErrorId} className="text-red-500 text-sm">
                   {errors.firstName}
                 </div>
               )}
             </div>
             <div className="space-y-2">
-              <label htmlFor="lastName" className="block text-sm font-medium">
+              <label htmlFor={lastNameId} className="block text-sm font-medium">
                 Last Name (required)
               </label>
               <Input
-                id="lastName"
+                id={lastNameId}
                 name="lastName"
                 placeholder="Last Name"
                 className="bg-white text-background"
@@ -232,21 +259,21 @@ export default function ContactUs() {
                 onChange={handleInputChange}
                 aria-invalid={errors.lastName ? true : undefined}
                 aria-errormessage={
-                  errors.lastName ? 'lastName-error' : undefined
+                  errors.lastName ? lastNameErrorId : undefined
                 }
               />
               {errors.lastName && (
-                <div id="lastName-error" className="text-red-500 text-sm">
+                <div id={lastNameErrorId} className="text-red-500 text-sm">
                   {errors.lastName}
                 </div>
               )}
             </div>
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium">
+              <label htmlFor={emailId} className="block text-sm font-medium">
                 Email (required)
               </label>
               <Input
-                id="email"
+                id={emailId}
                 name="email"
                 type="email"
                 placeholder="Email"
@@ -254,20 +281,20 @@ export default function ContactUs() {
                 value={formData.email}
                 onChange={handleInputChange}
                 aria-invalid={errors.email ? true : undefined}
-                aria-errormessage={errors.email ? 'email-error' : undefined}
+                aria-errormessage={errors.email ? emailErrorId : undefined}
               />
               {errors.email && (
-                <div id="email-error" className="text-red-500 text-sm">
+                <div id={emailErrorId} className="text-red-500 text-sm">
                   {errors.email}
                 </div>
               )}
             </div>
             <div className="space-y-2">
-              <label htmlFor="message" className="block text-sm font-medium">
+              <label htmlFor={messageId} className="block text-sm font-medium">
                 Message (required)
               </label>
               <Textarea
-                id="message"
+                id={messageId}
                 name="message"
                 placeholder="Your message"
                 className="bg-white text-background"
@@ -275,10 +302,10 @@ export default function ContactUs() {
                 value={formData.message}
                 onChange={handleInputChange}
                 aria-invalid={errors.message ? true : undefined}
-                aria-errormessage={errors.message ? 'message-error' : undefined}
+                aria-errormessage={errors.message ? messageErrorId : undefined}
               />
               {errors.message && (
-                <div id="message-error" className="text-red-500 text-sm">
+                <div id={messageErrorId} className="text-red-500 text-sm">
                   {errors.message}
                 </div>
               )}
@@ -290,7 +317,7 @@ export default function ContactUs() {
                 <Turnstile
                   siteKey={TURNSTILE_SITE_KEY}
                   ref={turnstileRef}
-                  onSuccess={(token) => setTurnstileToken(token)}
+                  onSuccess={token => setTurnstileToken(token)}
                   onError={() => setTurnstileToken('')}
                   onExpire={() => setTurnstileToken('')}
                   options={{

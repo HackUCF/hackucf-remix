@@ -1,8 +1,6 @@
 import type { MetaFunction } from '@remix-run/cloudflare';
 import { Link } from '@remix-run/react';
-import { Line, LineChart, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-
-import { ChartTooltip } from '@/components/ui/chart';
+import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import {
   Card,
   CardContent,
@@ -10,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { ChartTooltip } from '@/components/ui/chart';
 
 const EXECUTIVE_DATA = [
   {
@@ -109,7 +108,7 @@ const EXECUTIVE_DATA = [
     vicePresident: 'John Vezzola',
     treasurer: 'Eric Matthews',
     secretary: 'Jacob Freeman',
-  }
+  },
 ];
 
 const positions = ['president', 'vicePresident', 'treasurer', 'secretary'];

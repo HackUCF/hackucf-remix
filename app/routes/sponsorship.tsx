@@ -1,11 +1,10 @@
-import type { MetaFunction } from '@remix-run/cloudflare';
-import type { ActionFunctionArgs } from '@remix-run/cloudflare';
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
+import type { ActionFunctionArgs, MetaFunction } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
-import { useState, useEffect, useRef } from 'react';
-import { Turnstile } from '@marsidev/react-turnstile';
+import { useEffect, useId, useRef, useState } from 'react'; // Added useId
 
-import { ClientOnly } from "@/components/ClientOnly";
+import { ClientOnly } from '@/components/ClientOnly';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -71,39 +70,51 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   try {
     // Send a single request with both form data and Turnstile token
-    const response = await fetch('https://cf-email-worker.hack-cb6.workers.dev/', {
-      method: 'POST',
-      body: new URLSearchParams({
-        email,
-        firstName,
-        lastName,
-        message,
-        'cf-turnstile-response': turnstileToken, // Include the token in the same request
-      }),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const response = await fetch(
+      'https://cf-email-worker.hack-cb6.workers.dev/',
+      {
+        method: 'POST',
+        body: new URLSearchParams({
+          email,
+          firstName,
+          lastName,
+          message,
+          'cf-turnstile-response': turnstileToken, // Include the token in the same request
+        }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       },
-    });
+    );
 
-    // biome-ignore lint/suspicious/noExplicitAny: only type that really works in this case
-    let data: any;
+    let data: string | { error?: string };
     if (response.headers.get('content-type')?.includes('application/json')) {
-      data = await response.json();
+      data = (await response.json()) as { error?: string };
     } else {
       data = await response.text();
     }
 
     if (!response.ok) {
       // Check if the error is related to Turnstile validation
-      if (data?.error?.includes('turnstile') || data?.error?.includes('captcha')) {
+      if (
+        typeof data === 'object' &&
+        (data.error?.includes('turnstile') || data.error?.includes('captcha'))
+      ) {
         return json<ActionData>(
-          { errors: { turnstile: data?.error || 'CAPTCHA validation failed' } },
+          { errors: { turnstile: data.error || 'CAPTCHA validation failed' } },
           { status: response.status },
         );
       }
 
       return json<ActionData>(
-        { errors: { form: data?.error || 'Failed to submit form' } },
+        {
+          errors: {
+            form:
+              (typeof data === 'object' && data.error) ||
+              (typeof data === 'string' && data) ||
+              'Failed to submit form',
+          },
+        },
         { status: response.status },
       );
     }
@@ -122,6 +133,19 @@ export default function Sponsorship() {
   const actionData = useActionData<ActionData>();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'loading';
+
+  const firstNameId = useId();
+  const lastNameId = useId();
+  const companyId = useId();
+  const emailId = useId();
+  const messageId = useId();
+
+  const firstNameErrorId = useId();
+  const lastNameErrorId = useId();
+  const companyErrorId = useId();
+  const emailErrorId = useId();
+  const messageErrorId = useId();
+
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -131,7 +155,7 @@ export default function Sponsorship() {
     company: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const turnstileRef = useRef<any>(null);
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
 
   useEffect(() => {
     if (actionData?.success) {
@@ -149,6 +173,10 @@ export default function Sponsorship() {
       }
       const timer = setTimeout(() => setShowSuccessMessage(false), 5000);
       return () => clearTimeout(timer);
+    }
+    // Update local errors state if actionData.errors exists
+    if (actionData?.errors) {
+      setErrors(actionData.errors);
     }
   }, [actionData]);
 
@@ -256,11 +284,14 @@ export default function Sponsorship() {
               </div>
             )}
             <div className="space-y-2">
-              <label htmlFor="firstName" className="block text-sm font-medium">
+              <label
+                htmlFor={firstNameId}
+                className="block text-sm font-medium"
+              >
                 First Name (required)
               </label>
               <Input
-                id="firstName"
+                id={firstNameId}
                 name="firstName"
                 placeholder="First Name"
                 className="bg-white text-background"
@@ -268,21 +299,21 @@ export default function Sponsorship() {
                 onChange={handleInputChange}
                 aria-invalid={errors.firstName ? true : undefined}
                 aria-errormessage={
-                  errors.firstName ? 'firstName-error' : undefined
+                  errors.firstName ? firstNameErrorId : undefined
                 }
               />
               {errors.firstName && (
-                <div id="firstName-error" className="text-red-500 text-sm">
+                <div id={firstNameErrorId} className="text-red-500 text-sm">
                   {errors.firstName}
                 </div>
               )}
             </div>
             <div className="space-y-2">
-              <label htmlFor="lastName" className="block text-sm font-medium">
+              <label htmlFor={lastNameId} className="block text-sm font-medium">
                 Last Name (required)
               </label>
               <Input
-                id="lastName"
+                id={lastNameId}
                 name="lastName"
                 placeholder="Last Name"
                 className="bg-white text-background"
@@ -290,43 +321,41 @@ export default function Sponsorship() {
                 onChange={handleInputChange}
                 aria-invalid={errors.lastName ? true : undefined}
                 aria-errormessage={
-                  errors.lastName ? 'lastName-error' : undefined
+                  errors.lastName ? lastNameErrorId : undefined
                 }
               />
               {errors.lastName && (
-                <div id="lastName-error" className="text-red-500 text-sm">
+                <div id={lastNameErrorId} className="text-red-500 text-sm">
                   {errors.lastName}
                 </div>
               )}
             </div>
             <div className="space-y-2">
-              <label htmlFor="company" className="block text-sm font-medium">
+              <label htmlFor={companyId} className="block text-sm font-medium">
                 Company Name (required)
               </label>
               <Input
-                id="company"
+                id={companyId}
                 name="company"
                 placeholder="Company Name"
                 className="bg-white text-background"
                 value={formData.company}
                 onChange={handleInputChange}
                 aria-invalid={errors.company ? true : undefined}
-                aria-errormessage={
-                  errors.company ? 'company-error' : undefined
-                }
+                aria-errormessage={errors.company ? companyErrorId : undefined}
               />
               {errors.company && (
-                <div id="company-error" className="text-red-500 text-sm">
+                <div id={companyErrorId} className="text-red-500 text-sm">
                   {errors.company}
                 </div>
               )}
             </div>
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium">
+              <label htmlFor={emailId} className="block text-sm font-medium">
                 Email (required)
               </label>
               <Input
-                id="email"
+                id={emailId}
                 name="email"
                 type="email"
                 placeholder="Email"
@@ -334,20 +363,20 @@ export default function Sponsorship() {
                 value={formData.email}
                 onChange={handleInputChange}
                 aria-invalid={errors.email ? true : undefined}
-                aria-errormessage={errors.email ? 'email-error' : undefined}
+                aria-errormessage={errors.email ? emailErrorId : undefined}
               />
               {errors.email && (
-                <div id="email-error" className="text-red-500 text-sm">
+                <div id={emailErrorId} className="text-red-500 text-sm">
                   {errors.email}
                 </div>
               )}
             </div>
             <div className="space-y-2">
-              <label htmlFor="message" className="block text-sm font-medium">
+              <label htmlFor={messageId} className="block text-sm font-medium">
                 Message (required)
               </label>
               <Textarea
-                id="message"
+                id={messageId}
                 name="message"
                 placeholder="Your message"
                 className="bg-white text-background"
@@ -355,10 +384,10 @@ export default function Sponsorship() {
                 value={formData.message}
                 onChange={handleInputChange}
                 aria-invalid={errors.message ? true : undefined}
-                aria-errormessage={errors.message ? 'message-error' : undefined}
+                aria-errormessage={errors.message ? messageErrorId : undefined}
               />
               {errors.message && (
-                <div id="message-error" className="text-red-500 text-sm">
+                <div id={messageErrorId} className="text-red-500 text-sm">
                   {errors.message}
                 </div>
               )}

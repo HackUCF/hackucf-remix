@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
 import { Image } from '@unpic/react';
+import { useEffect, useRef, useState } from 'react';
 
 interface ImageCarouselProps {
   imagePaths: string[];

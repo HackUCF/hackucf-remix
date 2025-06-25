@@ -1,4 +1,4 @@
-import { useEffect, useState, ReactNode } from "react";
+import { type ReactNode, useEffect, useState } from 'react';
 
 interface ClientOnlyProps {
   children: ReactNode;
@@ -12,5 +12,5 @@ export function ClientOnly({ children, fallback = null }: ClientOnlyProps) {
     setMounted(true);
   }, []);
 
-  return mounted ? <>{children}</> : <>{fallback}</>;
+  return mounted ? children : fallback;
 }
