@@ -1,7 +1,4 @@
 import type { MetaFunction } from '@remix-run/cloudflare';
-import type { ActionFunctionArgs } from '@remix-run/cloudflare';
-import { json } from '@remix-run/cloudflare';
-import { Form, useActionData, useNavigation } from '@remix-run/react';
 import { useState, useEffect, useRef } from 'react';
 import { Turnstile } from '@marsidev/react-turnstile';
 
@@ -9,11 +6,6 @@ import { ClientOnly } from "@/components/ClientOnly";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-
-interface ActionData {
-  errors?: Record<string, string>;
-  success?: boolean;
-}
 
 // Replace with your actual Cloudflare Turnstile site key
 const TURNSTILE_SITE_KEY = '0x4AAAAAAA_5HexOM2PrjMHA';
@@ -33,95 +25,8 @@ export const meta: MetaFunction = ({ matches }) => {
   return [...parentMeta, ...routeMeta];
 };
 
-export const action = async ({ request }: ActionFunctionArgs) => {
-  const errors: Record<string, string> = {};
-  const formData = await request.formData();
-  const email = formData.get('email') as string;
-  const firstName = formData.get('firstName') as string;
-  let lastName = formData.get('lastName') as string;
-  const message = formData.get('message') as string;
-  const company = formData.get('company') as string;
-  const turnstileToken = formData.get('cf-turnstile-response') as string;
-
-  if (typeof email !== 'string' || !email.includes('@')) {
-    errors.email = 'Invalid email address';
-  }
-  if (typeof message !== 'string' || message.length < 9) {
-    errors.message = 'Message should contain more content';
-  }
-  if (typeof firstName !== 'string' || firstName.trim().length < 1) {
-    errors.firstName = 'Enter a valid first name';
-  }
-  if (typeof lastName !== 'string' || lastName.trim().length < 1) {
-    errors.lastName = 'Enter a valid last name';
-  }
-  if (typeof company !== 'string' || company.trim().length < 1) {
-    errors.company = 'Enter a valid company name';
-  }
-  if (!turnstileToken) {
-    errors.turnstile = 'Please complete the CAPTCHA';
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return json<ActionData>({ errors }, { status: 400 });
-  }
-
-  // add company to the end of message like lastname at company this uses url encoding
-  lastName = `${lastName} at ${company}`;
-
-  try {
-    // Send a single request with both form data and Turnstile token
-    const response = await fetch('https://cf-email-worker.hack-cb6.workers.dev/', {
-      method: 'POST',
-      body: new URLSearchParams({
-        email,
-        firstName,
-        lastName,
-        message,
-        'cf-turnstile-response': turnstileToken, // Include the token in the same request
-      }),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    });
-
-    // biome-ignore lint/suspicious/noExplicitAny: only type that really works in this case
-    let data: any;
-    if (response.headers.get('content-type')?.includes('application/json')) {
-      data = await response.json();
-    } else {
-      data = await response.text();
-    }
-
-    if (!response.ok) {
-      // Check if the error is related to Turnstile validation
-      if (data?.error?.includes('turnstile') || data?.error?.includes('captcha')) {
-        return json<ActionData>(
-          { errors: { turnstile: data?.error || 'CAPTCHA validation failed' } },
-          { status: response.status },
-        );
-      }
-
-      return json<ActionData>(
-        { errors: { form: data?.error || 'Failed to submit form' } },
-        { status: response.status },
-      );
-    }
-
-    return json<ActionData>({ success: true }, { status: 200 });
-  } catch (error: unknown) {
-    console.error('Error submitting form:', error);
-    return json<ActionData>(
-      { errors: { form: 'Failed to submit form. Please try again.' } },
-      { status: 500 },
-    );
-  }
-};
-
 export default function Sponsorship() {
-  const actionData = useActionData<ActionData>();
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === 'loading';
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -131,26 +36,8 @@ export default function Sponsorship() {
     company: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [turnstileToken, setTurnstileToken] = useState('');
   const turnstileRef = useRef<any>(null);
-
-  useEffect(() => {
-    if (actionData?.success) {
-      setShowSuccessMessage(true);
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        message: '',
-        company: '',
-      });
-      // Reset Turnstile if form submission was successful
-      if (turnstileRef.current?.reset) {
-        turnstileRef.current.reset();
-      }
-      const timer = setTimeout(() => setShowSuccessMessage(false), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [actionData]);
 
   const validateField = (name: string, value: string) => {
     if (
@@ -184,6 +71,96 @@ export default function Sponsorship() {
     setFormData(prev => ({ ...prev, [name]: value }));
     const error = validateField(name, value);
     setErrors(prev => ({ ...prev, [name]: error }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrors({});
+
+    const { firstName, lastName, email, message, company } = formData;
+
+    // Client-side validation
+    const newErrors: Record<string, string> = {};
+
+    if (!email.includes('@')) {
+      newErrors.email = 'Invalid email address';
+    }
+    if (message.length < 9) {
+      newErrors.message = 'Message should contain more content';
+    }
+    if (!firstName.trim()) {
+      newErrors.firstName = 'Enter a valid first name';
+    }
+    if (!lastName.trim()) {
+      newErrors.lastName = 'Enter a valid last name';
+    }
+    if (!company.trim()) {
+      newErrors.company = 'Enter a valid company name';
+    }
+    if (!turnstileToken) {
+      newErrors.turnstile = 'Please complete the CAPTCHA';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      // Append company to lastName for sponsorship form
+      const fullLastName = `${lastName} at ${company}`;
+      
+      const response = await fetch('https://workers.hackucf.org/send', {
+        method: 'POST',
+        body: new URLSearchParams({
+          email,
+          firstName,
+          lastName: fullLastName,
+          message,
+          'cf-turnstile-response': turnstileToken,
+        }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+
+      let data: any;
+      if (response.headers.get('content-type')?.includes('application/json')) {
+        data = await response.json();
+      } else {
+        data = await response.text();
+      }
+
+      if (!response.ok) {
+        if (data?.error?.includes('turnstile') || data?.error?.includes('captcha')) {
+          setErrors({ turnstile: data?.error || 'CAPTCHA validation failed' });
+        } else {
+          setErrors({ form: data?.error || 'Failed to submit form' });
+        }
+      } else {
+        setShowSuccessMessage(true);
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          message: '',
+          company: '',
+        });
+        setTurnstileToken('');
+        if (turnstileRef.current?.reset) {
+          turnstileRef.current.reset();
+        }
+        const timer = setTimeout(() => setShowSuccessMessage(false), 5000);
+        return () => clearTimeout(timer);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setErrors({ form: 'Failed to submit form. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -244,10 +221,10 @@ export default function Sponsorship() {
             </p>
           </div>
 
-          <Form method="post" className="space-y-6">
-            {actionData?.errors?.form && (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {errors.form && (
               <div className="text-red-500 bg-red-100 border border-red-400 rounded p-2">
-                {actionData.errors.form}
+                {errors.form}
               </div>
             )}
             {showSuccessMessage && (
@@ -370,14 +347,17 @@ export default function Sponsorship() {
                 <Turnstile
                   siteKey={TURNSTILE_SITE_KEY}
                   ref={turnstileRef}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onError={() => setTurnstileToken('')}
+                  onExpire={() => setTurnstileToken('')}
                   options={{
                     theme: 'dark',
                     size: 'normal',
                   }}
                 />
-                {actionData?.errors?.turnstile && (
+                {errors.turnstile && (
                   <div className="text-red-500 text-sm mt-1">
-                    {actionData.errors.turnstile}
+                    {errors.turnstile}
                   </div>
                 )}
               </ClientOnly>
@@ -390,7 +370,7 @@ export default function Sponsorship() {
             >
               {isSubmitting ? 'Sending...' : 'Send'}
             </Button>
-          </Form>
+          </form>
         </div>
 
         <div className="mt-16 text-sm text-center">
