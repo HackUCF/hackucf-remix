@@ -2,7 +2,7 @@ import type { MetaFunction } from '@remix-run/cloudflare';
 import { useState, useEffect, useRef } from 'react';
 import { Turnstile } from '@marsidev/react-turnstile';
 
-import { ClientOnly } from "@/components/ClientOnly";
+import { ClientOnly } from '@/components/ClientOnly';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -111,7 +111,7 @@ export default function Sponsorship() {
     try {
       // Append company to lastName for sponsorship form
       const fullLastName = `${lastName} at ${company}`;
-      
+
       const response = await fetch('https://workers.hackucf.org/send', {
         method: 'POST',
         body: new URLSearchParams({
@@ -134,7 +134,10 @@ export default function Sponsorship() {
       }
 
       if (!response.ok) {
-        if (data?.error?.includes('turnstile') || data?.error?.includes('captcha')) {
+        if (
+          data?.error?.includes('turnstile') ||
+          data?.error?.includes('captcha')
+        ) {
           setErrors({ turnstile: data?.error || 'CAPTCHA validation failed' });
         } else {
           setErrors({ form: data?.error || 'Failed to submit form' });
@@ -288,9 +291,7 @@ export default function Sponsorship() {
                 value={formData.company}
                 onChange={handleInputChange}
                 aria-invalid={errors.company ? true : undefined}
-                aria-errormessage={
-                  errors.company ? 'company-error' : undefined
-                }
+                aria-errormessage={errors.company ? 'company-error' : undefined}
               />
               {errors.company && (
                 <div id="company-error" className="text-red-500 text-sm">
@@ -347,7 +348,7 @@ export default function Sponsorship() {
                 <Turnstile
                   siteKey={TURNSTILE_SITE_KEY}
                   ref={turnstileRef}
-                  onSuccess={(token) => setTurnstileToken(token)}
+                  onSuccess={token => setTurnstileToken(token)}
                   onError={() => setTurnstileToken('')}
                   onExpire={() => setTurnstileToken('')}
                   options={{

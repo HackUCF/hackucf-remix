@@ -2,7 +2,7 @@ import type { MetaFunction } from '@remix-run/cloudflare';
 import { useState, useEffect, useRef } from 'react';
 import { Turnstile } from '@marsidev/react-turnstile';
 
-import { ClientOnly } from "@/components/ClientOnly";
+import { ClientOnly } from '@/components/ClientOnly';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -121,7 +121,10 @@ export default function ContactUs() {
       }
 
       if (!response.ok) {
-        if (data?.error?.includes('turnstile') || data?.error?.includes('captcha')) {
+        if (
+          data?.error?.includes('turnstile') ||
+          data?.error?.includes('captcha')
+        ) {
           setErrors({ turnstile: data?.error || 'CAPTCHA validation failed' });
         } else {
           setErrors({ form: data?.error || 'Failed to submit form' });
@@ -176,11 +179,16 @@ export default function ContactUs() {
                 Mailing Address
               </h3>
               <address className="not-italic">
-                Collegiate Cyber Defense Club @ UCF<br />
-                c/o Dr. Thomas Nedorost<br />
-                Department of Computer Science<br />
-                University of Central Florida<br />
-                4328 Scorpius Street, HEC 346<br />
+                Collegiate Cyber Defense Club @ UCF
+                <br />
+                c/o Dr. Thomas Nedorost
+                <br />
+                Department of Computer Science
+                <br />
+                University of Central Florida
+                <br />
+                4328 Scorpius Street, HEC 346
+                <br />
                 Orlando, FL 32816-2362
               </address>
             </div>
@@ -194,7 +202,8 @@ export default function ContactUs() {
             )}
             {showSuccessMessage && (
               <div className="text-green-500 bg-green-100 border border-green-400 rounded p-2">
-                Please check your email and click the link to confirm. (Link will expire in 15min)
+                Please check your email and click the link to confirm. (Link
+                will expire in 15min)
               </div>
             )}
             <div className="space-y-2">
@@ -290,7 +299,7 @@ export default function ContactUs() {
                 <Turnstile
                   siteKey={TURNSTILE_SITE_KEY}
                   ref={turnstileRef}
-                  onSuccess={(token) => setTurnstileToken(token)}
+                  onSuccess={token => setTurnstileToken(token)}
                   onError={() => setTurnstileToken('')}
                   onExpire={() => setTurnstileToken('')}
                   options={{

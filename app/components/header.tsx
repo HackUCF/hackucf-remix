@@ -58,7 +58,7 @@ export function Header() {
               className="text-white hover:text-background hover:bg-white transition-colors text-sm px-2 py-2 sm:px-3 sm:py-2.5 md:px-4 lg:px-5 xl:px-6 rounded-md whitespace-nowrap"
             >
               {item.href.startsWith('http') ||
-                ['contact-us', 'sponsorship'].includes(item.id) ? (
+              ['contact-us', 'sponsorship'].includes(item.id) ? (
                 <a href={item.href}>{item.name}</a>
               ) : (
                 <Link to={item.href} prefetch="intent">
@@ -125,7 +125,7 @@ export function Header() {
                     className="w-full text-left text-sm text-white hover:text-background hover:bg-white transition-colors px-3 py-2 rounded-md"
                   >
                     {item.href.startsWith('http') ||
-                      ['contact-us', 'sponsorship'].includes(item.id) ? (
+                    ['contact-us', 'sponsorship'].includes(item.id) ? (
                       <a href={item.href}>{item.name}</a>
                     ) : (
                       <Link to={item.href} prefetch="intent">

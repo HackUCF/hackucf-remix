@@ -109,7 +109,7 @@ const EXECUTIVE_DATA = [
     vicePresident: 'John Vezzola',
     treasurer: 'Eric Matthews',
     secretary: 'Jacob Freeman',
-  }
+  },
 ];
 
 const positions = ['president', 'vicePresident', 'treasurer', 'secretary'];
