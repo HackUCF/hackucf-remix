@@ -18,7 +18,7 @@ const FAQ_ITEMS = [
   {
     question: 'When are meetings?',
     answer:
-      'Check the calendar, newsletter, or our social media pages for up-to-date announcements regarding club events. Our general body meetings are Fridays at 5:30pm-7:00pm EST in ENG2-102.',
+      'Check the calendar, newsletter, or our social media pages for up-to-date announcements regarding club events. Our general body meetings are Fridays at 5:30pm-7:00pm EST in BA-119.',
     key: 'meeting-times',
   },
   {
