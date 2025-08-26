@@ -1,53 +1,53 @@
-import type { MetaFunction } from '@remix-run/cloudflare';
-import { Link } from '@remix-run/react';
+import type { MetaFunction } from "@remix-run/cloudflare";
+import { Link } from "@remix-run/react";
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
+} from "@/components/ui/accordion";
 
 const FAQ_ITEMS = [
   {
-    id: 'item-1',
-    question: 'What is a capture-the-flag?',
+    id: "item-1",
+    question: "What is a capture-the-flag?",
     answer:
       'A capture-the-flag (CTF) is a type of computer security competition. Participants attempt to find hidden "flags" by solving challenges related to various cybersecurity topics.',
   },
   {
-    id: 'item-2',
-    question: 'What skills are tested?',
+    id: "item-2",
+    question: "What skills are tested?",
     answer:
       "CTFs test a wide range of skills including cryptography, web exploitation, reverse engineering, binary exploitation, and more. It's a great way to develop practical cybersecurity skills.",
   },
   {
-    id: 'item-3',
-    question: 'Do you publish solutions for challenges?',
+    id: "item-3",
+    question: "Do you publish solutions for challenges?",
     answer:
       "We typically don't publish solutions publicly, but we do discuss them in our meetings and provide guidance to our members.",
   },
   {
-    id: 'item-4',
-    question: 'I know nothing. Can I play?',
+    id: "item-4",
+    question: "I know nothing. Can I play?",
     answer:
-      'We welcome beginners and provide resources to help you get started. Many of our experienced members started with no prior knowledge.',
+      "We welcome beginners and provide resources to help you get started. Many of our experienced members started with no prior knowledge.",
   },
 ];
 
 const STATISTICS = [
-  { id: 'stat-1', value: '7th', label: 'Top US Academic Team' },
-  { id: 'stat-2', value: '16th', label: 'Top American Team' },
-  { id: 'stat-3', value: '102nd', label: 'Top International Team' },
+  { id: "stat-1", value: "7th", label: "Top US Academic Team" },
+  { id: "stat-2", value: "16th", label: "Top American Team" },
+  { id: "stat-3", value: "102nd", label: "Top International Team" },
 ];
 
 export const meta: MetaFunction = ({ matches }) => {
-  const parentMeta = matches.flatMap(match => match.meta ?? []);
+  const parentMeta = matches.flatMap((match) => match.meta ?? []);
 
   const routeMeta = [
-    { title: 'Competitions | Hack@UCF' },
+    { title: "Competitions | Hack@UCF" },
     {
-      name: 'description',
+      name: "description",
       content:
         "Join Hack@UCF's competitive teams: KnightSec for CTF competitions and C3 Team for national cybersecurity events. Participate in offensive and defensive security challenges, from beginner-friendly CTFs to prestigious competitions like CCDC and CPTC.",
     },
@@ -92,7 +92,7 @@ export default function Competitions() {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
-            {STATISTICS.map(stat => (
+            {STATISTICS.map((stat) => (
               <div key={stat.id} className="text-center mt-16">
                 <p className="mb-2 text-5xl font-bold">{stat.value}</p>
                 <p className="text-sm">{stat.label}</p>
@@ -106,7 +106,7 @@ export default function Competitions() {
             Frequently Asked Questions
           </h2>
           <Accordion type="single" collapsible className="w-full">
-            {FAQ_ITEMS.map(item => (
+            {FAQ_ITEMS.map((item) => (
               <AccordionItem
                 className="border border-brandGold rounded-lg my-4"
                 key={item.id}
@@ -126,7 +126,7 @@ export default function Competitions() {
         <section>
           <h2 className="mb-4 text-3xl font-semibold">UCF C3 Teams</h2>
           <p className="mb-4">
-            The UCF College of Engineering and Computer Science sponsors the{' '}
+            The UCF College of Engineering and Computer Science sponsors the{" "}
             <span className="text-brandGold">
               <Link to="/ccdc" className="hover:underline">
                 Collegiate Cybersecurity Competition (C3) Team
@@ -141,7 +141,7 @@ export default function Competitions() {
           </p>
           <p>
             If you are interested in applying for the team, fill out the
-            application at{' '}
+            application at{" "}
             <a
               href="https://discord.com/invite/VwkkDcJ"
               className="text-brandGold hover:underline"

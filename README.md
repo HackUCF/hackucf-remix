@@ -24,7 +24,8 @@ The official website for UCF's Collegiate Cyber Defense Club (Hack@UCF), built w
 
 ### Prerequisites
 
-- Install [Bun](https://bun.sh/): 
+- Install [Bun](https://bun.sh/):
+
 ```bash
 curl -fsSL https://bun.sh/install | bash
 ```
@@ -32,17 +33,20 @@ curl -fsSL https://bun.sh/install | bash
 ### Setup
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/HackUCF/website.git
 cd website
 ```
 
 2. Install dependencies:
+
 ```bash
 bun install
 ```
 
 3. Start the development server:
+
 ```bash
 bun run dev
 ```
@@ -95,6 +99,7 @@ We welcome contributions from our community members! Please:
 4. Submit a pull request
 
 Please ensure your PR:
+
 - Follows our code style
 - Includes appropriate tests
 - Updates documentation as needed
@@ -102,6 +107,7 @@ Please ensure your PR:
 ## About Hack@UCF
 
 Hack@UCF is UCF's Premier Collegiate Cyber Defense Club. We focus on:
+
 - Learning cybersecurity through hands-on experience
 - Competing in national and regional competitions
 - Building a thriving community of security enthusiasts

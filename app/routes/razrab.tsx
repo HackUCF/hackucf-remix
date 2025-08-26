@@ -1,4 +1,4 @@
-import { Image } from '@unpic/react';
+import { Image } from "@unpic/react";
 
 export default function Razrab() {
   return (

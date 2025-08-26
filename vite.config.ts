@@ -1,12 +1,12 @@
 import {
   cloudflareDevProxyVitePlugin,
   vitePlugin as remix,
-} from '@remix-run/dev';
-import { defineConfig } from 'vite';
-import envOnly from 'vite-env-only';
-import tsconfigPaths from 'vite-tsconfig-paths';
+} from "@remix-run/dev";
+import { defineConfig } from "vite";
+import envOnly from "vite-env-only";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-import type { Env } from './context';
+import type { Env } from "./context";
 
 export default defineConfig({
   plugins: [
@@ -18,7 +18,7 @@ export default defineConfig({
           cloudflare: { env },
         },
       }) => {
-        const { getLoadContext } = await import('./context');
+        const { getLoadContext } = await import("./context");
         return getLoadContext(env);
       },
     }),

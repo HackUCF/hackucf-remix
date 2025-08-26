@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface HackerBackgroundProps {
   color?: string;
@@ -8,9 +8,9 @@ interface HackerBackgroundProps {
 }
 
 const HackerBackground: React.FC<HackerBackgroundProps> = ({
-  color = '#D2990B',
+  color = "#D2990B",
   fontSize = 14,
-  className = '',
+  className = "",
   speed = 1,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -19,7 +19,7 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const resizeCanvas = () => {
@@ -28,7 +28,7 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
     };
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
 
     let animationFrameId: number;
 
@@ -37,7 +37,7 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
     let drops: number[] = new Array(columns).fill(1);
 
     const chars =
-      'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()';
+      "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()";
 
     let lastTime = 0;
     const interval = 33; // ~30 fps
@@ -48,7 +48,7 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
       if (currentTime - lastTime < interval) return;
       lastTime = currentTime;
 
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = color;
@@ -74,11 +74,11 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
       drops = new Array(columns).fill(1);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };
   }, [color, fontSize, speed]);
@@ -94,11 +94,11 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
       width={defaultWidth}
       height={defaultHeight}
       style={{
-        position: 'absolute',
+        position: "absolute",
         top: 0,
         left: 0,
-        width: '100%',
-        height: '100%',
+        width: "100%",
+        height: "100%",
       }}
     />
   );

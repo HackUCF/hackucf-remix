@@ -1,24 +1,24 @@
-import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
-import type { MetaFunction } from '@remix-run/cloudflare';
-import { useId, useRef, useState } from 'react'; // Added useId
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
+import type { MetaFunction } from "@remix-run/cloudflare";
+import { useId, useRef, useState } from "react"; // Added useId
 
-import { ClientOnly } from '@/components/ClientOnly';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { ClientOnly } from "@/components/ClientOnly";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 // Replace with your actual Cloudflare Turnstile site key
-const TURNSTILE_SITE_KEY = '0x4AAAAAAA_5HexOM2PrjMHA';
+const TURNSTILE_SITE_KEY = "0x4AAAAAAA_5HexOM2PrjMHA";
 
 export const meta: MetaFunction = ({ matches }) => {
-  const parentMeta = matches.flatMap(match => match.meta ?? []);
+  const parentMeta = matches.flatMap((match) => match.meta ?? []);
 
   const routeMeta = [
-    { title: 'Contact Us | Hack@UCF' },
+    { title: "Contact Us | Hack@UCF" },
     {
-      name: 'description',
+      name: "description",
       content:
-        'Need to reach us? Send us an email or fill out a form, and someone from our team will get back to you as soon as possible.',
+        "Need to reach us? Send us an email or fill out a form, and someone from our team will get back to you as soon as possible.",
     },
   ];
 
@@ -39,41 +39,41 @@ export default function ContactUs() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    message: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState("");
   const turnstileRef = useRef<TurnstileInstance | null>(null);
 
   const validateField = (name: string, value: string) => {
     if (
-      name === 'email' &&
-      (typeof value !== 'string' || !value.includes('@'))
+      name === "email" &&
+      (typeof value !== "string" || !value.includes("@"))
     ) {
-      return 'Invalid email address';
+      return "Invalid email address";
     }
-    if (name === 'message' && (typeof value !== 'string' || value.length < 8)) {
-      return 'Message should contain more content';
+    if (name === "message" && (typeof value !== "string" || value.length < 8)) {
+      return "Message should contain more content";
     }
     if (
-      (name === 'firstName' || name === 'lastName') &&
-      (typeof value !== 'string' || value.trim().length < 1)
+      (name === "firstName" || name === "lastName") &&
+      (typeof value !== "string" || value.trim().length < 1)
     ) {
-      return `Enter a valid ${name === 'firstName' ? 'first' : 'last'} name`;
+      return `Enter a valid ${name === "firstName" ? "first" : "last"} name`;
     }
-    return '';
+    return "";
   };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     const error = validateField(name, value);
-    setErrors(prev => ({ ...prev, [name]: error }));
+    setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -86,20 +86,20 @@ export default function ContactUs() {
     // Client-side validation
     const newErrors: Record<string, string> = {};
 
-    if (!email.includes('@')) {
-      newErrors.email = 'Invalid email address';
+    if (!email.includes("@")) {
+      newErrors.email = "Invalid email address";
     }
     if (message.length < 9) {
-      newErrors.message = 'Message should contain more content';
+      newErrors.message = "Message should contain more content";
     }
     if (!firstName.trim()) {
-      newErrors.firstName = 'Enter a valid first name';
+      newErrors.firstName = "Enter a valid first name";
     }
     if (!lastName.trim()) {
-      newErrors.lastName = 'Enter a valid last name';
+      newErrors.lastName = "Enter a valid last name";
     }
     if (!turnstileToken) {
-      newErrors.turnstile = 'Please complete the CAPTCHA';
+      newErrors.turnstile = "Please complete the CAPTCHA";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -109,22 +109,22 @@ export default function ContactUs() {
     }
 
     try {
-      const response = await fetch('https://workers.hackucf.org/send', {
-        method: 'POST',
+      const response = await fetch("https://workers.hackucf.org/send", {
+        method: "POST",
         body: new URLSearchParams({
           email,
           firstName,
           lastName,
           message,
-          'cf-turnstile-response': turnstileToken,
+          "cf-turnstile-response": turnstileToken,
         }),
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
       });
 
       let data: string | { error?: string };
-      if (response.headers.get('content-type')?.includes('application/json')) {
+      if (response.headers.get("content-type")?.includes("application/json")) {
         data = (await response.json()) as { error?: string };
       } else {
         data = await response.text();
@@ -132,27 +132,27 @@ export default function ContactUs() {
 
       if (!response.ok) {
         if (
-          typeof data === 'object' &&
-          (data.error?.includes('turnstile') || data.error?.includes('captcha'))
+          typeof data === "object" &&
+          (data.error?.includes("turnstile") || data.error?.includes("captcha"))
         ) {
-          setErrors({ turnstile: data.error || 'CAPTCHA validation failed' });
+          setErrors({ turnstile: data.error || "CAPTCHA validation failed" });
         } else {
           setErrors({
             form:
-              (typeof data === 'object' && data.error) ||
-              (typeof data === 'string' && data) ||
-              'Failed to submit form',
+              (typeof data === "object" && data.error) ||
+              (typeof data === "string" && data) ||
+              "Failed to submit form",
           });
         }
       } else {
         setShowSuccessMessage(true);
         setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          message: '',
+          firstName: "",
+          lastName: "",
+          email: "",
+          message: "",
         });
-        setTurnstileToken('');
+        setTurnstileToken("");
         if (turnstileRef.current?.reset) {
           turnstileRef.current.reset();
         }
@@ -160,8 +160,8 @@ export default function ContactUs() {
         return () => clearTimeout(timer);
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      setErrors({ form: 'Failed to submit form. Please try again.' });
+      console.error("Error submitting form:", error);
+      setErrors({ form: "Failed to submit form. Please try again." });
     } finally {
       setIsSubmitting(false);
     }
@@ -317,12 +317,12 @@ export default function ContactUs() {
                 <Turnstile
                   siteKey={TURNSTILE_SITE_KEY}
                   ref={turnstileRef}
-                  onSuccess={token => setTurnstileToken(token)}
-                  onError={() => setTurnstileToken('')}
-                  onExpire={() => setTurnstileToken('')}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onError={() => setTurnstileToken("")}
+                  onExpire={() => setTurnstileToken("")}
                   options={{
-                    theme: 'dark',
-                    size: 'normal',
+                    theme: "dark",
+                    size: "normal",
                   }}
                 />
                 {errors.turnstile && (
@@ -338,7 +338,7 @@ export default function ContactUs() {
               className="bg-brandGold hover:bg-brandGold/90 text-background font-semibold py-2 px-4 w-full"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Sending...' : 'Send'}
+              {isSubmitting ? "Sending..." : "Send"}
             </Button>
           </form>
         </div>

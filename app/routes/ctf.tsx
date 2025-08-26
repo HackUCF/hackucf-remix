@@ -1,15 +1,15 @@
-import type { MetaFunction } from '@remix-run/cloudflare';
-import { Link } from '@remix-run/react';
+import type { MetaFunction } from "@remix-run/cloudflare";
+import { Link } from "@remix-run/react";
 
 export const meta: MetaFunction = ({ matches }) => {
-  const parentMeta = matches.flatMap(match => match.meta ?? []);
+  const parentMeta = matches.flatMap((match) => match.meta ?? []);
 
   const routeMeta = [
-    { title: 'Capture the Flag | Hack@UCF' },
+    { title: "Capture the Flag | Hack@UCF" },
     {
-      name: 'description',
+      name: "description",
       content:
-        'UCF Hack@UCF Capture the Flag team, a group of offensive security enthusiasts who compete in jeopardy-style CTF competitions to solve real-world security challenges.',
+        "UCF Hack@UCF Capture the Flag team, a group of offensive security enthusiasts who compete in jeopardy-style CTF competitions to solve real-world security challenges.",
     },
   ];
 
@@ -36,9 +36,9 @@ export default function CaptureTheFlag() {
         <section className="mb-16">
           <h2 className="mb-6 text-3xl font-semibold">KnightSec, the Team</h2>
           <p className="mb-6">
-            At the University of Central Florida, we are all{' '}
-            <span className="text-brandGold">Knights</span>. And that{' '}
-            <span className="text-brandGold">Sec</span> in{' '}
+            At the University of Central Florida, we are all{" "}
+            <span className="text-brandGold">Knights</span>. And that{" "}
+            <span className="text-brandGold">Sec</span> in{" "}
             <span className="text-brandGold">KnightSec</span> doesn't
             necessarily stand for secrecy, but rather security. We do something
             really special. Our students participate in offensive-based Capture
@@ -116,7 +116,7 @@ export default function CaptureTheFlag() {
           </p>
           <p className="mb-6">
             We have a CTF workshop nearly every weekend. Catch up on some of the
-            challenges that we work on:{' '}
+            challenges that we work on:{" "}
             <Link to="#" className="text-brandGold hover:underline">
               Challenges
             </Link>
@@ -126,7 +126,7 @@ export default function CaptureTheFlag() {
             Occasionally, we will host an all-day or multi-day CTF event
             on-campus where students can learn, have fun, and enjoy food and
             drinks from our sponsors—all while competing. Be on the lookout for
-            upcoming competitions by checking out{' '}
+            upcoming competitions by checking out{" "}
             <a
               href="https://ctftime.org/"
               target="_blank"
@@ -134,8 +134,8 @@ export default function CaptureTheFlag() {
               className="text-brandGold hover:underline"
             >
               CTFtime
-            </a>{' '}
-            and our{' '}
+            </a>{" "}
+            and our{" "}
             <Link to="/calendar" className="text-brandGold hover:underline">
               Calendar
             </Link>

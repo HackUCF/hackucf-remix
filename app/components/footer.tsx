@@ -1,56 +1,56 @@
-import { Link } from '@remix-run/react';
-import { useId } from 'react';
+import { Link } from "@remix-run/react";
+import { useId } from "react";
 
 export function Footer() {
   const footerId = useId();
   const SOCIAL_LINKS = [
     {
-      id: 'instagram',
+      id: "instagram",
       icon: <img src="/instagram.svg" alt="Instagram" className="h-6 w-6" />,
-      url: 'https://www.instagram.com/hack_ucf/',
-      label: 'Instagram',
+      url: "https://www.instagram.com/hack_ucf/",
+      label: "Instagram",
     },
     {
-      id: 'x',
+      id: "x",
       icon: <img src="/x-social.svg" alt="X" className="h-6 w-6" />,
-      url: 'https://x.com/HackUCF',
-      label: 'Twitter',
+      url: "https://x.com/HackUCF",
+      label: "Twitter",
     },
     {
-      id: 'github',
+      id: "github",
       icon: <img src="/github.svg" alt="GitHub" className="h-6 w-6" />,
-      url: 'https://github.com/HackUCF',
-      label: 'GitHub',
+      url: "https://github.com/HackUCF",
+      label: "GitHub",
     },
     {
-      id: 'linkedin',
+      id: "linkedin",
       icon: <img src="/linkedin.svg" alt="LinkedIn" className="h-6 w-6" />,
-      url: 'https://www.linkedin.com/company/collegiate-cyber-defense-club-at-ucf',
-      label: 'LinkedIn',
+      url: "https://www.linkedin.com/company/collegiate-cyber-defense-club-at-ucf",
+      label: "LinkedIn",
     },
   ];
 
   const ACTION_LINKS = [
     {
-      id: 'join-the-fun',
-      text: 'Join the Fun',
-      url: 'https://join.hackucf.org',
+      id: "join-the-fun",
+      text: "Join the Fun",
+      url: "https://join.hackucf.org",
     },
     {
-      id: 'hop-on-discord',
-      text: 'Hop on Discord',
-      url: 'https://discord.com/invite/VwkkDcJ',
+      id: "hop-on-discord",
+      text: "Hop on Discord",
+      url: "https://discord.com/invite/VwkkDcJ",
     },
-    { id: 'view-the-calendar', text: 'View the Calendar', url: '/calendar' },
+    { id: "view-the-calendar", text: "View the Calendar", url: "/calendar" },
     {
-      id: 'present-at-meeting',
-      text: 'Present at a Meeting',
-      url: 'https://discord.com/invite/VwkkDcJ',
+      id: "present-at-meeting",
+      text: "Present at a Meeting",
+      url: "https://discord.com/invite/VwkkDcJ",
     },
     {
-      id: 'donate',
-      text: 'Donate',
-      url: 'https://donate.stripe.com/7sI7un5vkfGV9xKaEE',
+      id: "donate",
+      text: "Donate",
+      url: "https://donate.stripe.com/7sI7un5vkfGV9xKaEE",
     },
   ];
 
@@ -73,7 +73,7 @@ export function Footer() {
             Don't forget to join our Discord!
           </p>
           <div className="flex justify-center space-x-6">
-            {SOCIAL_LINKS.map(social => (
+            {SOCIAL_LINKS.map((social) => (
               <a
                 key={social.id}
                 href={social.url}
@@ -88,7 +88,7 @@ export function Footer() {
           </div>
         </div>
         <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {ACTION_LINKS.map(action => (
+          {ACTION_LINKS.map((action) => (
             <Link
               key={action.id}
               to={action.url}
@@ -103,7 +103,7 @@ export function Footer() {
             &copy;HackUCF {new Date().getFullYear()}
           </p>
           <p className="text-white text-sm">
-            Made with ❤ by{' '}
+            Made with ❤ by{" "}
             <a
               href="https://github.com/parchinski"
               target="_blank"

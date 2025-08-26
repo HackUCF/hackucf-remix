@@ -1,20 +1,20 @@
-import { DiscordLogoIcon as Discord } from '@radix-ui/react-icons';
-import type { MetaFunction } from '@remix-run/cloudflare';
-import { Link } from '@remix-run/react';
-import { Image } from '@unpic/react';
-import { Mail } from 'lucide-react';
+import { DiscordLogoIcon as Discord } from "@radix-ui/react-icons";
+import type { MetaFunction } from "@remix-run/cloudflare";
+import { Link } from "@remix-run/react";
+import { Image } from "@unpic/react";
+import { Mail } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 export const meta: MetaFunction = ({ matches }) => {
-  const parentMeta = matches.flatMap(match => match.meta ?? []);
+  const parentMeta = matches.flatMap((match) => match.meta ?? []);
 
   const routeMeta = [
-    { title: 'WiCyS @ UCF | Hack@UCF' },
+    { title: "WiCyS @ UCF | Hack@UCF" },
     {
-      name: 'description',
+      name: "description",
       content:
-        'Women in CyberSecurity (WiCyS) at UCF is a student organization fostering a supportive community for underrepresented groups in cybersecurity through knowledge sharing, networking, and mentoring.',
+        "Women in CyberSecurity (WiCyS) at UCF is a student organization fostering a supportive community for underrepresented groups in cybersecurity through knowledge sharing, networking, and mentoring.",
     },
   ];
 

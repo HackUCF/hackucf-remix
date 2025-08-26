@@ -10,9 +10,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Biome
-        uses: biomejs/setup-biome@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          version: latest
-      - name: Run Biome
-        run: biome ci ./app/
+          node-version: 20
+      - name: Run Prettier
+        run: npx prettier --check ./

@@ -1,12 +1,12 @@
-import type { MetaFunction } from '@remix-run/cloudflare';
+import type { MetaFunction } from "@remix-run/cloudflare";
 
 export const meta: MetaFunction = ({ matches }) => {
-  const parentMeta = matches.flatMap(match => match.meta ?? []);
+  const parentMeta = matches.flatMap((match) => match.meta ?? []);
 
   const routeMeta = [
-    { title: 'Calendar & Events | Hack@UCF' },
+    { title: "Calendar & Events | Hack@UCF" },
     {
-      name: 'description',
+      name: "description",
       content:
         "Stay up-to-date with Hack@UCF's upcoming meetings, workshops, CTF competitions, and cybersecurity events. View our full calendar to never miss an opportunity to learn and engage with our community.",
     },

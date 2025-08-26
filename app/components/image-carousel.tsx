@@ -1,5 +1,5 @@
-import { Image } from '@unpic/react';
-import { useEffect, useRef, useState } from 'react';
+import { Image } from "@unpic/react";
+import { useEffect, useRef, useState } from "react";
 
 interface ImageCarouselProps {
   imagePaths: string[];
@@ -19,7 +19,7 @@ export default function ImageCarousel({ imagePaths, alt }: ImageCarouselProps) {
 
     const timer = setInterval(() => {
       setPreviousIndex(currentIndex);
-      setCurrentIndex(prevIndex => (prevIndex + 1) % totalImages);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % totalImages);
     }, 8000);
 
     return () => clearInterval(timer);
@@ -33,7 +33,7 @@ export default function ImageCarousel({ imagePaths, alt }: ImageCarouselProps) {
   }, [currentIndex, previousIndex, totalImages]);
 
   if (!imagePaths || imagePaths.length === 0) {
-    console.error('ERROR: No image paths loaded');
+    console.error("ERROR: No image paths loaded");
     return null;
   }
 
@@ -55,7 +55,7 @@ export default function ImageCarousel({ imagePaths, alt }: ImageCarouselProps) {
       width={1112}
       height={834}
       className="w-full h-auto"
-      loading={'lazy'}
+      loading={"lazy"}
     />
   );
 
@@ -69,11 +69,11 @@ export default function ImageCarousel({ imagePaths, alt }: ImageCarouselProps) {
         className="flex transition-transform ease-in-out duration-500"
         style={{
           transform: getTransformStyle(),
-          transition: isTransitioning ? 'none' : 'transform 0.5s ease-in-out',
+          transition: isTransitioning ? "none" : "transform 0.5s ease-in-out",
         }}
       >
         <div
-          key={generateUniqueId('last', imagePaths[totalImages - 1])}
+          key={generateUniqueId("last", imagePaths[totalImages - 1])}
           className="w-full flex-shrink-0"
         >
           {renderImage(imagePaths[totalImages - 1], `${alt} last clone`)}
@@ -81,7 +81,7 @@ export default function ImageCarousel({ imagePaths, alt }: ImageCarouselProps) {
 
         {imagePaths.map((image, index) => (
           <div
-            key={generateUniqueId('main', image)}
+            key={generateUniqueId("main", image)}
             className="w-full flex-shrink-0"
           >
             {renderImage(image, `${alt} ${index + 1}`)}
@@ -89,7 +89,7 @@ export default function ImageCarousel({ imagePaths, alt }: ImageCarouselProps) {
         ))}
 
         <div
-          key={generateUniqueId('first', imagePaths[0])}
+          key={generateUniqueId("first", imagePaths[0])}
           className="w-full flex-shrink-0"
         >
           {renderImage(imagePaths[0], `${alt} first clone`)}

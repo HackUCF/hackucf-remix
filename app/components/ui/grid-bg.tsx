@@ -1,5 +1,5 @@
-'use client';
-import type { HTMLProps } from 'react';
+"use client";
+import type { HTMLProps } from "react";
 
 interface BackgroundGridProps {
   color: string;
@@ -10,9 +10,9 @@ interface BackgroundGridProps {
 }
 
 const BackgroundGrid = ({
-  color = '#D2990B',
-  cellSize = '25px',
-  strokeWidth = '3px',
+  color = "#D2990B",
+  cellSize = "25px",
+  strokeWidth = "3px",
   className,
   fade = true,
   ...props
@@ -31,13 +31,13 @@ const BackgroundGrid = ({
         className={`pointer-events-none absolute inset-0 left-0 top-0 flex h-full w-full ${className}`}
         style={{
           backgroundImage: `url("${svgDataUrl}")`,
-          backgroundRepeat: 'repeat',
+          backgroundRepeat: "repeat",
           backgroundSize: cellSize,
           maskImage: fade
-            ? 'radial-gradient(ellipse at top, white, transparent 70%)'
+            ? "radial-gradient(ellipse at top, white, transparent 70%)"
             : undefined,
           WebkitMaskImage: fade
-            ? 'radial-gradient(ellipse at top, white, transparent 70%)'
+            ? "radial-gradient(ellipse at top, white, transparent 70%)"
             : undefined,
         }}
         {...props}

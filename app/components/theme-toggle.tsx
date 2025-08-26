@@ -1,12 +1,12 @@
-import { LaptopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
-import React from 'react';
-import { useHydrated } from 'remix-utils/use-hydrated';
+import { LaptopIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import React from "react";
+import { useHydrated } from "remix-utils/use-hydrated";
 
 import {
   getTheme,
   setTheme as setSystemTheme,
-} from '@/components/theme-switcher';
-import { Button } from '@/components/ui/button';
+} from "@/components/theme-switcher";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,14 +15,14 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
-const THEME_OPTIONS = ['light', 'dark', 'system'] as const;
+const THEME_OPTIONS = ["light", "dark", "system"] as const;
 type ThemeOption = (typeof THEME_OPTIONS)[number];
 
 export function ThemeToggle() {
   const hydrated = useHydrated();
-  const [theme, setThemeState] = React.useState<ThemeOption>('system');
+  const [theme, setThemeState] = React.useState<ThemeOption>("system");
 
   React.useEffect(() => {
     if (hydrated) {
@@ -42,9 +42,9 @@ export function ThemeToggle() {
         <DropdownMenuTrigger asChild className="border-2">
           <Button className="w-9 h-9 rounded-full" size="icon" variant="ghost">
             <span className="sr-only">Theme selector</span>
-            {!hydrated ? null : theme === 'dark' ? (
+            {!hydrated ? null : theme === "dark" ? (
               <MoonIcon className="text-brandGold hover:text-background" />
-            ) : theme === 'light' ? (
+            ) : theme === "light" ? (
               <SunIcon className="text-brandGold hover:text-background" />
             ) : (
               <LaptopIcon className="text-brandGold hover:text-background" />
@@ -56,9 +56,9 @@ export function ThemeToggle() {
           <DropdownMenuSeparator />
           <DropdownMenuRadioGroup
             value={theme}
-            onValueChange={value => setTheme(value as ThemeOption)}
+            onValueChange={(value) => setTheme(value as ThemeOption)}
           >
-            {THEME_OPTIONS.map(themeOption => (
+            {THEME_OPTIONS.map((themeOption) => (
               <DropdownMenuRadioItem
                 key={themeOption}
                 value={themeOption}

@@ -1,127 +1,127 @@
-import type { MetaFunction } from '@remix-run/cloudflare';
-import { Link } from '@remix-run/react';
-import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import type { MetaFunction } from "@remix-run/cloudflare";
+import { Link } from "@remix-run/react";
+import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { ChartTooltip } from '@/components/ui/chart';
+} from "@/components/ui/card";
+import { ChartTooltip } from "@/components/ui/chart";
 
 const EXECUTIVE_DATA = [
   {
-    year: '2012-13',
-    president: 'Gaelan Adams',
-    vicePresident: 'Kirk Elifson',
-    treasurer: 'Ditmar Wendt',
-    secretary: 'Brandon Catubig',
+    year: "2012-13",
+    president: "Gaelan Adams",
+    vicePresident: "Kirk Elifson",
+    treasurer: "Ditmar Wendt",
+    secretary: "Brandon Catubig",
   },
   {
-    year: '2013-14',
-    president: 'Carlos Beltran (fmr: Jonathan Singer)',
-    vicePresident: 'Alex Davis (fmr: Carlos Beltran)',
-    treasurer: 'Troy Micka',
-    secretary: 'Austin Brogle',
+    year: "2013-14",
+    president: "Carlos Beltran (fmr: Jonathan Singer)",
+    vicePresident: "Alex Davis (fmr: Carlos Beltran)",
+    treasurer: "Troy Micka",
+    secretary: "Austin Brogle",
   },
   {
-    year: '2014-15',
-    president: 'Cody McMahon',
-    vicePresident: 'Joe Pate',
-    treasurer: 'Troy Micka (fmr: Dale Driggs)',
-    secretary: 'Mark Ignacio',
+    year: "2014-15",
+    president: "Cody McMahon",
+    vicePresident: "Joe Pate",
+    treasurer: "Troy Micka (fmr: Dale Driggs)",
+    secretary: "Mark Ignacio",
   },
   {
-    year: '2015-16',
-    president: 'Mark Ignacio',
-    vicePresident: 'Shane Welsh',
-    treasurer: 'Jacob Hazelbaker',
-    secretary: 'Heather Lawrence',
+    year: "2015-16",
+    president: "Mark Ignacio",
+    vicePresident: "Shane Welsh",
+    treasurer: "Jacob Hazelbaker",
+    secretary: "Heather Lawrence",
   },
   {
-    year: '2016-17',
-    president: 'Heather Lawrence',
-    vicePresident: 'Tyler Lukasiewicz',
-    treasurer: 'Nathan Dolorfino',
-    secretary: 'Matthew St. Hubin',
+    year: "2016-17",
+    president: "Heather Lawrence",
+    vicePresident: "Tyler Lukasiewicz",
+    treasurer: "Nathan Dolorfino",
+    secretary: "Matthew St. Hubin",
   },
   {
-    year: '2017-18',
-    president: 'Kevin Colley',
-    vicePresident: 'Matthew St. Hubin',
-    treasurer: 'Emil Dolorfino',
-    secretary: 'David Maria',
+    year: "2017-18",
+    president: "Kevin Colley",
+    vicePresident: "Matthew St. Hubin",
+    treasurer: "Emil Dolorfino",
+    secretary: "David Maria",
   },
   {
-    year: '2018-19',
-    president: 'David Maria',
-    vicePresident: 'Charlton Trezevant',
-    treasurer: 'Nathan Dolorfino',
-    secretary: 'Lauryn Landkrohn',
+    year: "2018-19",
+    president: "David Maria",
+    vicePresident: "Charlton Trezevant",
+    treasurer: "Nathan Dolorfino",
+    secretary: "Lauryn Landkrohn",
   },
   {
-    year: '2019-20',
-    president: 'Charlton Trezevant',
-    vicePresident: 'Peyton Duncan',
-    treasurer: 'Alexander Cote',
-    secretary: 'James Simmons',
+    year: "2019-20",
+    president: "Charlton Trezevant",
+    vicePresident: "Peyton Duncan",
+    treasurer: "Alexander Cote",
+    secretary: "James Simmons",
   },
   {
-    year: '2020-21',
-    president: 'Michael Troisi',
-    vicePresident: 'Ryan Carnovsky',
-    treasurer: 'Addison Cobble',
-    secretary: 'Jeffrey DiVincent (fmr: Marisa Kosto Burns)',
+    year: "2020-21",
+    president: "Michael Troisi",
+    vicePresident: "Ryan Carnovsky",
+    treasurer: "Addison Cobble",
+    secretary: "Jeffrey DiVincent (fmr: Marisa Kosto Burns)",
   },
   {
-    year: '2021-22',
-    president: 'Daniel Trimble',
-    vicePresident: 'Jeffrey DiVincent',
-    treasurer: 'Matthew McKeever',
-    secretary: 'Jake DiClemente',
+    year: "2021-22",
+    president: "Daniel Trimble",
+    vicePresident: "Jeffrey DiVincent",
+    treasurer: "Matthew McKeever",
+    secretary: "Jake DiClemente",
   },
   {
-    year: '2022-23',
-    president: 'Jeffrey DiVincent',
-    vicePresident: 'Addison Cobble',
-    treasurer: 'Caleb Sjostedt',
-    secretary: 'Colton Knight',
+    year: "2022-23",
+    president: "Jeffrey DiVincent",
+    vicePresident: "Addison Cobble",
+    treasurer: "Caleb Sjostedt",
+    secretary: "Colton Knight",
   },
   {
-    year: '2023-24',
-    president: 'Jackson Shaw',
-    vicePresident: 'Victor Suarez',
-    treasurer: 'Caleb Sjostedt',
-    secretary: 'Joshua Walsworth',
+    year: "2023-24",
+    president: "Jackson Shaw",
+    vicePresident: "Victor Suarez",
+    treasurer: "Caleb Sjostedt",
+    secretary: "Joshua Walsworth",
   },
   {
-    year: '2024-25',
-    president: 'Kevin Kiderchah',
-    vicePresident: 'Adit Rajkumar',
-    treasurer: 'Jonathan Styles',
-    secretary: 'John Vezzola',
+    year: "2024-25",
+    president: "Kevin Kiderchah",
+    vicePresident: "Adit Rajkumar",
+    treasurer: "Jonathan Styles",
+    secretary: "John Vezzola",
   },
   {
-    year: '2025-26',
-    president: 'Kevin Kiderchah',
-    vicePresident: 'John Vezzola',
-    treasurer: 'Eric Matthews',
-    secretary: 'Jacob Freeman',
+    year: "2025-26",
+    president: "Kevin Kiderchah",
+    vicePresident: "John Vezzola",
+    treasurer: "Eric Matthews",
+    secretary: "Jacob Freeman",
   },
 ];
 
-const positions = ['president', 'vicePresident', 'treasurer', 'secretary'];
+const positions = ["president", "vicePresident", "treasurer", "secretary"];
 
 export const meta: MetaFunction = ({ matches }) => {
-  const parentMeta = matches.flatMap(match => match.meta ?? []);
+  const parentMeta = matches.flatMap((match) => match.meta ?? []);
 
   const routeMeta = [
-    { title: 'Executives | Hack@UCF' },
+    { title: "Executives | Hack@UCF" },
     {
-      name: 'description',
+      name: "description",
       content:
-        'Meet the Hack@UCF executive team throughout the years. Learn about our club leadership and the evolution of executive positions over time.',
+        "Meet the Hack@UCF executive team throughout the years. Learn about our club leadership and the evolution of executive positions over time.",
     },
   ];
 
@@ -129,7 +129,7 @@ export const meta: MetaFunction = ({ matches }) => {
 };
 
 export default function Executives() {
-  const chartData = EXECUTIVE_DATA.map(year => ({
+  const chartData = EXECUTIVE_DATA.map((year) => ({
     name: year.year,
     value: 0.5,
   }));
@@ -166,7 +166,7 @@ export default function Executives() {
                   <XAxis
                     dataKey="name"
                     type="category"
-                    tick={{ fill: '#D2990B', fontSize: 14 }}
+                    tick={{ fill: "#D2990B", fontSize: 14 }}
                     height={80}
                   />
                   <YAxis type="number" domain={[0, 1]} hide />
@@ -174,7 +174,7 @@ export default function Executives() {
                     content={({ active, payload }) => {
                       if (active && payload && payload.length) {
                         const yearData = EXECUTIVE_DATA.find(
-                          d => d.year === payload[0].payload.name,
+                          (d) => d.year === payload[0].payload.name,
                         );
                         if (yearData) {
                           return (
@@ -203,14 +203,14 @@ export default function Executives() {
                       return null;
                     }}
                   />
-                  {positions.map(position => (
+                  {positions.map((position) => (
                     <Line
                       key={position}
                       dataKey="value"
                       stroke="#D2990B"
                       strokeWidth={2}
-                      dot={{ r: 4, fill: '#D2990B' }}
-                      activeDot={{ r: 6, fill: '#D2990B' }}
+                      dot={{ r: 4, fill: "#D2990B" }}
+                      activeDot={{ r: 6, fill: "#D2990B" }}
                     />
                   ))}
                 </LineChart>
@@ -249,8 +249,8 @@ export default function Executives() {
                       border-t border-brandGold/10
                       ${
                         index % 2 === 0
-                          ? 'bg-background'
-                          : 'bg-brandGold bg-opacity-5'
+                          ? "bg-background"
+                          : "bg-brandGold bg-opacity-5"
                       }
                     `}
                   >
