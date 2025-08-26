@@ -10,7 +10,7 @@ import {
 } from "@remix-run/react";
 import { Footer } from "@/components/Footer";
 import { GlobalPendingIndicator } from "@/components/global-pending-indicator";
-import { Navbar } from "@/components/Navbar";
+import { Navbar } from "@/components/header";
 import {
   ThemeSwitcherSafeHTML,
   ThemeSwitcherScript,

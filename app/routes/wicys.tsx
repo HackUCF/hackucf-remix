@@ -43,7 +43,6 @@ export default function WiCyS() {
           <div className="flex items-center justify-center h-full">
             <Image
               src="/wicys-logo.svg"
-              alt="WiCyS Logo"
               width={600}
               height={600}
               objectFit="fill"

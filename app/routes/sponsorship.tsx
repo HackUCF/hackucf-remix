@@ -2,7 +2,7 @@ import type { MetaFunction } from "@remix-run/cloudflare";
 import { useState, useRef } from "react";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 
-import { ClientOnly } from "@/components/ClientOnly";
+import { ClientOnly } from "@/components/client-only";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
