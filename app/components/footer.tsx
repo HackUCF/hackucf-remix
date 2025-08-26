@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
 import { useId } from "react";
+import BackgroundGrid from "./ui/grid-bg";
 
 export function Footer() {
   const footerId = useId();
@@ -56,12 +57,13 @@ export function Footer() {
 
   return (
     <footer
-      className="bg-background text-white px-4 sm:px-6 lg:px-8 mb-16 pt-16"
+      className="relative bg-background text-white px-4 sm:px-6 lg:px-8 mb-16 pt-16"
       id={footerId}
     >
+      <BackgroundGrid className="absolute inset-0 w-full h-full z-0 rotate-180" />
       <div
         data-nosnippet
-        className="max-w-7xl mx-auto flex-col items-center justify-center h-full"
+        className="relative z-10 max-w-7xl mx-auto flex-col items-center justify-center h-full"
       >
         <div className="mb-12">
           <h2 className="text-4xl font-bold text-center mb-8 text-white">

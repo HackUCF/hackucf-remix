@@ -56,7 +56,7 @@ const images = [
   },
 ];
 
-const velocity = [3, -3];
+const velocity = [2, -2];
 
 function SponsorScroll() {
   return (
@@ -79,7 +79,7 @@ function SponsorScroll() {
             ))}
           </ScrollVelocity>
         ))}
-        <ScrollVelocity velocity={5}>You can also use a text!</ScrollVelocity>
+        <ScrollVelocity velocity={4}>WE ❤️ OUR SPONSORS</ScrollVelocity>
       </div>
     </div>
   );

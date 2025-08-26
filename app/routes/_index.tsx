@@ -13,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import BackgroundGrid from "@/components/ui/grid-bg";
 import HackerBg from "@/components/ui/hacker-bg";
 
 const INDEX_CARD_DATA = [
@@ -134,8 +133,6 @@ export default function Index() {
         aria-label="Club Activities section"
         ref={clubActivitiesRef}
       >
-        <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-background to-transparent" />
-        <BackgroundGrid className="absolute inset-0 w-full h-full" />
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-white relative z-10 my-8">
           Club Activities
         </h2>
