@@ -130,7 +130,7 @@ export default function Index() {
 
       {/* Meetings and Membership Section */}
       <section
-        className="h-3/4 w-full flex flex-col justify-top bg-background relative overflow-hidden"
+        className="h-3/4 w-full flex flex-col justify-top bg-background relative overflow-hidden sm:px-8 px-4 py-8"
         aria-label="Club Activities section"
         ref={clubActivitiesRef}
       >
@@ -173,6 +173,7 @@ export default function Index() {
           ))}
         </div>
       </section>
+
       <section className="h-1/4 mt-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-white">
           Our Sponsors
