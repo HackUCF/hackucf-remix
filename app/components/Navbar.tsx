@@ -12,6 +12,11 @@ import {
 } from "@/components/ui/sheet";
 
 const NAV_ITEMS = [
+  {
+    id: "join-the-fun",
+    name: "Join the Fun",
+    href: "https://join.hackucf.org/",
+  },
   { id: "about-us", name: "About Us", href: "/about-us" },
   { id: "contact-us", name: "Contact Us", href: "/contact-us" },
   { id: "sponsorship", name: "Sponsorship", href: "/sponsorship" },
@@ -19,7 +24,7 @@ const NAV_ITEMS = [
   { id: "wicys", name: "WiCyS", href: "/wicys" },
   {
     id: "horse-plinko",
-    name: "Horse Plinko Cyber Challenge",
+    name: "Horse Plinko",
     href: "https://plinko.horse",
   },
   {
@@ -29,7 +34,7 @@ const NAV_ITEMS = [
   },
 ];
 
-export function Header() {
+export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -41,7 +46,7 @@ export function Header() {
             <img
               src="/hackucf-logo.svg"
               alt="HackUCF Logo"
-              className="w-48 md:w-64"
+              className="w-64 md:w-64"
               loading="eager"
             />
           </Link>

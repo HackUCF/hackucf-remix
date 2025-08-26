@@ -8,9 +8,9 @@ import {
   ScrollRestoration,
   useRouteError,
 } from "@remix-run/react";
-import { Footer } from "@/components/footer";
+import { Footer } from "@/components/Footer";
 import { GlobalPendingIndicator } from "@/components/global-pending-indicator";
-import { Header } from "@/components/header";
+import { Navbar } from "@/components/Navbar";
 import {
   ThemeSwitcherSafeHTML,
   ThemeSwitcherScript,
@@ -64,7 +64,7 @@ function App({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <GlobalPendingIndicator />
-        <Header />
+        <Navbar />
         {children}
         <Footer />
         <ScrollRestoration />

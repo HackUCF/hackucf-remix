@@ -2,7 +2,7 @@ import type { MetaFunction } from "@remix-run/cloudflare";
 import { Link } from "@remix-run/react";
 import { ChevronDown } from "lucide-react";
 import { useRef } from "react";
-import ImageCarousel from "@/components/image-carousel";
+import ImageCarousel from "@/components/ImageCarousel";
 import { Button } from "@/components/ui/button";
 import {
   Card,
