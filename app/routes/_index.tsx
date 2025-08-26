@@ -3,6 +3,7 @@ import { Link } from "@remix-run/react";
 import { ChevronDown } from "lucide-react";
 import { useRef } from "react";
 import ImageCarousel from "@/components/image-carousel";
+import { SponsorScroll } from "@/components/sponsor-scroll";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -125,12 +126,11 @@ export default function Index() {
           </Link>
         </div>
         <ScrollArrow onClick={scrollToNextSection} />
-        <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-b from-transparent to-background z-20" />
       </section>
 
       {/* Meetings and Membership Section */}
       <section
-        className="min-h-screen w-full flex flex-col justify-top bg-background px-4 sm:px-8 relative overflow-hidden"
+        className="h-3/4 w-full flex flex-col justify-top bg-background relative overflow-hidden"
         aria-label="Club Activities section"
         ref={clubActivitiesRef}
       >
@@ -172,6 +172,12 @@ export default function Index() {
             </Card>
           ))}
         </div>
+      </section>
+      <section className="h-1/4 mt-8">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-white">
+          Our Sponsors
+        </h2>
+        <SponsorScroll />
       </section>
     </div>
   );

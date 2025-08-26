@@ -1,8 +1,6 @@
 import { Link } from "@remix-run/react";
 import { useId } from "react";
 
-import { SponsorScroll } from "./sponsor-scroll";
-
 export function Footer() {
   const footerId = useId();
   const SOCIAL_LINKS = [
