@@ -8,7 +8,7 @@ import {
   ScrollRestoration,
   useRouteError,
 } from "@remix-run/react";
-import { Footer } from "@/components/Footer";
+import { Footer } from "@/components/footer";
 import { GlobalPendingIndicator } from "@/components/global-pending-indicator";
 import { Navbar } from "@/components/header";
 import {
