@@ -22,13 +22,23 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let resizeTimeout: NodeJS.Timeout;
+    let isResizing = false;
+
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const newWidth = window.innerWidth;
+      // Add buffer on mobile to prevent address bar resize issues
+      const isMobile = window.innerWidth <= 768;
+      const newHeight = window.innerHeight + (isMobile ? 200 : 0);
+
+      // Only resize if dimensions actually changed to prevent unnecessary clearing
+      if (canvas.width !== newWidth || canvas.height !== newHeight) {
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+      }
     };
 
     resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
 
     let animationFrameId: number;
 
@@ -67,18 +77,50 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
 
     animationFrameId = requestAnimationFrame(draw);
 
-    // Update columns and drops when the window is resized
-    const handleResize = () => {
-      resizeCanvas();
-      columns = Math.floor(canvas.width / fontSize);
-      drops = new Array(columns).fill(1);
+    // On mobile, only resize for width changes to avoid address bar issues
+    const debouncedResize = () => {
+      const isMobile = window.innerWidth <= 768;
+      const currentWidth = canvas.width;
+      const newWidth = window.innerWidth;
+
+      // On mobile, only resize if width changes (ignore height changes from address bar)
+      if (isMobile && Math.abs(newWidth - currentWidth) < 10) {
+        return; // Ignore minor width changes and all height changes on mobile
+      }
+
+      clearTimeout(resizeTimeout);
+      isResizing = true;
+
+      resizeTimeout = setTimeout(() => {
+        const oldColumns = columns;
+        const oldDrops = [...drops];
+
+        resizeCanvas();
+        columns = Math.floor(canvas.width / fontSize);
+
+        // Preserve existing drop positions when possible
+        if (columns !== oldColumns) {
+          const newDrops = new Array(columns);
+          for (let i = 0; i < columns; i++) {
+            if (i < oldDrops.length) {
+              newDrops[i] = oldDrops[i];
+            } else {
+              newDrops[i] = Math.random() * (canvas.height / fontSize);
+            }
+          }
+          drops = newDrops;
+        }
+
+        isResizing = false;
+      }, 150); // 150ms debounce
     };
 
-    window.addEventListener("resize", handleResize);
+    // Use passive listener for better scroll performance on mobile
+    window.addEventListener("resize", debouncedResize, { passive: true });
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas);
-      window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimeout);
+      window.removeEventListener("resize", debouncedResize);
       cancelAnimationFrame(animationFrameId);
     };
   }, [color, fontSize, speed]);
@@ -99,6 +141,8 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
         left: 0,
         width: "100%",
         height: "100%",
+        willChange: "auto",
+        backfaceVisibility: "hidden",
       }}
     />
   );
