@@ -27,18 +27,14 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
 
     const resizeCanvas = () => {
       const newWidth = window.innerWidth;
-      const newHeight = window.innerHeight;
+      // Add buffer on mobile to prevent address bar resize issues
+      const isMobile = window.innerWidth <= 768;
+      const newHeight = window.innerHeight + (isMobile ? 200 : 0);
 
       // Only resize if dimensions actually changed to prevent unnecessary clearing
       if (canvas.width !== newWidth || canvas.height !== newHeight) {
-        // Preserve canvas content during resize
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
         canvas.width = newWidth;
         canvas.height = newHeight;
-
-        // Restore the preserved content
-        ctx.putImageData(imageData, 0, 0);
       }
     };
 
@@ -81,52 +77,38 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
 
     animationFrameId = requestAnimationFrame(draw);
 
-    // Debounced resize handler to prevent frequent resets on mobile
+    // On mobile, only resize for width changes to avoid address bar issues
     const debouncedResize = () => {
-      console.log("Resize event triggered:", {
-        currentWidth: canvas.width,
-        currentHeight: canvas.height,
-        windowWidth: window.innerWidth,
-        windowHeight: window.innerHeight,
-        timestamp: new Date().toLocaleTimeString(),
-      });
+      const isMobile = window.innerWidth <= 768;
+      const currentWidth = canvas.width;
+      const newWidth = window.innerWidth;
+
+      // On mobile, only resize if width changes (ignore height changes from address bar)
+      if (isMobile && Math.abs(newWidth - currentWidth) < 10) {
+        return; // Ignore minor width changes and all height changes on mobile
+      }
 
       clearTimeout(resizeTimeout);
       isResizing = true;
 
       resizeTimeout = setTimeout(() => {
-        const oldWidth = canvas.width;
-        const oldHeight = canvas.height;
         const oldColumns = columns;
         const oldDrops = [...drops];
 
         resizeCanvas();
+        columns = Math.floor(canvas.width / fontSize);
 
-        // Only recalculate if canvas dimensions actually changed
-        if (canvas.width !== oldWidth || canvas.height !== oldHeight) {
-          console.log("Canvas dimensions actually changed:", {
-            oldWidth,
-            oldHeight,
-            newWidth: canvas.width,
-            newHeight: canvas.height,
-          });
-
-          columns = Math.floor(canvas.width / fontSize);
-
-          // Preserve existing drop positions when possible
-          if (columns !== oldColumns) {
-            const newDrops = new Array(columns);
-            for (let i = 0; i < columns; i++) {
-              if (i < oldDrops.length) {
-                newDrops[i] = oldDrops[i];
-              } else {
-                newDrops[i] = Math.random() * (canvas.height / fontSize);
-              }
+        // Preserve existing drop positions when possible
+        if (columns !== oldColumns) {
+          const newDrops = new Array(columns);
+          for (let i = 0; i < columns; i++) {
+            if (i < oldDrops.length) {
+              newDrops[i] = oldDrops[i];
+            } else {
+              newDrops[i] = Math.random() * (canvas.height / fontSize);
             }
-            drops = newDrops;
           }
-        } else {
-          console.log("Resize event but no dimension change - ignoring");
+          drops = newDrops;
         }
 
         isResizing = false;
