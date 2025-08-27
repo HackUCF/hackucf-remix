@@ -22,13 +22,27 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let resizeTimeout: NodeJS.Timeout;
+    let isResizing = false;
+
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const newWidth = window.innerWidth;
+      const newHeight = window.innerHeight;
+
+      // Only resize if dimensions actually changed to prevent unnecessary clearing
+      if (canvas.width !== newWidth || canvas.height !== newHeight) {
+        // Preserve canvas content during resize
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+
+        // Restore the preserved content
+        ctx.putImageData(imageData, 0, 0);
+      }
     };
 
     resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
 
     let animationFrameId: number;
 
@@ -67,18 +81,64 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
 
     animationFrameId = requestAnimationFrame(draw);
 
-    // Update columns and drops when the window is resized
-    const handleResize = () => {
-      resizeCanvas();
-      columns = Math.floor(canvas.width / fontSize);
-      drops = new Array(columns).fill(1);
+    // Debounced resize handler to prevent frequent resets on mobile
+    const debouncedResize = () => {
+      console.log("Resize event triggered:", {
+        currentWidth: canvas.width,
+        currentHeight: canvas.height,
+        windowWidth: window.innerWidth,
+        windowHeight: window.innerHeight,
+        timestamp: new Date().toLocaleTimeString(),
+      });
+
+      clearTimeout(resizeTimeout);
+      isResizing = true;
+
+      resizeTimeout = setTimeout(() => {
+        const oldWidth = canvas.width;
+        const oldHeight = canvas.height;
+        const oldColumns = columns;
+        const oldDrops = [...drops];
+
+        resizeCanvas();
+
+        // Only recalculate if canvas dimensions actually changed
+        if (canvas.width !== oldWidth || canvas.height !== oldHeight) {
+          console.log("Canvas dimensions actually changed:", {
+            oldWidth,
+            oldHeight,
+            newWidth: canvas.width,
+            newHeight: canvas.height,
+          });
+
+          columns = Math.floor(canvas.width / fontSize);
+
+          // Preserve existing drop positions when possible
+          if (columns !== oldColumns) {
+            const newDrops = new Array(columns);
+            for (let i = 0; i < columns; i++) {
+              if (i < oldDrops.length) {
+                newDrops[i] = oldDrops[i];
+              } else {
+                newDrops[i] = Math.random() * (canvas.height / fontSize);
+              }
+            }
+            drops = newDrops;
+          }
+        } else {
+          console.log("Resize event but no dimension change - ignoring");
+        }
+
+        isResizing = false;
+      }, 150); // 150ms debounce
     };
 
-    window.addEventListener("resize", handleResize);
+    // Use passive listener for better scroll performance on mobile
+    window.addEventListener("resize", debouncedResize, { passive: true });
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas);
-      window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimeout);
+      window.removeEventListener("resize", debouncedResize);
       cancelAnimationFrame(animationFrameId);
     };
   }, [color, fontSize, speed]);
@@ -99,6 +159,8 @@ const HackerBackground: React.FC<HackerBackgroundProps> = ({
         left: 0,
         width: "100%",
         height: "100%",
+        willChange: "auto",
+        backfaceVisibility: "hidden",
       }}
     />
   );
