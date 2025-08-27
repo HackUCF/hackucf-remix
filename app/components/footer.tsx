@@ -60,7 +60,7 @@ export function Footer() {
       className="relative bg-background text-white px-4 sm:px-6 lg:px-8 mb-16 pt-16"
       id={footerId}
     >
-      <BackgroundGrid className="absolute inset-0 w-full h-full z-0 rotate-180" />
+      <BackgroundGrid className="absolute inset-0 w-full h-full z-0" />
       <div
         data-nosnippet
         className="relative z-10 max-w-7xl mx-auto flex-col items-center justify-center h-full"
