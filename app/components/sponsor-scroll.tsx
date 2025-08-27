@@ -5,81 +5,71 @@ import { Image } from "@unpic/react";
 
 const images = [
   {
-    title: "Moonbeam",
-    thumbnail:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=40&w=640",
+    title: "Lockheed Martin",
+    thumbnail: "/lockheed-martin.svg",
   },
   {
-    title: "Cursor",
-    thumbnail:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=40&w=640",
+    title: "Redseer",
+    thumbnail: "/redseer.svg",
   },
   {
-    title: "Rogue",
-    thumbnail:
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=40&w=640",
+    title: "Amazon",
+    thumbnail: "/amazon.svg",
   },
   {
-    title: "Editorially",
-    thumbnail:
-      "https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?q=80&w=640",
+    title: "Dark Wolf",
+    thumbnail: "/dark-wolf.svg",
   },
   {
-    title: "Editrix AI",
-    thumbnail:
-      "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=640",
+    title: "Naval Nuclear Labratory",
+    thumbnail: "/naval-nuclear-labratory.svg",
   },
   {
-    title: "Moonbeam 2",
-    thumbnail:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=40&w=640",
+    title: "Texas Instruments",
+    thumbnail: "/texas-instruments.svg",
   },
   {
-    title: "Cursor 2",
-    thumbnail:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=40&w=640",
+    title: "CTFd",
+    thumbnail: "/ctfd.svg",
   },
   {
-    title: "Rogue 2",
-    thumbnail:
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=40&w=640",
+    title: "Guidepoint Security",
+    thumbnail: "/guidepoint-security.svg",
   },
   {
-    title: "Editorially 2",
-    thumbnail:
-      "https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?q=80&w=640",
+    title: "TriCat",
+    thumbnail: "/tricat.svg",
   },
   {
-    title: "Editrix AI 2",
-    thumbnail:
-      "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=640",
+    title: "Other",
+    thumbnail: "/other-sponsors.svg",
   },
 ];
 
-const velocity = [2, -2];
+const velocity = [3, -3];
 
 function SponsorScroll() {
   return (
     <div className="w-full">
-      <div className="flex flex-col space-y-5 py-10">
+      <div className="flex flex-col space-y-5 py-8">
         {velocity.map((v, index) => (
           <ScrollVelocity key={index} velocity={v}>
             {images.map(({ title, thumbnail }) => (
               <div
                 key={title}
-                className="relative h-[6rem] w-[9rem] md:h-[8rem] md:w-[12rem] xl:h-[12rem] xl:w-[18rem]"
+                className="relative h-[6rem] w-[9rem] md:h-[8rem] md:w-[12rem] xl:h-[12rem] xl:w-[18rem] overflow-hidden"
               >
                 <Image
                   src={thumbnail}
                   alt={title}
+                  className="absolute inset-0 m-auto max-h-full max-w-full object-contain object-center p-2"
                   layout="fullWidth"
-                  className="h-full w-full object-cover object-center"
+                  loading="lazy"
                 />
               </div>
             ))}
           </ScrollVelocity>
         ))}
-        <ScrollVelocity velocity={4}>WE ❤️ OUR SPONSORS</ScrollVelocity>
       </div>
     </div>
   );
