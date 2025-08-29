@@ -2,7 +2,7 @@ import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import type { MetaFunction } from "@remix-run/cloudflare";
 import { useId, useRef, useState } from "react"; // Added useId
 
-import { ClientOnly } from "@/components/ClientOnly";
+import { ClientOnly } from "@/components/client-only";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

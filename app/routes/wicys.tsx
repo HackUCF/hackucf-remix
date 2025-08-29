@@ -24,10 +24,10 @@ export const meta: MetaFunction = ({ matches }) => {
 export default function WiCyS() {
   return (
     <main className="bg-background text-white min-h-screen mt-20 px-8">
-      <div className="container mx-auto max-w-6xl py-16">
-        <h1 className="text-5xl font-bold mb-16 text-center">WiCyS @ UCF</h1>
+      <div className="container mx-auto max-w-6xl pt-16">
+        <h1 className="text-5xl font-bold text-center">WiCyS @ UCF</h1>
 
-        <div className="grid md:grid-cols-2 gap-16 mb-16">
+        <div className="grid md:grid-cols-2 gap-16">
           <div className="flex flex-col justify-center">
             <p className="text-lg mb-6">
               Women in CyberSecurity (WiCyS) is a leading global organization
@@ -40,10 +40,9 @@ export default function WiCyS() {
               supportive community for UCF students.
             </p>
           </div>
-          <div className="flex items-center justify-center h-full">
+          <div className="flex items-center justify-center">
             <Image
               src="/wicys-logo.svg"
-              alt="WiCyS Logo"
               width={600}
               height={600}
               objectFit="fill"

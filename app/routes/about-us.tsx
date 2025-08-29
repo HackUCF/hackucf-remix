@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { id: "constitution", name: "Constitution", href: "/constitution" },
   { id: "nonprofit", name: "Nonprofit", href: "/nonprofit" },
   { id: "execs", name: "Executives", href: "/execs" },
+  { id: "cyberlab", name: "Cyber Lab", href: "/cyberlab" },
 ];
 
 const PARTNER_LINKS = [

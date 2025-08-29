@@ -10,7 +10,7 @@ import {
 } from "@remix-run/react";
 import { Footer } from "@/components/footer";
 import { GlobalPendingIndicator } from "@/components/global-pending-indicator";
-import { Header } from "@/components/header";
+import { Navbar } from "@/components/header";
 import {
   ThemeSwitcherSafeHTML,
   ThemeSwitcherScript,
@@ -64,7 +64,7 @@ function App({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <GlobalPendingIndicator />
-        <Header />
+        <Navbar />
         {children}
         <Footer />
         <ScrollRestoration />

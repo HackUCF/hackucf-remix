@@ -1,8 +1,8 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 
-import { ClientOnly } from "@/components/ClientOnly";
+import { ClientOnly } from "@/components/client-only";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -379,7 +379,7 @@ export default function Sponsorship() {
           </form>
         </div>
 
-        <div className="mt-16 text-sm text-center">
+        <div className="mt-16 text-sm">
           <p className="mb-2">
             A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION MAY BE
             OBTAINED FROM THE DIVISION OF CONSUMER SERVICES BY CALLING TOLL-FREE

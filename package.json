@@ -12,6 +12,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@babel/helpers": "^7.26.10",
+    "@babel/runtime": "^7.26.10",
     "@marsidev/react-turnstile": "^1.3.0",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -20,21 +22,29 @@
     "@radix-ui/react-slot": "1.0.2",
     "@remix-run/cloudflare": "^2.17.0",
     "@remix-run/cloudflare-pages": "^2.17.0",
-    "@remix-run/express": "^2.17.0",
     "@remix-run/react": "^2.17.0",
-    "@remix-run/serve": "^2.17.0",
     "@unpic/react": "^0.1.15",
+    "brace-expansion": "^2.0.2",
     "caniuse-lite": "^1.0.30001737",
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.0",
+    "cookie": "^0.7.2",
+    "cross-spawn": "^7.0.6",
+    "esbuild": "^0.25.9",
+    "estree-util-value-to-estree": "^3.3.3",
+    "framer-motion": "^12.23.12",
     "isbot": "5.1.0",
     "lucide-react": "^0.471.2",
+    "nanoid": "^3.3.8",
+    "on-headers": "^1.1.0",
+    "path-to-regexp": "^0.1.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "recharts": "^2.15.4",
     "remix-utils": "7.5.0",
     "tailwind-merge": "2.2.1",
-    "tailwindcss-animate": "1.0.7"
+    "tailwindcss-animate": "1.0.7",
+    "undici": "^6.21.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
@@ -58,6 +68,8 @@
     "node": ">=18.0.0"
   },
   "trustedDependencies": [
-    "@biomejs/biome"
+    "@biomejs/biome",
+    "esbuild",
+    "workerd"
   ]
 }

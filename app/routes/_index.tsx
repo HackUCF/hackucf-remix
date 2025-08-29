@@ -3,6 +3,7 @@ import { Link } from "@remix-run/react";
 import { ChevronDown } from "lucide-react";
 import { useRef } from "react";
 import ImageCarousel from "@/components/image-carousel";
+import { SponsorScroll } from "@/components/sponsor-scroll";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import BackgroundGrid from "@/components/ui/grid-bg";
 import HackerBg from "@/components/ui/hacker-bg";
 
 const INDEX_CARD_DATA = [
@@ -125,17 +125,14 @@ export default function Index() {
           </Link>
         </div>
         <ScrollArrow onClick={scrollToNextSection} />
-        <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-b from-transparent to-background z-20" />
       </section>
 
       {/* Meetings and Membership Section */}
       <section
-        className="min-h-screen w-full flex flex-col justify-top bg-background px-4 sm:px-8 relative overflow-hidden"
+        className="h-3/4 w-full flex flex-col justify-top bg-background relative overflow-hidden sm:px-8 px-4 py-8"
         aria-label="Club Activities section"
         ref={clubActivitiesRef}
       >
-        <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-background to-transparent" />
-        <BackgroundGrid className="absolute inset-0 w-full h-full" />
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-white relative z-10 my-8">
           Club Activities
         </h2>
@@ -172,6 +169,13 @@ export default function Index() {
             </Card>
           ))}
         </div>
+      </section>
+
+      <section className="h-1/4 mt-8">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-white">
+          Our Sponsors
+        </h2>
+        <SponsorScroll />
       </section>
     </div>
   );
