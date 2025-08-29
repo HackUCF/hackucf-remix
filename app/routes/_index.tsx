@@ -93,9 +93,15 @@ export default function Index() {
   const clubActivitiesRef = useRef<HTMLElement>(null);
 
   const scrollToNextSection = () => {
-    clubActivitiesRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
+    const el = clubActivitiesRef.current;
+    if (!el) return;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    el.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "center",
+      inline: "nearest",
     });
   };
 
@@ -129,15 +135,16 @@ export default function Index() {
 
       {/* Meetings and Membership Section */}
       <section
-        className="h-3/4 w-full flex flex-col justify-top bg-background relative overflow-hidden sm:px-8 px-4 py-8"
+        id="club-activities"
+        className="w-full min-h-[75vh] flex flex-col justify-start bg-background relative overflow-hidden sm:px-8 px-4 py-8"
         aria-label="Club Activities section"
         ref={clubActivitiesRef}
       >
-        <h2 className="text-3xl sm:text-4xl font-bold text-center text-white relative z-10 my-8">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-white relative z-10 my-8 mb-16 scroll-mt-28 sm:scroll-mt-32">
           Club Activities
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10 overflow-y-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
           {INDEX_CARD_DATA.map((card) => (
             <Card
               key={card.id}
