@@ -41,6 +41,14 @@ const images = [
     thumbnail: "/tricat.svg",
   },
   {
+    title: "ThreatLocker",
+    thumbnail: "/threatlocker.svg",
+  },
+  {
+    title: "Research Innovations",
+    thumbnail: "/research-innovations.svg",
+  },
+  {
     title: "Other",
     thumbnail: "/other-sponsors.svg",
   },
