@@ -39,6 +39,13 @@ const SPONSORS_BY_TIER: TierConfig[] = [
       },
       {
         name: "Crest Advisory Group",
+        logo: "/crest-advisory-group.svg",
+        url: "https://crestadvisorygroup.com/",
+      },
+      {
+        name: "Redseer",
+        logo: "/redseer.svg",
+        url: "https://www.redseersecurity.com/",
       },
     ],
     containerSize: "w-40 h-16 md:w-52 md:h-20 xl:w-64 xl:h-24",

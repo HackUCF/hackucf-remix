@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f4fc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4ebf7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="200" fill="url(#bgGradient)"/>
+  
+  <!-- Peacock tail feathers (stylized leaves/plumes) -->
+  <g transform="translate(200, 85)">
+    <!-- Large decorative tail feathers -->
+    <ellipse cx="-45" cy="-35" rx="8" ry="22" fill="#4a7c9b" transform="rotate(-40)"/>
+    <ellipse cx="-30" cy="-45" rx="7" ry="20" fill="#5a8caa" transform="rotate(-25)"/>
+    <ellipse cx="-12" cy="-50" rx="6" ry="18" fill="#6a9cb8" transform="rotate(-10)"/>
+    <ellipse cx="5" cy="-52" rx="6" ry="17" fill="#5a8caa" transform="rotate(5)"/>
+    <ellipse cx="22" cy="-48" rx="7" ry="19" fill="#4a7c9b" transform="rotate(20)"/>
+    <ellipse cx="38" cy="-40" rx="8" ry="21" fill="#3a6c8b" transform="rotate(35)"/>
+    
+    <!-- Medium decorative elements -->
+    <ellipse cx="-35" cy="-25" rx="5" ry="14" fill="#3a6c8b" transform="rotate(-35)"/>
+    <ellipse cx="-18" cy="-35" rx="5" ry="13" fill="#4a7c9b" transform="rotate(-15)"/>
+    <ellipse cx="0" cy="-38" rx="4" ry="12" fill="#5a8caa" transform="rotate(0)"/>
+    <ellipse cx="18" cy="-35" rx="5" ry="13" fill="#4a7c9b" transform="rotate(15)"/>
+    <ellipse cx="35" cy="-25" rx="5" ry="14" fill="#3a6c8b" transform="rotate(35)"/>
+    
+    <!-- Peacock body -->
+    <ellipse cx="0" cy="8" rx="12" ry="18" fill="#2d5a7b"/>
+    
+    <!-- Peacock head -->
+    <circle cx="0" cy="-12" r="8" fill="#2d5a7b"/>
+    
+    <!-- Beak -->
+    <path d="M 8 -12 L 14 -10 L 8 -9 Z" fill="#d4a84b"/>
+    
+    <!-- Eye -->
+    <circle cx="3" cy="-13" r="1.5" fill="#ffffff"/>
+    <circle cx="3.5" cy="-13" r="0.8" fill="#1a1a1a"/>
+    
+    <!-- Crown/crest feathers -->
+    <line x1="-2" y1="-20" x2="-4" y2="-28" stroke="#2d5a7b" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="-4" cy="-29" r="2" fill="#4a7c9b"/>
+    <line x1="0" y1="-20" x2="0" y2="-30" stroke="#2d5a7b" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="0" cy="-31" r="2" fill="#4a7c9b"/>
+    <line x1="2" y1="-20" x2="4" y2="-28" stroke="#2d5a7b" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="4" cy="-29" r="2" fill="#4a7c9b"/>
+  </g>
+  
+  <!-- Text: CREST PET HEALTH -->
+  <text x="200" y="155" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2d5a7b" text-anchor="middle" letter-spacing="4">CREST PET HEALTH</text>
+  
+  <!-- Small copyright text -->
+  <text x="200" y="185" font-family="Arial, Helvetica, sans-serif" font-size="6" fill="#7a9bb5" text-anchor="middle">Crest Advisory Group LLC. All Rights Reserved.</text>
+  <text x="200" y="193" font-family="Arial, Helvetica, sans-serif" font-size="5" fill="#7a9bb5" text-anchor="middle">Confidential and proprietary information, only intended recipients allowed.</text>
+</svg>
