@@ -1,9 +1,5 @@
-import type { MetaFunction } from "@remix-run/cloudflare";
-import { Link } from "@remix-run/react";
-import { ChevronDown } from "lucide-react";
-import { useRef } from "react";
 import ImageCarousel from "@/components/image-carousel";
-import { SponsorScroll } from "@/components/sponsor-scroll";
+import { SponsorTiers } from "@/components/sponsor-tiers";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,6 +10,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import HackerBg from "@/components/ui/hacker-bg";
+import type { MetaFunction } from "@remix-run/cloudflare";
+import { Link } from "@remix-run/react";
+import { ChevronDown } from "lucide-react";
+import { useRef } from "react";
 
 const INDEX_CARD_DATA = [
   {
@@ -178,11 +178,11 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="h-1/4 mt-8">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center text-white">
+      <section className="mt-8 pb-12">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-4">
           Our Sponsors
         </h2>
-        <SponsorScroll />
+        <SponsorTiers />
       </section>
     </div>
   );

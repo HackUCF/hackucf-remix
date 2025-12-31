@@ -1,5 +1,3 @@
-"use client";
-
 import { ScrollVelocity } from "@/components/ui/scroll-velocity";
 import { Image } from "@unpic/react";
 

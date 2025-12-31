@@ -1,4 +1,3 @@
-"use client";
 import type { HTMLProps } from "react";
 
 interface BackgroundGridProps {
