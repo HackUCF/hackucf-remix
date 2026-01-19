@@ -105,7 +105,7 @@ const EXECUTIVE_DATA = [
   {
     year: "2025-26",
     president: "Kevin Kiderchah",
-    vicePresident: "Logen Autry (fmr: John Vezzola)",
+    vicePresident: "Logen Autry",
     treasurer: "Eric Matthews",
     secretary: "Jacob Freeman",
   },
