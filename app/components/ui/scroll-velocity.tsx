@@ -1,32 +1,45 @@
-"use client";
-
-import * as React from "react";
+import { cn } from "@/lib/utils";
 import {
   motion,
+  useAnimationFrame,
+  useMotionValue,
   useScroll,
   useSpring,
   useTransform,
-  useMotionValue,
   useVelocity,
-  useAnimationFrame,
-  wrap,
 } from "framer-motion";
-import { cn } from "@/lib/utils";
+import * as React from "react";
 
 interface ScrollVelocityProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode[] | string;
-  velocity: number;
+  children: React.ReactNode;
+  /**
+   * Base scroll speed in percentage points per second.
+   * Positive = left, Negative = right
+   * Recommended: 15-30 for smooth scrolling
+   */
+  velocity?: number;
+  /**
+   * Whether to animate continuously or only on scroll
+   */
   movable?: boolean;
+  /**
+   * Clamp the velocity factor
+   */
   clamp?: boolean;
+  /**
+   * Gap between items in the marquee (Tailwind spacing scale)
+   */
+  gap?: string;
 }
 
 const ScrollVelocity = React.forwardRef<HTMLDivElement, ScrollVelocityProps>(
   (
     {
       children,
-      velocity = 5,
+      velocity = 20,
       movable = true,
       clamp = false,
+      gap = "gap-8",
       className,
       ...props
     },
@@ -35,20 +48,43 @@ const ScrollVelocity = React.forwardRef<HTMLDivElement, ScrollVelocityProps>(
     const baseX = useMotionValue(0);
     const { scrollY } = useScroll();
     const scrollVelocity = useVelocity(scrollY);
+
+    // Smoother spring config for less jarring motion
     const smoothVelocity = useSpring(scrollVelocity, {
-      damping: 50,
-      stiffness: 100,
+      damping: 80,
+      stiffness: 60,
+      restDelta: 0.001,
     });
-    const velocityFactor = useTransform(smoothVelocity, [0, 10000], [0, 5], {
+
+    // Reduced velocity factor impact for smoother feel
+    const velocityFactor = useTransform(smoothVelocity, [0, 5000], [0, 2], {
       clamp,
     });
 
-    const x = useTransform(baseX, (v) => `${wrap(0, -50, v)}%`);
+    // Wrap at 50% since we duplicate content 2x
+    const x = useTransform(baseX, (v) => `${v % 50}%`);
 
     const directionFactor = React.useRef<number>(1);
     const scrollThreshold = React.useRef<number>(5);
 
-    useAnimationFrame((t, delta) => {
+    // Check for reduced motion preference
+    const [prefersReducedMotion, setPrefersReducedMotion] =
+      React.useState(false);
+
+    React.useEffect(() => {
+      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      setPrefersReducedMotion(mediaQuery.matches);
+
+      const handler = (e: MediaQueryListEvent) =>
+        setPrefersReducedMotion(e.matches);
+      mediaQuery.addEventListener("change", handler);
+      return () => mediaQuery.removeEventListener("change", handler);
+    }, []);
+
+    useAnimationFrame((_, delta) => {
+      // Skip animation if user prefers reduced motion
+      if (prefersReducedMotion) return;
+
       if (movable) {
         move(delta);
       } else {
@@ -59,38 +95,41 @@ const ScrollVelocity = React.forwardRef<HTMLDivElement, ScrollVelocityProps>(
     });
 
     function move(delta: number) {
+      // Smoother movement calculation
+      // velocity is now in % per second, delta is in ms
       let moveBy = directionFactor.current * velocity * (delta / 1000);
-      if (velocityFactor.get() < 0) {
+
+      // Respond to scroll direction but with reduced impact
+      const velFactor = velocityFactor.get();
+      if (velFactor < 0) {
         directionFactor.current = -1;
-      } else if (velocityFactor.get() > 0) {
+      } else if (velFactor > 0) {
         directionFactor.current = 1;
       }
-      moveBy += directionFactor.current * moveBy * velocityFactor.get();
+
+      // Add scroll influence (reduced from original)
+      moveBy += directionFactor.current * moveBy * velFactor * 0.3;
+
       baseX.set(baseX.get() + moveBy);
     }
+
+    // Convert children to array for duplication
+    const childrenArray = React.Children.toArray(children);
 
     return (
       <div
         ref={ref}
-        className={cn(
-          "relative m-0 flex flex-nowrap overflow-hidden whitespace-nowrap leading-[0.8] tracking-[-2px]",
-          className,
-        )}
+        className={cn("relative flex overflow-hidden", className)}
         {...props}
       >
         <motion.div
-          className="flex flex-row flex-nowrap whitespace-nowrap text-xl font-semibold uppercase *:mr-6 *:block md:text-2xl xl:text-4xl"
+          className={cn("flex flex-nowrap items-center", gap)}
           style={{ x }}
         >
-          {typeof children === "string" ? (
-            <>
-              {Array.from({ length: 5 }).map((_, idx) => (
-                <span key={idx}>{children}</span>
-              ))}
-            </>
-          ) : (
-            children
-          )}
+          {/* First set of children */}
+          {childrenArray}
+          {/* Duplicate for seamless loop */}
+          {childrenArray}
         </motion.div>
       </div>
     );

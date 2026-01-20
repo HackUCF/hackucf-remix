@@ -1,5 +1,3 @@
-"use client";
-
 import { ScrollVelocity } from "@/components/ui/scroll-velocity";
 import { Image } from "@unpic/react";
 
@@ -39,6 +37,14 @@ const images = [
   {
     title: "TriCat",
     thumbnail: "/tricat.svg",
+  },
+  {
+    title: "ThreatLocker",
+    thumbnail: "/threatlocker.svg",
+  },
+  {
+    title: "Research Innovations",
+    thumbnail: "/research-innovations.svg",
   },
   {
     title: "Other",

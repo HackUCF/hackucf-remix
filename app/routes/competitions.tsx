@@ -143,12 +143,12 @@ export default function Competitions() {
             If you are interested in applying for the team, fill out the
             application at{" "}
             <a
-              href="https://discord.com/invite/VwkkDcJ"
+              href="https://bit.ly/UCF_C3Team"
               className="text-brandGold hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
-              bit.ly/UCF-C3Team
+              bit.ly/UCF_C3Team
             </a>
             .
           </p>

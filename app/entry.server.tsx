@@ -9,6 +9,9 @@ import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
 import ReactDOM from "react-dom/server";
 
+// Reject/cancel all pending promises after 5 seconds (for Single Fetch)
+export const streamTimeout = 5000;
+
 export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
@@ -21,7 +24,7 @@ export default async function handleRequest(
 ) {
   let status = responseStatusCode;
   const headers = new Headers(responseHeaders);
-  headers.set("Content-Type", "text/html, charset=utf-8");
+  headers.set("Content-Type", "text/html; charset=utf-8");
 
   const body = await ReactDOM.renderToReadableStream(
     <RemixServer context={remixContext} url={request.url} />,

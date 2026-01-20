@@ -1,6 +1,3 @@
-import { Link } from "@remix-run/react";
-import { Menu } from "lucide-react";
-import { useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,6 +7,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Link } from "@remix-run/react";
+import { Menu } from "lucide-react";
+import { useState } from "react";
 
 const NAV_ITEMS = [
   {

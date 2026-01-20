@@ -11,8 +11,8 @@ export const meta: MetaFunction = ({ matches }) => {
       name: "description",
       content:
         "UCF’s 970-square-foot Lockheed Martin Cyber Innovation Lab in " +
-        "Engineering I serves as a hub, classroom, and Hack@UCF practice " +
-        "center, supported by a $1.5M gift and long-term mentorship.",
+        "Engineering I serves as a learning hub, classroom, and the practice " +
+        "center for Hack@UCF.",
     },
   ];
 
@@ -36,9 +36,8 @@ export default function CyberLab() {
         </div>
 
         <p className="mb-12 text-xl">
-          As the need for cybersecurity experts across the nation grows, UCF has
-          created a space where students interested in the field can develop
-          their skills.
+          As the need for cybersecurity experts across the nation grows,
+          Hack@UCF has a space to further meet that need.
         </p>
 
         {/* Image block (Unpic). Replace src and dimensions with your asset. */}
@@ -53,63 +52,44 @@ export default function CyberLab() {
             sizes="(min-width: 1280px) 1152px, 100vw"
           />
           <figcaption className="mt-2 text-sm text-foreground/70">
-            The Lockheed Martin Cyber Innovation Lab in Engineering I.
+            The Lockheed Martin Cyber Innovation Lab in Engineering I, 186.
           </figcaption>
         </figure>
 
         <section className="mb-16">
           <h2 className="mb-6 text-3xl font-semibold">About the Lab</h2>
           <p className="mb-4">
-            The Lockheed Martin Cyber Innovation Lab, located in the Engineering
-            I building, opened in February to foster the next generation of
-            cybersecurity.
-          </p>
-          <p>Spring 2019 | By Nicole Dudenhoefer ’17</p>
-        </section>
-
-        <section className="mb-16">
-          <h2 className="mb-6 text-3xl font-semibold">
-            Purpose and Student Impact
-          </h2>
-          <p className="mb-4">
-            The 970-square-foot lab will serve as a learning hub, classroom and
-            the practice center for Hack@UCF, the university’s cyberdefense
-            club. The student organization has more than 350 members and has
-            placed first in 41 competitions since 2013.
-          </p>
-          <p>
-            “Having a centralized space will streamline the way we organize our
-            meetings and practices,” says Hack@UCF president David Maria, a
-            senior studying computer engineering. “With this lab, we can
-            practice for competitions, host workshops and speakers, provide
-            cybersecurity tools and resources, give our student members a sense
-            of community and help get them ready for future careers. It’s not
-            just a practice space. It’s a home for us.”
+            The lab is in UCF’s Engineering 1 building and serves as a learning
+            hub, classroom, and the practice center for Hack@UCF. In November
+            2018, Lockheed Martin donated $1.5 million to UCF to help create the
+            Cyber Innovation Lab. We are the only RSO on campus with access to a
+            space like the Cyberlab. We hold office hours (most) weekdays during
+            fall and spring so feel free to stop by. The Cyberlab is a space our
+            members use to study, work on projects, hold meetings, and learn
+            about cyber.
           </p>
         </section>
 
         <section className="mb-16">
           <h2 className="mb-6 text-3xl font-semibold">
-            Support from Lockheed Martin
+            How to get to the Cyberlab?
           </h2>
           <p className="mb-4">
-            Last year, Lockheed Martin donated $1.5 million to UCF to help
-            create the facility and fund software and technology to support the
-            lab. The defense company will also provide training and mentorship
-            to engineering students for the next 20 years.
-          </p>
-          <p>
-            UCF provides more graduates to aerospace and defense companies than
-            any other university in the nation.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="mb-6 text-3xl font-semibold">National Recognition</h2>
-          <p>
-            In 2016, the university was named a National Center of Academic
-            Excellence in Cyberdefense Education by the National Security Agency
-            and the U.S. Department of Homeland Security.
+            The best place to park is Garage C{" "}
+            <Link
+              to="https://maps.app.goo.gl/m6b4SRzvJkt4eNgz7"
+              className="text-brandGold hover:underline"
+            >
+              12998 Gemini Blvd E, Orlando, FL 32816
+            </Link>{" "}
+            (parking pass required). You can then enter though the main ENG 2
+            atrium or the ENG 1 entrance by Business Administration.{" "}
+            <Link
+              to="https://maps.app.goo.gl/K6Ao1osVTRnUqK5A8"
+              className="text-brandGold hover:underline"
+            >
+              Google Maps link to approximately the entrance.
+            </Link>{" "}
           </p>
         </section>
       </div>

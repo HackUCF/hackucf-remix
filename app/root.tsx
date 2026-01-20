@@ -1,13 +1,3 @@
-import type { MetaFunction } from "@remix-run/cloudflare";
-import {
-  isRouteErrorResponse,
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useRouteError,
-} from "@remix-run/react";
 import { Footer } from "@/components/footer";
 import { GlobalPendingIndicator } from "@/components/global-pending-indicator";
 import { Navbar } from "@/components/header";
@@ -16,6 +6,16 @@ import {
   ThemeSwitcherScript,
 } from "@/components/theme-switcher";
 import { generateCanonicalUrl } from "@/lib/utils";
+import type { MetaFunction } from "@remix-run/cloudflare";
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  isRouteErrorResponse,
+  useRouteError,
+} from "@remix-run/react";
 
 import "./globals.css";
 

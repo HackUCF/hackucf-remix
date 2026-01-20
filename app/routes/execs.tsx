@@ -1,6 +1,3 @@
-import type { MetaFunction } from "@remix-run/cloudflare";
-import { Link } from "@remix-run/react";
-import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -9,6 +6,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ChartTooltip } from "@/components/ui/chart";
+import type { MetaFunction } from "@remix-run/cloudflare";
+import { Link } from "@remix-run/react";
+import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 const EXECUTIVE_DATA = [
   {
