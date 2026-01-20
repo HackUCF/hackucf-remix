@@ -25,9 +25,9 @@ export default function CyberChallenge() {
             src="/cyber-challenge.webp"
             alt="OCPS Cyber Challenge Logo"
             width={192}
-            height={220}
+            height={240}
             loading="eager"
-            className="mb-6"
+            className="mb-6 h-auto"
           />
           <h1 className="text-5xl font-bold">OCPS Cyber Challenge</h1>
           <p className="text-2xl mt-4 text-brandGold">Friday, January 30th</p>
@@ -89,16 +89,14 @@ export default function CyberChallenge() {
           </p>
         </section>
 
-        <div className="flex justify-center mt-8">
-          <a
-            href="https://forms.gle/6DeK8XTGLhQfVXzA9"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-2 bg-brandGold hover:bg-background text-xl font-semibold hover:text-brandGold border-brandGold text-background rounded-full px-16 py-4 transition-colors"
-          >
-            Register Now
-          </a>
-        </div>
+        <a
+          href="https://forms.gle/6DeK8XTGLhQfVXzA9"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block text-center border-2 bg-brandGold hover:bg-background text-xl font-semibold hover:text-brandGold border-brandGold text-background rounded-full w-full mt-8 py-4 transition-colors"
+        >
+          Register Now
+        </a>
       </div>
     </main>
   );
