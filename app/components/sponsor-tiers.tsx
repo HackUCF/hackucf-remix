@@ -49,8 +49,7 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://www.redseersecurity.com/",
       },
     ],
-    logoBox:
-      "max-w-[200px] max-h-[60px] md:max-w-[240px] md:max-h-[72px] xl:max-w-[280px] xl:max-h-[84px]",
+    logoBox: "w-[200px] h-[60px] md:w-[240px] md:h-[72px] xl:w-[280px] xl:h-[84px]",
     labelColor: "text-brandGold",
     opacity: "opacity-90 hover:opacity-100",
   },
@@ -69,8 +68,7 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://www.threatlocker.com",
       },
     ],
-    logoBox:
-      "max-w-[180px] max-h-[48px] md:max-w-[200px] md:max-h-[56px] xl:max-w-[220px] xl:max-h-[64px]",
+    logoBox: "w-[180px] h-[48px] md:w-[200px] md:h-[56px] xl:w-[220px] xl:h-[64px]",
     labelColor: "text-brandGold/80",
     opacity: "opacity-80 hover:opacity-100",
   },
@@ -104,8 +102,7 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://ctfd.io",
       },
     ],
-    logoBox:
-      "max-w-[160px] max-h-[40px] md:max-w-[180px] md:max-h-[48px] xl:max-w-[200px] xl:max-h-[56px]",
+    logoBox: "w-[160px] h-[40px] md:w-[180px] md:h-[48px] xl:w-[200px] xl:h-[56px]",
     labelColor: "text-white/60",
     opacity: "opacity-70 hover:opacity-100",
   },
@@ -119,8 +116,7 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://www.guidepointsecurity.com",
       },
     ],
-    logoBox:
-      "max-w-[160px] max-h-[40px] md:max-w-[180px] md:max-h-[48px] xl:max-w-[200px] xl:max-h-[56px]",
+    logoBox: "w-[160px] h-[40px] md:w-[180px] md:h-[48px] xl:w-[200px] xl:h-[56px]",
     labelColor: "text-amber-500/70",
     opacity: "opacity-70 hover:opacity-100",
   },
@@ -137,8 +133,7 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         logo: "/other-sponsors.svg",
       },
     ],
-    logoBox:
-      "max-w-[140px] max-h-[32px] md:max-w-[160px] md:max-h-[40px] xl:max-w-[180px] xl:max-h-[48px]",
+    logoBox: "w-[140px] h-[32px] md:w-[160px] md:h-[40px] xl:w-[180px] xl:h-[48px]",
     labelColor: "text-white/40",
     opacity: "opacity-60 hover:opacity-100",
   },
@@ -162,19 +157,37 @@ const SponsorLogo = React.memo(function SponsorLogo({
   // Container centers content
   const containerClasses = "flex items-center justify-center";
 
+  const isSvg = sponsor.logo?.endsWith(".svg");
+
   const content = sponsor.logo ? (
     <div className={cn("flex items-center justify-center", logoBox)}>
-      <Image
-        src={sponsor.logo}
-        alt={sponsor.name}
-        layout="fullWidth"
-        className={cn(
-          "!w-auto !h-auto !max-w-full !max-h-full object-contain transition-all duration-300",
-          "grayscale hover:grayscale-0",
-          opacity,
-        )}
-        loading="lazy"
-      />
+      {isSvg ? (
+        <img
+          src={sponsor.logo}
+          alt={sponsor.name}
+          className={cn(
+            "max-w-full max-h-full object-contain transition-all duration-300",
+            "grayscale hover:grayscale-0",
+            opacity,
+          )}
+          loading="lazy"
+          draggable={false}
+        />
+      ) : (
+        <Image
+          src={sponsor.logo}
+          alt={sponsor.name}
+          width={280}
+          height={84}
+          layout="constrained"
+          className={cn(
+            "!max-w-full !max-h-full object-contain transition-all duration-300",
+            "grayscale hover:grayscale-0",
+            opacity,
+          )}
+          loading="lazy"
+        />
+      )}
     </div>
   ) : (
     <span
