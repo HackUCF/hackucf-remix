@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Image } from "@unpic/react";
 import * as React from "react";
 
 // =============================================================================
@@ -17,8 +18,8 @@ interface TierConfig {
   id: TierLevel;
   label: string;
   sponsors: Sponsor[];
-  /** Fixed height for uniform logo sizing across the tier (width is auto) */
-  logoHeight: string;
+  /** Max dimensions for logo bounding box - logos fit within this area */
+  logoBox: string;
   labelColor: string;
   opacity: string;
 }
@@ -48,7 +49,8 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://www.redseersecurity.com/",
       },
     ],
-    logoHeight: "h-16 md:h-20 xl:h-24",
+    logoBox:
+      "max-w-[200px] max-h-[60px] md:max-w-[240px] md:max-h-[72px] xl:max-w-[280px] xl:max-h-[84px]",
     labelColor: "text-brandGold",
     opacity: "opacity-90 hover:opacity-100",
   },
@@ -67,7 +69,8 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://www.threatlocker.com",
       },
     ],
-    logoHeight: "h-12 md:h-14 xl:h-16",
+    logoBox:
+      "max-w-[180px] max-h-[48px] md:max-w-[200px] md:max-h-[56px] xl:max-w-[220px] xl:max-h-[64px]",
     labelColor: "text-brandGold/80",
     opacity: "opacity-80 hover:opacity-100",
   },
@@ -101,7 +104,8 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://ctfd.io",
       },
     ],
-    logoHeight: "h-10 md:h-12 xl:h-14",
+    logoBox:
+      "max-w-[160px] max-h-[40px] md:max-w-[180px] md:max-h-[48px] xl:max-w-[200px] xl:max-h-[56px]",
     labelColor: "text-white/60",
     opacity: "opacity-70 hover:opacity-100",
   },
@@ -115,7 +119,8 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://www.guidepointsecurity.com",
       },
     ],
-    logoHeight: "h-10 md:h-12 xl:h-14",
+    logoBox:
+      "max-w-[160px] max-h-[40px] md:max-w-[180px] md:max-h-[48px] xl:max-w-[200px] xl:max-h-[56px]",
     labelColor: "text-amber-500/70",
     opacity: "opacity-70 hover:opacity-100",
   },
@@ -132,7 +137,8 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         logo: "/other-sponsors.svg",
       },
     ],
-    logoHeight: "h-8 md:h-10 xl:h-12",
+    logoBox:
+      "max-w-[140px] max-h-[32px] md:max-w-[160px] md:max-h-[40px] xl:max-w-[180px] xl:max-h-[48px]",
     labelColor: "text-white/40",
     opacity: "opacity-60 hover:opacity-100",
   },
@@ -144,30 +150,32 @@ const SPONSORS_BY_TIER: TierConfig[] = [
 
 interface SponsorLogoProps {
   sponsor: Sponsor;
-  logoHeight: string;
+  logoBox: string;
   opacity: string;
 }
 
 const SponsorLogo = React.memo(function SponsorLogo({
   sponsor,
-  logoHeight,
+  logoBox,
   opacity,
 }: SponsorLogoProps) {
-  // Container with fixed height, auto width to preserve aspect ratio
-  const containerClasses = cn("flex items-center justify-center", logoHeight);
+  // Container centers content
+  const containerClasses = "flex items-center justify-center";
 
   const content = sponsor.logo ? (
-    <img
-      src={sponsor.logo}
-      alt={sponsor.name}
-      className={cn(
-        "h-full w-auto max-w-[180px] md:max-w-[220px] xl:max-w-[280px] object-contain transition-all duration-300",
-        "grayscale hover:grayscale-0",
-        opacity,
-      )}
-      loading="lazy"
-      draggable={false}
-    />
+    <div className={cn("flex items-center justify-center", logoBox)}>
+      <Image
+        src={sponsor.logo}
+        alt={sponsor.name}
+        layout="fullWidth"
+        className={cn(
+          "!w-auto !h-auto !max-w-full !max-h-full object-contain transition-all duration-300",
+          "grayscale hover:grayscale-0",
+          opacity,
+        )}
+        loading="lazy"
+      />
+    </div>
   ) : (
     <span
       className={cn(
@@ -234,7 +242,7 @@ function TierRow({ tier }: TierRowProps) {
           <SponsorLogo
             key={sponsor.name}
             sponsor={sponsor}
-            logoHeight={tier.logoHeight}
+            logoBox={tier.logoBox}
             opacity={tier.opacity}
           />
         ))}
