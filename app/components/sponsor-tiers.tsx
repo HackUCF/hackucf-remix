@@ -199,7 +199,6 @@ const SponsorLogo = React.memo(function SponsorLogo({
         "font-bold text-white text-center leading-tight transition-all duration-300",
         "text-sm md:text-base xl:text-lg",
         opacity,
-        "hover:text-brandGold",
       )}
     >
       {sponsor.name}
