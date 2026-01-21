@@ -254,7 +254,9 @@ export default function Executives() {
                       }
                     `}
                   >
-                    <td className="p-4 text-foreground">{year.year}</td>
+                    <td className="p-4 text-foreground whitespace-nowrap">
+                      {year.year}
+                    </td>
                     <td className="p-4 text-foreground whitespace-nowrap">
                       {year.president}
                     </td>

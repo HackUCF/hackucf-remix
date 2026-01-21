@@ -40,7 +40,6 @@ const SPONSORS_BY_TIER: TierConfig[] = [
       },
       {
         name: "Crest Advisory Group",
-        logo: "/crest-advisory-group.svg",
         url: "https://crestadvisorygroup.com/",
       },
       {
@@ -49,7 +48,8 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://www.redseersecurity.com/",
       },
     ],
-    logoBox: "w-[200px] h-[60px] md:w-[240px] md:h-[72px] xl:w-[280px] xl:h-[84px]",
+    logoBox:
+      "w-[220px] h-[66px] md:w-[260px] md:h-[78px] xl:w-[300px] xl:h-[90px]",
     labelColor: "text-brandGold",
     opacity: "opacity-90 hover:opacity-100",
   },
@@ -68,7 +68,8 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://www.threatlocker.com",
       },
     ],
-    logoBox: "w-[180px] h-[48px] md:w-[200px] md:h-[56px] xl:w-[220px] xl:h-[64px]",
+    logoBox:
+      "w-[200px] h-[54px] md:w-[220px] md:h-[62px] xl:w-[250px] xl:h-[72px]",
     labelColor: "text-brandGold/80",
     opacity: "opacity-80 hover:opacity-100",
   },
@@ -102,7 +103,8 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://ctfd.io",
       },
     ],
-    logoBox: "w-[160px] h-[40px] md:w-[180px] md:h-[48px] xl:w-[200px] xl:h-[56px]",
+    logoBox:
+      "w-[160px] h-[40px] md:w-[180px] md:h-[48px] xl:w-[200px] xl:h-[56px]",
     labelColor: "text-white/60",
     opacity: "opacity-70 hover:opacity-100",
   },
@@ -116,7 +118,8 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         url: "https://www.guidepointsecurity.com",
       },
     ],
-    logoBox: "w-[160px] h-[40px] md:w-[180px] md:h-[48px] xl:w-[200px] xl:h-[56px]",
+    logoBox:
+      "w-[160px] h-[40px] md:w-[180px] md:h-[48px] xl:w-[200px] xl:h-[56px]",
     labelColor: "text-amber-500/70",
     opacity: "opacity-70 hover:opacity-100",
   },
@@ -133,7 +136,8 @@ const SPONSORS_BY_TIER: TierConfig[] = [
         logo: "/other-sponsors.svg",
       },
     ],
-    logoBox: "w-[140px] h-[32px] md:w-[160px] md:h-[40px] xl:w-[180px] xl:h-[48px]",
+    logoBox:
+      "w-[140px] h-[32px] md:w-[160px] md:h-[40px] xl:w-[180px] xl:h-[48px]",
     labelColor: "text-white/40",
     opacity: "opacity-60 hover:opacity-100",
   },
