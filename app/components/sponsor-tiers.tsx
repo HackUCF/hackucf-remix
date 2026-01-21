@@ -161,7 +161,7 @@ const SponsorLogo = React.memo(function SponsorLogo({
       src={sponsor.logo}
       alt={sponsor.name}
       className={cn(
-        "h-full w-auto object-contain transition-all duration-300",
+        "h-full w-auto max-w-[180px] md:max-w-[220px] xl:max-w-[280px] object-contain transition-all duration-300",
         "grayscale hover:grayscale-0",
         opacity,
       )}

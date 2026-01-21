@@ -25,9 +25,9 @@ export default function CyberChallenge() {
             src="/cyber-challenge.webp"
             alt="OCPS Cyber Challenge Logo"
             width={192}
-            height={240}
+            layout="constrained"
             loading="eager"
-            className="mb-6 h-auto"
+            className="mb-6"
           />
           <h1 className="text-5xl font-bold">OCPS Cyber Challenge</h1>
           <p className="text-2xl mt-4 text-brandGold">Friday, January 30th</p>
