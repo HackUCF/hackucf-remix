@@ -37,14 +37,14 @@ export default function CyberChallenge() {
         <section className="mb-16">
           <h2 className="mb-6 text-3xl font-semibold">Eligibility</h2>
           <ul className="list-disc list-inside space-y-2 text-lg">
-            <li>Open to UCF students only</li>
-            <li>Teams of 2</li>
-            <li>Bring your own charged laptops</li>
+            <li>Open to UCF & Seminole State students only.</li>
+            <li>Teams of 2.</li>
+            <li>Bring your own charged laptops.</li>
           </ul>
         </section>
 
         <section className="mb-16">
-          <h2 className="mb-6 text-3xl font-semibold">Schedule</h2>
+          <h2 className="mb-6 text-3xl font-semibold">Collegiate Schedule</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
@@ -96,7 +96,7 @@ export default function CyberChallenge() {
           rel="noopener noreferrer"
           className="block text-center border-2 bg-brandGold hover:bg-background text-xl font-semibold hover:text-brandGold border-brandGold text-background rounded-full w-full mt-8 py-4 transition-colors"
         >
-          Register Now
+          Register Now!
         </a>
       </div>
     </main>
