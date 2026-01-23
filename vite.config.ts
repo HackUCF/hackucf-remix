@@ -19,7 +19,7 @@ export default defineConfig({
   plugins: [
     envOnlyMacros(),
     tsconfigPaths(),
-    cloudflareDevProxyVitePlugin<Env, CfProperties>({
+    cloudflareDevProxyVitePlugin<Env>({
       getLoadContext: async ({
         context: {
           cloudflare: { env },
