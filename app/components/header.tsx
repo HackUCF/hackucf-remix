@@ -27,11 +27,7 @@ const NAV_ITEMS = [
     name: "Horse Plinko",
     href: "https://plinko.horse",
   },
-  {
-    id: "writeups",
-    name: "Writeups",
-    href: "https://hackucf-writeups.pages.dev/",
-  },
+  { id: "writeups", name: "Writeups", href: "/writeups" },
 ];
 
 export function Navbar() {
