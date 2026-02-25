@@ -110,6 +110,14 @@ export default function Index() {
       {/* Home Section */}
       <section className="min-h-screen w-full flex items-center justify-center px-8 bg-black relative">
         <HackerBg className="absolute inset-0 w-full h-full" />
+        {/* gradient dissolve — matrix rain fades to void */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none z-[1]"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.75) 60%, black 100%)",
+          }}
+        />
         <div className="max-w-4xl text-center z-10 mt-16">
           <h1 className="text-5xl font-bold bg-white text-transparent bg-clip-text drop-shadow-md py-1 animate-fade-in-up">
             HACK@UCF
