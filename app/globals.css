@@ -103,6 +103,44 @@
   }
 }
 
+/* Syntax Highlighting (rehype-pretty-code) */
+[data-rehype-pretty-code-figure] pre {
+  @apply rounded-lg border border-stone-700 bg-stone-900 px-0 py-4;
+  overflow-x: auto;
+}
+
+[data-rehype-pretty-code-figure] code {
+  @apply text-sm;
+  counter-reset: line;
+  display: grid;
+}
+
+[data-rehype-pretty-code-figure] code > [data-line] {
+  @apply px-4 border-l-2 border-transparent;
+}
+
+[data-rehype-pretty-code-figure] code > [data-highlighted-line] {
+  @apply bg-brandGold/10 border-l-brandGold;
+}
+
+[data-rehype-pretty-code-figure] [data-rehype-pretty-code-title] {
+  @apply rounded-t-lg border border-b-0 border-stone-700 bg-stone-800 px-4 py-2 text-sm font-medium text-stone-300;
+}
+
+[data-rehype-pretty-code-figure] [data-highlighted-chars] {
+  @apply rounded bg-brandGold/20 px-1;
+}
+
+/* Inline code (not in pre blocks) */
+.prose :not(pre) > code {
+  @apply rounded bg-stone-800 px-1.5 py-0.5 text-sm;
+}
+
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none;
+}
+
 /* Chart Colors */
 @layer base {
   :root {

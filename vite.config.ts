@@ -1,7 +1,14 @@
+import mdx from "@mdx-js/rollup";
 import {
   cloudflareDevProxyVitePlugin,
   vitePlugin as remix,
 } from "@remix-run/dev";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { defineConfig } from "vite";
 import { envOnlyMacros } from "vite-env-only";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -19,6 +26,14 @@ export default defineConfig({
   plugins: [
     envOnlyMacros(),
     tsconfigPaths(),
+    mdx({
+      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm],
+      rehypePlugins: [
+        rehypeSlug,
+        [rehypeAutolinkHeadings, { behavior: "wrap" }],
+        [rehypePrettyCode, { theme: "one-dark-pro" }] as any,
+      ],
+    }),
     cloudflareDevProxyVitePlugin<Env>({
       getLoadContext: async ({
         context: {
