@@ -109,6 +109,13 @@ const EXECUTIVE_DATA = [
     treasurer: "Eric Matthews",
     secretary: "Jacob Freeman",
   },
+  {
+    year: "2026-27",
+    president: "Isabella Sanglade",
+    vicePresident: "Jacob Freeman",
+    treasurer: "Nico Scagliarini",
+    secretary: "Lily Ferreira",
+  },
 ];
 
 const positions = ["president", "vicePresident", "treasurer", "secretary"];
